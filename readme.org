@@ -1,0 +1,8 @@
+* Git repo mirror of the melpa package archive
+  - rsync commands stolen from [[https://github.com/dochang/elpa-clone/pull/1/files%0A][purcell]]
+  - this [[https://github.com/d12frosted/elpa-mirror/issues/2][issue]] started it all
+#+BEGIN_SRC shell
+/usr/bin/rsync -avz --delete --progress rsync://melpa.org/packages/ /var/elpa-packages/melpa
+/usr/bin/rsync -avz --delete --progress rsync://stable.melpa.org/packages/ /var/elpa-packages/melpa-stable
+/usr/bin/rsync -avz --delete --progress elpa.gnu.org::elpa/ /var/elpa-packages/gnu
+#+END_SRC
