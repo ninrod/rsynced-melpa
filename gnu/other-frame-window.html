@@ -23,15 +23,51 @@
 
             <div class="container">
 <h2 class="package">other-frame-window</h2><dl><dt>Description</dt><dd>Minor mode to enable global prefix keys for other frame/window buffer placement</dd>
-<dt>Latest</dt> <dd><a href="other-frame-window-1.0.2.el">other-frame-window-1.0.2.el</a>, 2015-Nov-15, 15.6kB</dd>
+<dt>Latest</dt> <dd><a href="other-frame-window-1.0.3.el">other-frame-window-1.0.3.el</a>, 2017-May-13, 18.0kB</dd>
 <dt>Maintainer</dt> <dd>Stephen Leake &lt;stephen_leake@member.fsf.org></dd>
 <dt>Home page</dt> <dd><a href="http://elpa.gnu.org/packages/other-frame-window.html">http://elpa.gnu.org/packages/other-frame-window.html</a></dd>
 <dt>Browse repository</dt> <dd><a href="http://git.savannah.gnu.org/cgit/emacs/elpa.git/tree/packages/other-frame-window">CGit</a> or <a href="http://git.savannah.gnu.org/gitweb/?p=emacs/elpa.git;a=tree;f=packages/other-frame-window">Gitweb</a></dd>
 </dl><p>To install this package, run in Emacs:</p>
                        <pre>M-x <span class="kw">package-install</span> RET <span class="kw">other-frame-window</span> RET</pre><h2>Full description</h2><pre>
+C-x 7 &lt;command> causes a buffer displayed by &lt;command>
+to appear in another window in the same frame; a window
+is created if necessary.
 
+C-x 9 &lt;command> causes a buffer displayed by &lt;command>
+to appear in another frame; a frame is created if necessary.
+
+C-x W moves the current buffer to another window in the same frame.
+
+C-x F moves the current buffer to another frame.
+
+In addition, C-x 7 and C-x 9 can be followed by these keys:
+
+0 - deletes the current window.
+
+1 - deletes the other windows/frames.
+
+2 - shows another view of the current buffer in a new
+    window/frame.
+
+a - creates a commit log entry for the current defun in
+    another window/frame.
+
+b - switches to another buffer in another window/frame.
+
+d - start dired in another window/frame.
+
+f - find-file in another window/frame.
+
+m - compose mail in another window/frame.
+
+o - move to another window/frame.
+
+r - find-file-read-only in another window/frame.
+
+To extend this list, add key bindings to ‘ofw-transient-map’.
 </pre>
 <h2>Old versions</h2><table>
+<tr><td><a href="other-frame-window-1.0.2.el">other-frame-window-1.0.2.el</a></td><td>2015-Nov-15</td><td>15.6kB</td>
 <tr><td><a href="other-frame-window-1.0.1.el">other-frame-window-1.0.1.el</a></td><td>2015-Aug-17</td><td>14.6kB</td>
 <tr><td><a href="other-frame-window-1.0.0.el">other-frame-window-1.0.0.el</a></td><td>2015-Aug-15</td><td>14.4kB</td>
 </table>
