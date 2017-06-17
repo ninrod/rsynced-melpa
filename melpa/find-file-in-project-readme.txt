@@ -29,10 +29,28 @@ search when calling `find-file-in-project-by-selected'. For example,
 When file basename `helloWorld' provided, `HelloWorld', `hello-world'
 are added as the file name search patterns.
 `C-h v ffip-filename-rules' to see its default value.
+`find-file-with-similar-name' find file with similar name to current
+opened file. The regular expression `ffip-strip-file-name-regex' is
+also used by `find-file-with-similar-name'.
 
-All these variables may be overridden on a per-directory basis in
+all these variables may be overridden on a per-directory basis in
 your .dir-locals.el.  See (info "(Emacs) Directory Variables") for
 details.
+
+Sample .dir-locals.el,
+
+((nil . ((ffip-project-root . "~/projs/PROJECT_DIR")
+         ;; ingore files bigger than 64k and directory "dist/"
+         (ffip-find-options . "-not -size +64k -not -iwholename '*/dist/*'")
+         ;; only search files with following extensions
+         (ffip-patterns . ("*.html" "*.js" "*.css" "*.java" "*.xml" "*.js"))
+         (eval . (progn
+                   (require 'find-file-in-project)
+                   ;; ingore directory ".tox/"
+                   (setq ffip-prune-patterns `("*/.tox/*" ,@ffip-prune-patterns))
+                   ;; Do NOT ignore directory "bin/"
+                   (setq ffip-prune-patterns `(delete "*/bin/*" ,@ffip-prune-patterns))))
+         )))
 
 To find in *current directory*, use `find-file-in-current-directory'
 and `find-file-in-current-directory-by-selected'.
@@ -48,7 +66,13 @@ to open correspong file.
 
 `ffip-diff-find-file-before-hook' is called before `ffip-diff-find-file'.
 
-If you use evil-mode, insert below code into ~/.emacs,
+`ffip-diff-apply-hunk' applies current hunk in `diff-mode' (please note
+`ffip-diff-mode' inherits from `diff-mode') to the target.
+file. The target file could be located by searching `recentf-list'.
+Except this extra feature, `ffip-diff-apply-hunk' is same as `diff-apply-hunk'.
+So `diff-apply-hunk' can be replaced by `ffip-diff-apply-hunk'.
+
+If you use `evil-mode', insert below code into ~/.emacs,
   (defun ffip-diff-mode-hook-setup ()
       (evil-local-set-key 'normal "K" 'diff-hunk-prev)
       (evil-local-set-key 'normal "J" 'diff-hunk-next)

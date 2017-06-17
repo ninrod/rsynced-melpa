@@ -11,6 +11,7 @@ function clone {
   emacs -l "$elpa_clone_path/elpa-clone.el" -nw --batch --eval="(elpa-clone \"$1\" \"$SCRIPTPATH/$2\")"
 }
 
+# gnu elpa rsync link: https://github.com/emacs-china/elpa/issues/30
+clone "rsync://elpa.gnu.org::elpa/" "gnu"
+clone "rsync://melpa.org/packages/" "melpa"
 clone "http://orgmode.org/elpa/" "org"
-# clone "https://elpa.gnu.org/packages/" "gnu"
-# clone "rsync://melpa.org/packages/" "melpa"

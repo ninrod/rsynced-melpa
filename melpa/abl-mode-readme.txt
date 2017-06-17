@@ -87,12 +87,16 @@ shell buffers. Please see README.rst for details.
 (make-variable-buffer-local 'abl-mode-install-command)
 
 (defcustom abl-mode-test-file-regexp ".*_tests.py"
-"regexp used to check whether a file is a test file")
+  "regexp used to check whether a file is a test file")
 (make-variable-buffer-local 'abl-mode-test-file-regexp)
 
 (defcustom abl-mode-test-path-module-class-separator "."
-"character used to separate class name from module path. Alternative is ':'")
+  "string used to separate class name from module path.")
 (make-variable-buffer-local 'abl-mode-test-path-module-class-separator)
+
+(defcustom abl-mode-test-path-class-method-separator "."
+  "string used to separate class name from test method.")
+(make-variable-buffer-local 'abl-mode-test-path-class-method-separator)
 
 (defcustom abl-mode-code-file-tests-regexps
   '("^\"\"\"[^(\"\"\")]*\\(^tests:\\)" "^'''[^(''')]*\\(^tests:\\)")
@@ -103,6 +107,10 @@ shell buffers. Please see README.rst for details.
   "^OK$\\|^FAILED (failures=[0-9]*)$"
 "Regexp to find out whether the test run has finished.")
 (make-variable-buffer-local 'abl-mode-end-testrun-re)
+
+(defcustom abl-mode-use-file-module t
+  "Use the python module path for test file; when nil, the relative path to file is used")
+(make-variable-buffer-local 'abl-mode-use-file-module)
 
 <<----------------  Here ends the customization -------------->>
 
@@ -445,11 +453,11 @@ map for latest test run output."
   (save-excursion
     (end-of-line)
     (if (not (re-search-backward "^ *def test_*" nil t))
-	(error "Looks like you are not even in a function definiton! Bad girl!"))
+	(error "Looks like you are not even in a function definiton."))
     (let* ((start (re-search-forward "^ *def *"))
 	   (end (re-search-forward "test_[^\(]*" (line-end-position) t)))
       (if (not end)
-	  (error "Looks like you are not inside a test function. Go to a test function! Now!")
+	  (error "Looks like you are not inside a test function.")
 	(buffer-substring-no-properties start (point))))))
 
 
@@ -457,11 +465,11 @@ map for latest test run output."
   (save-excursion
     (if (not (re-search-backward "^class *" nil t))
 	(error "Looks like there is a problem with your python code (functions is indented
-but not in a class). Sorry, can't do anything")
+but not in a class).")
     (let* ((start (re-search-forward "^class *"))
 	   (end (re-search-forward "[^\(:]*" (line-end-position) t)))
       (if (not end)
-	  (error "Looks like there is a problem with you python code (keyword class not
+	  (error "Looks like there is a problem with your python code (keyword class not
 followed by a proper class name).")
 	(buffer-substring-no-properties start (point)))))))
 
@@ -479,7 +487,16 @@ the function above)
 (defun abl-mode-get-test-file-path ()
   (let ((buffer-name (buffer-file-name)))
     (if (not (abl-mode-ends-with buffer-name ".py"))
-	(error "You do not appear to be in a python file. Now open a python file!"))
+	(error "You do not appear to be in a python file."))
+    (substring buffer-file-name
+	       (+ (length abl-mode-branch-base) 1)
+	       (length buffer-name))))
+
+
+(defun abl-mode-get-test-file-module ()
+  (let ((buffer-name (buffer-file-name)))
+    (if (not (abl-mode-ends-with buffer-name ".py"))
+	(error "You do not appear to be in a python file."))
     (let ((relative-path (substring
 			  buffer-file-name
 			  (+ (length abl-mode-branch-base) 1)
@@ -492,7 +509,11 @@ the function above)
     (if (not (abl-mode-test-in-class))
 	(concat file-path abl-mode-test-path-module-class-separator function-name)
       (let ((class-name (abl-mode-determine-test-class-name)))
-	(concat file-path abl-mode-test-path-module-class-separator class-name "." function-name)))))
+	(concat file-path
+		abl-mode-test-path-module-class-separator
+		class-name
+		abl-mode-test-path-class-method-separator
+		function-name)))))
 
 
 (defun abl-mode-run-test (test-path &optional branch-name)
@@ -509,11 +530,11 @@ the function above)
 
 (defun abl-mode-get-test-entity ()
   "Which tests should be run? If this is a test file, depending
-on where the cursor is, test whole file, class, or test
-method. Otherwise, look for a header with 'tests:' and run
-that. In the last case, return whatever follows 'tests: '. Error
-if none of these is true."
-  (let* ((file-path (abl-mode-get-test-file-path)))
+on where the cursor is, test whole file, class, or test method.
+Error if none of these is true."
+  (let* ((file-path (if abl-mode-use-file-module
+			(abl-mode-get-test-file-module)
+		      (abl-mode-get-test-file-path))))
     (if (= (line-number-at-pos) 1)
 	file-path
       (let* ((test-func-pos

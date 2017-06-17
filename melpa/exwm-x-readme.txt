@@ -27,24 +27,25 @@ make exwm easier for Mouse-Control-People to use.
 
 ** Configure
 
+*** Add exwm-x directory to emacs's load-path
+Pasting the below line to "~/.emacs" is a simple way.
+
+#+BEGIN_EXAMPLE
+(add-to-list 'load-path "/path/to/exwm-x")
+#+END_EXAMPLE
+
 *** Edit "~/.initrc" file or "~/.xsession" file
 You should edit "~/.initrc" file or "~/.xsession" file like below example:
 
 #+BEGIN_EXAMPLE
-
-# Emacs X input method (exim) setting
-# export XMODIFIERS=@im=exim
-# export GTK_IM_MODULE=xim
-# export QT_IM_MODULE=xim
-# export CLUTTER_IM_MODULE=xim
-
-xhost +SI:localuser:$USER
 
 # Fallback cursor
 # xsetroot -cursor_name left_ptr
 
 # Keyboard repeat rate
 # xset r rate 200 60
+
+xhost +SI:localuser:$USER
 
 exec dbus-launch --exit-with-session emacs --eval '(require (quote exwmx-loader))'
 #+END_EXAMPLE
@@ -61,19 +62,18 @@ or
 chmod a+x ~/.initrc
 #+END_EXAMPLE
 
-*** Edit "~/.exwm"
+*** Edit "~/.exwm-x"
 Add your exwm config to this file, for example:
 
 #+BEGIN_EXAMPLE
-(add-to-list 'load-path "/path/to/exwm-x")
 (require 'exwm)
 (require 'exwm-x)
 (require 'exwmx-xfce)
 (require 'exwmx-example)
-(exwm-input-set-key (kbd "C-t v") 'exwmx:thunar)
-(exwm-input-set-key (kbd "C-t f") 'exwmx:icecat)
-(exwm-input-set-key (kbd "C-t c") 'exwmx:xfce4-terminal)
-(exwm-input-set-key (kbd "C-t C-c") 'exwmx:xfce4-new-terminal)
+(exwm-input-set-key (kbd "C-t v") 'exwmx:file-browser)
+(exwm-input-set-key (kbd "C-t f") 'exwmx:web-browser)
+(exwm-input-set-key (kbd "C-t c") 'exwmx-xfce-terminal)
+(exwm-input-set-key (kbd "C-t C-c") 'exwmx-xfce-new-terminal)
 #+END_EXAMPLE
 
 Note: Package "exwmx-example" is Exwm-X buildin example, user can use it to test Exwm-X's
