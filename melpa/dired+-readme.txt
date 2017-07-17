@@ -300,6 +300,41 @@
  behavior.
 
 
+ If You Use Dired+ in Terminal Mode
+ ----------------------------------
+
+ By default, Dired+ binds some keys that can be problematic in some
+ terminals when you use Emacs in terminal mode (i.e., `emacs -nw').
+ This is controlled by option
+ `diredp-bind-problematic-terminal-keys'.
+
+ In particular, keys that use modifiers Meta and Shift together can
+ be problematic.  If you use Dired+ in terminal mode, and you find
+ that your terminal does not support such keys then you might want
+ to customize the option to set the value to `nil', and then bind
+ the commands to some other keys, which your terminal supports.
+
+ Regardless of the option value, unless Emacs is in terminal mode
+ the keys are bound by default.  The problematic keys used by
+ Dired+ include these:
+
+   `M-M'   (aka `M-S-m')   - `diredp-chmod-this-file'
+   `M-O'   (aka `M-S-o')   - `diredp-chown-this-file'
+   `M-T'   (aka `M-S-t')   - `diredp-touch-this-file'
+   `C-M-B' (aka `C-M-S-b') - `diredp-do-bookmark-in-bookmark-file'
+   `C-M-G' (aka `C-M-S-g') - `diredp-chgrp-this-file'
+   `C-M-R' (aka `C-M-S-r') - `diredp-toggle-find-file-reuse-dir'
+   `C-M-T' (aka `C-M-S-t') - `dired-do-touch'
+   `M-+ M-B'   (aka `M-+ M-S-b') -
+       `diredp-do-bookmark-dirs-recursive'
+   `M-+ C-M-B' (aka `M-+ C-M-S-b') -
+       `diredp-do-bookmark-in-bookmark-file-recursive'
+   `M-+ C-M-T' (aka `M-+ C-M-S-t') - `diredp-do-touch-recursive'
+
+ (See also `(info "(org) TTY keys")' for more information about
+ keys that can be problematic in terminal mode.)
+
+
  Faces defined here:
 
    `diredp-autofile-name', `diredp-compressed-file-suffix',
@@ -390,6 +425,7 @@
    `diredp-marked', `diredp-marked-other-window',
    `diredp-marked-recursive',
    `diredp-marked-recursive-other-window',
+   `diredp-mark-extension-recursive',
    `diredp-mark-files-regexp-recursive',
    `diredp-mark-files-tagged-all', `diredp-mark-files-tagged-none',
    `diredp-mark-files-tagged-not-all',
@@ -449,6 +485,7 @@
  User options defined here:
 
    `diredp-auto-focus-frame-for-thumbnail-tooltip-flag',
+   `diredp-bind-problematic-terminal-keys',
    `diredp-compressed-extensions', `diredp-dwim-any-frame-flag'
    (Emacs 22+), `diredp-image-preview-in-tooltip', `diff-switches',
    `diredp-hide-details-initially-flag' (Emacs 24.4+),
@@ -468,12 +505,13 @@
    `diredp-dired-plus-description',
    `diredp-dired-plus-description+links',
    `diredp-dired-plus-help-link', `diredp-dired-union-1',
-   `diredp-dired-union-interactive-spec', `diredp-display-image'
-   (Emacs 22+), `diredp-do-chxxx-recursive',
-   `diredp-do-create-files-recursive', `diredp-do-grep-1',
-   `diredp-ensure-bookmark+', `diredp-ensure-mode',
-   `diredp-existing-dired-buffer-p', `diredp-fewer-than-2-files-p',
-   `diredp-fileset-1', `diredp-find-a-file-read-args',
+   `diredp-dired-union-interactive-spec',
+   `diredp-display-graphic-p', `diredp-display-image' (Emacs 22+),
+   `diredp-do-chxxx-recursive', `diredp-do-create-files-recursive',
+   `diredp-do-grep-1', `diredp-ensure-bookmark+',
+   `diredp-ensure-mode', `diredp-existing-dired-buffer-p',
+   `diredp-fewer-than-2-files-p', `diredp-fileset-1',
+   `diredp-find-a-file-read-args',
    `diredp-file-for-compilation-hit-at-point' (Emacs 24+),
    `diredp-files-within', `diredp-files-within-1',
    `diredp-fit-frame-unless-buffer-narrowed' (Emacs 24.4+),
@@ -491,10 +529,11 @@
    `diredp-nonempty-region-p', `diredp-parent-dir',
    `diredp-paste-add-tags', `diredp-paste-replace-tags',
    `diredp-read-bookmark-file-args', `diredp-read-include/exclude',
-   `diredp-recent-dirs', `diredp-refontify-buffer',
-   `diredp-remove-if', `diredp-remove-if-not',
-   `diredp-root-directory-p', `diredp-set-header-line-breadcrumbs'
-   (Emacs 22+), `diredp-set-tag-value', `diredp-set-union',
+   `diredp-read-regexp', `diredp-recent-dirs',
+   `diredp-refontify-buffer', `diredp-remove-if',
+   `diredp-remove-if-not', `diredp-root-directory-p',
+   `diredp-set-header-line-breadcrumbs' (Emacs 22+),
+   `diredp-set-tag-value', `diredp-set-union',
    `diredp--set-up-font-locking', `diredp-string-match-p',
    `diredp-tag', `diredp-this-file-marked-p',
    `diredp-this-file-unmarked-p', `diredp-this-subdir',
@@ -508,11 +547,11 @@
    `diredp-hide-details-toggled' (Emacs 24.4+),
    `diredp-hide/show-menu', `diredp-images-recursive-menu',
    `diredp-list-files-map', `diredp-loaded-p',
-   `diredp-menu-bar-dir-menu', `diredp-menu-bar-marks-menu',
-   `diredp-menu-bar-multiple-menu', `diredp-menu-bar-regexp-menu',
-   `diredp-menu-bar-single-menu', `diredp-multiple-bookmarks-menu',
-   `diredp-multiple-delete-menu', `diredp-multiple-dired-menu',
-   `diredp-multiple-images-menu',
+   `diredp-marks-recursive-menu', `diredp-menu-bar-dir-menu',
+   `diredp-menu-bar-marks-menu', `diredp-menu-bar-multiple-menu',
+   `diredp-menu-bar-regexp-menu', `diredp-menu-bar-single-menu',
+   `diredp-multiple-bookmarks-menu', `diredp-multiple-delete-menu',
+   `diredp-multiple-dired-menu', `diredp-multiple-images-menu',
    `diredp-multiple-encryption-menu',
    `diredp-multiple-move-copy-link-menu',
    `diredp-multiple-omit-menu', `diredp-multiple-recursive-menu',
