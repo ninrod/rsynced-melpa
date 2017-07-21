@@ -32,9 +32,15 @@ When switch-window is enabled, user can use the below five keys:
 | "j" | Move the border left  |
 | "k" | Move the border right |
 | "b" | Balance windows       |
+|"SPC"| Resume auto-resize    |
 
 If you want to customize this feature, please see variable:
 `switch-window-extra-map'.
+
+Note: if you use auto-resize window feature, you *must* know
+that when you execute above window operate commands, auto-resize
+feature will be disabled temporarily, you should use above "SPC"
+key to resume.
 
 ** Tips
 
@@ -59,6 +65,23 @@ If you want to customize this feature, please see variable:
 #+BEGIN_EXAMPLE
 (setq switch-window-minibuffer-shortcut ?z)
 #+END_EXAMPLE
+
+*** I want to auto resize a window when switch to it
+#+BEGIN_EXAMPLE
+(setq switch-window-auto-resize-window t)
+(setq switch-window-default-window-size 0.8) ;80% of frame size
+(switch-window-mouse-mode) ;auto resize when switch window with mouse
+#+END_EXAMPLE
+
+Advanced usage:
+#+BEGIN_EXAMPLE
+(setq switch-window-auto-resize-window
+      (lambda ()
+        (equal (buffer-name) "*scratch*"))) ;when return t, run auto switch
+(setq switch-window-default-window-size '(0.8 . 0.6)) ;80% width and 60% height of frame
+#+END_EXAMPLE
+
+By the way, you can use package [[https://github.com/roman/golden-ratio.el][golden-ratio]] also.
 
 *** Switch-window seem to conflict with Exwm, how to do?
 By default, switch-window get user's input with the help
