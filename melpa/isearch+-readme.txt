@@ -141,6 +141,7 @@
    `isearchp-assoc-delete-all', `isearchp-barf-if-use-minibuffer',
    `isearchp-columns-p' (Emacs 24.4+),
    `isearchp-complete-past-string',
+   `isearchp-constrain-to-rectangular-region' (Emacs 25+),
    `isearchp-current-filter-predicates' (Emacs 24.4+),
    `isearchp-fail-pos', `isearchp-ffap-guesser' (Emacs 24.4+),
    `isearchp-filter-bookmark-alist-only' (Emacs 24.4+),
@@ -749,16 +750,20 @@ Overview of Features ---------------------------------------------
    search: regexp, word, multiple-buffer, and whether searching has
    wrapped around the buffer (Emacs 22+ only).
 
- * Optional limiting of search to the active region, controlled by
-   option `isearchp-restrict-to-region-flag'.  Deactivation of the
-   active region is controlled by option
+ * Optional restriction of search to the active region, controlled
+   by option `isearchp-restrict-to-region-flag'.  Deactivation of
+   the active region is controlled by option
    `isearchp-deactivate-region-flag'.  Both of these are available
    for Emacs 24.3 and later.  You can use `C-x n' (command
    `isearchp-toggle-region-restriction') during search to toggle
    `isearchp-restrict-to-region-flag'.
 
-   NOTE: For search to be limited to the active region in Info, you
-   must also use library `info+.el'.
+   Restriction of Isearch to the region works also for a
+   rectangular region (which you create using `M-x
+   rectangle-mark-mode').
+
+   NOTE: For search to be limited to the region in Info, you must
+   also use library `info+.el'.
 
  * Option and commands to let you select the last target occurrence
    (set the region around it):
