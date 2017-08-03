@@ -39,7 +39,8 @@
    `zz-add-zone-and-unite', `zz-clone-and-coalesce-zones',
    `zz-clone-and-unite-zones', `zz-clone-zones',
    `zz-coalesce-zones', `zz-delete-zone', `zz-narrow',
-   `zz-narrow-repeat', `zz-select-region',
+   `zz-narrow-repeat', `zz-query-replace-zones' (Emacs 25+),
+   `zz-query-replace-regexp-zones' (Emacs 25+), `zz-select-region',
    `zz-select-region-repeat', `zz-set-izones-var',
    `zz-unite-zones'.
 
@@ -53,15 +54,17 @@
 
  Non-interactive functions defined here:
 
-   `zz-buffer-of-markers', `zz-car-<', `zz-every',
+   `zz-buffer-of-markers', `zz-car-<', `zz-dot-pairs', `zz-every',
    `zz-izone-has-other-buffer-marker-p', `zz-izone-limits',
-   `zz-izone-limits-in-bufs', `zz-izones', `zz-izones-from-zones',
-   `zz-izones-p', `zz-izones-renumber', `zz-marker-from-object',
-   `zz-markerize', `zz-max', `zz-min', `zz-narrowing-lighter',
-   `zz-number-or-marker-p', `zz-rassoc-delete-all',
-   `zz-readable-marker', `zz-readable-marker-p',
-   `zz-read-any-variable', `zz-read-bufs', `zz-regexp-car-member',
-   `zz-remove-if', `zz-remove-if-not',
+   `zz-izone-limits-in-bufs', `zz-izones',
+   `zz-izones-from-noncontiguous-region' (Emacs 25+),
+   `zz-izones-from-zones', `zz-izones-p', `zz-izones-renumber',
+   `zz-marker-from-object', `zz-markerize', `zz-max', `zz-min',
+   `zz-narrowing-lighter', `zz-noncontiguous-region-from-izones',
+   `zz-noncontiguous-region-from-zones', `zz-number-or-marker-p',
+   `zz-rassoc-delete-all', `zz-readable-marker',
+   `zz-readable-marker-p', `zz-read-any-variable', `zz-read-bufs',
+   `zz-regexp-car-member', `zz-remove-if', `zz-remove-if-not',
    `zz-remove-izones-w-other-buffer-markers',
    `zz-remove-zones-w-other-buffer-markers', `zz-repeat-command',
    `zz-set-intersection', `zz-set-union', `zz-some',
@@ -69,8 +72,9 @@
    `zz-two-zone-union', `zz-zones-complement',
    `zz-zone-has-other-buffer-marker-p', `zz-zone-intersection',
    `zz-zone-intersection-1', `zz-zone-ordered',
-   `zz-zones-overlap-p', `zz-zones-same-buffer-p',
-   `zz-zone-union', `zz-zone-union-1'.
+   `zz-zones-from-noncontiguous-region' (Emacs 25+),
+   `zz-zones-overlap-p', `zz-zones-same-buffer-p', `zz-zone-union',
+   `zz-zone-union-1'.
 
  Internal variables defined here:
 
@@ -106,7 +110,8 @@
 
  Some of the functions defined here are not available for Emacs
  versions prior to Emacs 22.  Others are not available for versions
- prior to Emacs 23.  This is mentioned where applicable.
+ prior to Emacs 23.  Still others are available only starting with
+ Emacs 25.  This is mentioned where applicable.
 
 
 (@* "Zones")
@@ -217,6 +222,8 @@
    bookmark to restore it in a subsequent Emacs session.  For this
    you need library `bookmark+.el'.
 
+ * Query-replace over them (Emacs 25 and later).
+
 
 (@* "Izone List Variables")
  ** Izone List Variables **
@@ -271,7 +278,7 @@
 (@* "Keys")
  ** Keys **
 
- Most of the commands that manipulate izones are bound on keymap
+ Many of the commands that manipulate izones are bound on keymap
  `narrow-map'.  They are available on prefix key `C-x n', along
  with the narrowing/widening keys `C-x n d', `C-x n n', `C-x n p',
  and `C-x n w':
