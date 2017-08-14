@@ -1,7 +1,21 @@
 "Re:VIEW" text editing mode
 
 License:
-  GNU General Public License version 2 (see COPYING)
+  GNU General Public License version 3 (see COPYING) or any later version
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 C-c C-a ユーザーから編集者へのメッセージ擬似マーカー
 C-c C-k ユーザー注釈の擬似マーカー
@@ -32,7 +46,8 @@ C-c C-f C-n 出力付き索引化(@<idx>)する
 
 C-c C-p =見出し挿入(レベルを指定)
 C-c C-b 吹き出しを入れる
-C-c CR  隠し索引(@<hidx>)を入れる
+C-c CR  隠し索引(@<hidx>)を入力して入れる
+C-c C-w 選択範囲を隠し索引(@<hidx>)にして範囲の前に入れる
 C-c <   rawのHTML開きタグを入れる
 C-c >   rawのHTML閉じタグを入れる
 
