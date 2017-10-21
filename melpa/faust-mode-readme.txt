@@ -1,18 +1,30 @@
-FAUST Mode (very simple syntax colorizing!)
-by rukano
-based on the tutorial on:
-http://xahlee.org/emacs/elisp_syntax_coloring.html
+## Features
 
+- Syntax highlighting of *all* the Faust commands and operators
+- Indentation rules
+- [Compatible](https://github.com/syl20bnr/spacemacs/tree/develop/layers/%2Blang/faust) with SpaceEmacs
 
-BIG TODOS:
-Colorize Composition Operators
-Colorize after keyword {}
-Colorize arguments (numbers)
-Colorize [] metadata in string?
-Run Shell faust w/ custom defaults
+## Installation
 
+### Easy
 
-ROADMAP
-export option and list possibilities
-create hotkeys for every compilation
-view graph
+- Install it from [MELPA](https://melpa.org).
+
+### Hard
+
+- Copy/clone this repository in `load-path`
+- Add
+```elisp
+(require 'faust-mode)
+```
+to your init file
+
+### Faust
+
+Oh, and of course install [the latest
+Faust](http://faust.grame.fr/download/) and ensure it's in the
+PATH.
+
+### Faustine
+
+Based on faust-mode, [Faustine](https://bitbucket.org/yassinphilip/faustine) goes even further into turning Emacs into a full-fledged Faust IDE.

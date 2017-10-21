@@ -1,6 +1,7 @@
 Provides font-lock, indentation, and navigation for the Hy
 language. (http://hylang.org)
 
+(require 'cl)
 (require 'dash)
 (require 'dash-functional)
 (require 's)
@@ -10,10 +11,70 @@ language. (http://hylang.org)
   :prefix "hy-mode-"
   :group 'applications)
 
+Configuration
+Inferior shell
+
+(defconst hy-shell-interpreter "hy"
+  "Default Hy interpreter name.")
+
+(defconst hy-shell-interpreter-args "--spy"
+  "Default arguments for Hy interpreter.")
+
+This command being phased out in favor of `run-hy'
 (defcustom hy-mode-inferior-lisp-command "hy"
   "The command used by `inferior-lisp-program'."
   :type 'string
   :group 'hy-mode)
+
+(defconst hy-shell-use-control-codes? nil
+  "Append `--control-codes' flag to `hy-shell-interpreter-args'?
+
+Requires recent version of Hy.")
+
+(defconst hy-shell-spy-delim ""
+  "If using `--spy' interpreter arg then delimit spy ouput.")
+
+Indentation
+
+(defconst hy-indent-special-forms
+  '(:exact
+    ("when" "unless"
+     "for" "for*"
+     "while"
+     "except" "catch")
+
+    :fuzzy
+    ("def"
+     "with"
+     "fn"
+     "lambda"))
+  "Special forms to always indent following line by +1.")
+
+Syntax Table
+
+(defconst hy-mode-syntax-table
+  (-let [table
+         (copy-syntax-table lisp-mode-syntax-table)]
+    (modify-syntax-entry ?\{ "(}" table)
+    (modify-syntax-entry ?\} "){" table)
+    (modify-syntax-entry ?\[ "(]" table)
+    (modify-syntax-entry ?\] ")[" table)
+
+    ;; Quote characters are prefixes
+    (modify-syntax-entry ?\~ "'" table)
+    (modify-syntax-entry ?\@ "'" table)
+
+    ;; "," is a symbol in Hy, namely the tuple constructor
+    (modify-syntax-entry ?\, "_ p" table)
+
+    ;; "|" is a symbol in hy, naming the or operator
+    (modify-syntax-entry ?\| "_ p" table)
+
+    ;; "#" is a tag macro, we include # in the symbol
+    (modify-syntax-entry ?\# "_ p" table)
+
+    table)
+  "Hy modes syntax table.")
 
 Keywords
 
@@ -257,7 +318,7 @@ Static
 (defconst hy--font-lock-kwds-tag-macros
   (list
    (rx "#"
-       (not (any "*" "@"))
+       (not (any "*" "@" "["))  ; #* is unpacking, #@ decorator, #[ bracket str
        (0+ word))
 
    '(0 font-lock-function-name-face))
@@ -334,22 +395,20 @@ Grouped
   "All Hy font lock keywords.")
 
 Indentation
-Specform
+Utilities
 
-(defconst hy-indent-specform
-  '(("for" . 1)
-    ("for*" . 1)
-    ("while" . 1)
-    ("except" . 1)
-    ("catch" . 1)
-    ("let" . 1)
-    ("if" . 1)
-    ("when" . 1)
-    ("lambda" . 1)
-    ("unless" . 1))
-  "How to indent specials specform.")
+Aliases for `parse-partial-sexp' value
+(defun hy--sexp-inermost-char (state)
+  (nth 1 state))
+(defun hy--start-of-last-sexp (state)
+  (nth 2 state))
+(defun hy--in-string? (state)
+  (nth 3 state))
+(defun hy--start-of-string (state)
+  (nth 8 state))
 
-Normal Indent Calculation
+(defun hy--prior-sexp? (state)
+  (number-or-marker-p (hy--start-of-last-sexp state)))
 
 (defun hy--anything-before? (pos)
   "Determine if chars before POS in current line."
@@ -361,7 +420,13 @@ Normal Indent Calculation
   (when pos
     (< pos (line-end-position))))
 
-(defun hy-normal-indent (last-sexp)
+(defun hy--check-non-symbol-sexp (pos)
+  "Check for a non-symbol yet symbol-like (tuple constructor comma) at POS."
+  (member (char-after pos) '(?\, ?\|)))
+
+Normal Indent
+
+(defun hy--normal-indent (last-sexp)
   "Determine normal indentation column of LAST-SEXP.
 
 Example:
@@ -381,7 +446,13 @@ the loop will terminate without error and the prior lines indentation is it."
   (-let [last-sexp-start nil]
     (if (ignore-errors
           (while (hy--anything-before? (point))
-            (setq last-sexp-start (prog1 (point) (backward-sexp))))
+            (setq last-sexp-start (prog1
+                                      ;; Indentation should ignore quote chars
+                                      (if (-contains? '(?\' ?\` ?\~ ?\#)
+                                                      (char-before))
+                                          (1- (point))
+                                        (point))
+                                    (backward-sexp))))
           t)
         (current-column)
       (if (not (hy--anything-after? last-sexp-start))
@@ -389,216 +460,754 @@ the loop will terminate without error and the prior lines indentation is it."
         (goto-char last-sexp-start)  ; Align with function argument
         (current-column)))))
 
+Function or form
+
+(defun hy--not-function-form-p ()
+  "Non-nil if form at point doesn't represent a function call."
+  (or (-contains? '(?\[ ?\{) (char-after))
+      (not (looking-at (rx anything  ; Skips form opener
+                           (or "(" (syntax symbol) (syntax word)))))))
+
 Hy find indent spec
 
-`parse-partial-sexp' returned state aliases
-(defun hy--start-of-last-sexp (state) (elt state 2))
-(defun hy--prior-sexp? (state) (number-or-marker-p (hy--start-of-last-sexp state)))
-
-(defun hy--at-name? ()
-  "Are we looking at a word or symbol?"
-  (looking-at (rx (or (syntax word) (syntax symbol)))))
-
-(defun hy--string-to-next-sexp ()
-  "Move and get string from point to next sexp."
-  (buffer-substring (point) (progn (forward-sexp) (point))))
-
-(defun hy-find-indent-spec (state)
+(defun hy--find-indent-spec (state)
   "Return integer for special indentation of form or nil to use normal indent.
 
-Observe `calculate-lisp-indent-last-sexp' is bound by `calculate-lisp-indent',
-driven by `lisp-indent-function', to the last sexps indentation.
-
-Note that `hy-not-function-form-p' filters out forms that are lists and dicts.
+Note that `hy--not-function-form-p' filters out forms that are lists and dicts.
 Point is always at the start of a function."
-  (save-excursion
-    (unless (and (hy--prior-sexp? state)
-                 (not (hy--at-name?)))
-      (-> (hy--string-to-next-sexp)
-         (assoc hy-indent-specform)
-         cdr))))
+  (-when-let
+      (function (and (hy--prior-sexp? state)
+                     (thing-at-point 'symbol)))
+
+    (or (-contains? (plist-get hy-indent-special-forms :exact)
+                    function)
+        (-some (-cut s-matches? <> function)
+               (plist-get hy-indent-special-forms :fuzzy)))))
 
 Hy indent function
 
 (defun hy-indent-function (indent-point state)
-  ;; Goto to the open-paren.
-  (goto-char (elt state 1))
-  ;; Maps, sets, vectors and reader conditionals.
-  (if (hy-not-function-form-p)
-      (1+ (current-column))
-    ;; Function or macro call.
-    (forward-char 1)
+  "Indent at INDENT-POINT where STATE is `parse-partial-sexp' for INDENT-POINT."
+  (goto-char (hy--sexp-inermost-char state))
 
-    ;; Handle special case that the funcall is the tuple constructor comma
-    ;; since , is not a sexp and wont be recognized when traversing backwards
-    (if (member (char-after (point)) '(?\,))
-        (+ 2 (current-column))
-      (let ((method (hy-find-indent-spec state))
-            (last-sexp calculate-lisp-indent-last-sexp)
-            (containing-form-column (1- (current-column))))
-        (pcase method
-          ((or (pred integerp) `(,method))
-           (let ((pos -1))
-             (condition-case nil
-                 (while (and (<= (point) indent-point)
-                             (not (eobp)))
-                   (forward-sexp 1)
-                   (cl-incf pos))
-               ;; If indent-point is _after_ the last sexp in the
-               ;; current sexp, we detect that by catching the
-               ;; `scan-error'. In that case, we should return the
-               ;; indentation as if there were an extra sexp at point.
-               (scan-error (cl-incf pos)))
-             (cond
-              ;; The first non-special arg. Rigidly reduce indentation.
-              ((= pos (1+ method))
-               (+ lisp-body-indent containing-form-column))
-              ;; Further non-special args, align with the arg above.
-              ((> pos (1+ method))
-               (hy-normal-indent last-sexp))  ;; NOTE
-              ;; Special arg. Rigidly indent with a large indentation.
-              (t
-               (+ (* 2 lisp-body-indent) containing-form-column)))))
+  (if (hy--not-function-form-p)
+      (1+ (current-column))  ; Indent after [, {, ... is always 1
+    (forward-char 1)  ; Move to start of sexp
 
-          ((pred functionp)
-           (funcall method indent-point state))
+    (cond ((hy--check-non-symbol-sexp (point))  ; Comma tuple constructor
+           (+ 2 (current-column)))
 
-          ;; No indent spec, do the default.
-          (`nil
-           (let ((function (thing-at-point 'symbol)))
-             (cond
-              ;; Preserve useful alignment of :require (and friends) in `ns' forms.
-              ((and function (string-match "^:" function))
-               (hy-normal-indent last-sexp))
-              ;; This is should be identical to the :defn above.
-              ((and function
-                    (string-match "\\`\\(?:\\S +/\\)?\\(def\\|with-\\|fn\\|lambda\\)"
-                                  function)
-                    (not (string-match "\\`default" (match-string 1 function))))
-               (+ lisp-body-indent containing-form-column))
-              ;; Finally, nothing special here, just respect the user's
-              ;; preference.
-              (t
-               (hy-normal-indent last-sexp))))))))))
+          ((hy--find-indent-spec state)  ; Special form uses fixed indendation
+           (1+ (current-column)))
 
-Find indent spec
+          (t
+           (hy--normal-indent calculate-lisp-indent-last-sexp)))))
 
-(defun hy-not-function-form-p ()
-  "Non-nil if form at point doesn't represent a function call."
-  (unless (member (char-after (1+ (point))) '(?\,))  ; tuple constructor special
-    (or (member (char-after) '(?\[ ?\{))
-        (save-excursion ;; Catch #?@ (:cljs ...)
-          (skip-chars-backward "\r\n[:blank:]")
-          (when (eq (char-before) ?@)
-            (forward-char -1))
-          (and (eq (char-before) ?\?)
-               (eq (char-before (1- (point))) ?\#)))
-        ;; Car of form is not a symbol.
-        (not (looking-at ".\\(?:\\sw\\|\\s_\\)")))))
+Bracket String Literals
 
-Syntax
+(defun hy--match-bracket-string (limit)
+  "Search forward for a bracket string literal."
+  (re-search-forward
+   (rx "#["
+       (0+ not-newline)
+       "["
+       (group (1+ (not (any "]"))))
+       "]"
+       (0+ not-newline)
+       "]")
+   limit
+   t))
 
-(defvar hy-mode-syntax-table
-  (let ((table (copy-syntax-table lisp-mode-syntax-table)))
-    (modify-syntax-entry ?\{ "(}" table)
-    (modify-syntax-entry ?\} "){" table)
-    (modify-syntax-entry ?\[ "(]" table)
-    (modify-syntax-entry ?\] ")[" table)
-    (modify-syntax-entry ?~ "'" table)
+(defun hy-syntax-propertize-function (start end)
+  "Implements context sensitive syntax highlighting beyond `font-lock-keywords'.
 
-    table))
+In particular this implements bracket string literals.
+START and END are the limits with which to search for bracket strings passed
+and determined by `font-lock-mode' internals when making an edit to a buffer.
+"
+  (save-excursion
+    (goto-char start)
 
-Font Lock Docs
+    ;; Start goes to current line, need to go to start of #[[ block
+    (when (nth 1 (syntax-ppss))  ; when inermost-char go to [ => [ => #
+      (goto-char (- (hy--sexp-inermost-char (syntax-ppss)) 2)))
 
-(defun hy-string-in-doc-position-p (listbeg startpos)
-  "Return true if a doc string may occur at STARTPOS inside a list.
-LISTBEG is the position of the start of the innermost list
-containing STARTPOS."
-  (if (= 1 startpos)  ; Uniquely identifies module docstring
+    (while (hy--match-bracket-string end)
+      (put-text-property (1- (match-beginning 1)) (match-beginning 1)
+                         'syntax-table (string-to-syntax "|"))
+
+      (put-text-property (match-end 1) (1+ (match-end 1))
+                         'syntax-table (string-to-syntax "|")))))
+
+Font Lock Syntactics
+
+(defun hy--string-in-doc-position? (state)
+  "Is STATE within a docstring?"
+  (if (= 1 (hy--start-of-string state))  ; Identify module docstring
       t
-    (let* ((firstsym (and listbeg
-                          (save-excursion
-                            (goto-char listbeg)
-                            (and (looking-at
-                                  (eval-when-compile
-                                    (concat "([ \t\n]*\\("
-                                            lisp-mode-symbol-regexp "\\)")))
-                                 (match-string-no-properties 1))))))
-
-      (or (member firstsym hy--kwds-defs)
-          (string= firstsym "defclass")))))
+    (-when-let* ((first-sexp (hy--sexp-inermost-char state))
+                 (function (save-excursion
+                             (goto-char (1+ first-sexp))
+                             (thing-at-point 'symbol))))
+      (s-matches? (rx "def" (not blank)) function))))  ; "def"=="setv"
 
 (defun hy-font-lock-syntactic-face-function (state)
   "Return syntactic face function for the position represented by STATE.
 STATE is a `parse-partial-sexp' state, and the returned function is the
-Lisp font lock syntactic face function."
-  (if (nth 3 state)
-      ;; This might be a (doc)string or a |...| symbol.
-      (let ((startpos (nth 8 state)))
-        (if (eq (char-after startpos) ?|)
-            ;; This is not a string, but a |...| symbol.
-            nil
-          (let ((listbeg (nth 1 state)))
-            (if (hy-string-in-doc-position-p listbeg startpos)
-                font-lock-doc-face
-              font-lock-string-face))))
+Lisp font lock syntactic face function. String is shorthand for either
+a string or comment."
+  (if (hy--in-string? state)
+      (if (hy--string-in-doc-position? state)
+          font-lock-doc-face
+        font-lock-string-face)
     font-lock-comment-face))
 
-Hy-mode
+Shell Integration
+Configuration
 
-(unless (fboundp 'setq-local)
-  (defmacro setq-local (var val)
-    `(set (make-local-variable ',var) ,val)))
+(defconst hy-shell-buffer-name "Hy"
+  "Default buffer name for Hy interpreter.")
 
-###autoload
-(progn
-  (add-to-list 'auto-mode-alist '("\\.hy\\'" . hy-mode))
-  (add-to-list 'interpreter-mode-alist '("hy" . hy-mode)))
+(defconst hy-shell-internal-buffer-name "Hy Internal"
+  "Default buffer name for the internal Hy process.")
 
-###autoload
-(define-derived-mode hy-mode prog-mode "Hy"
-  "Major mode for editing Hy files."
+(defvar hy-shell-buffer nil
+  "The current shell buffer for Hy.")
+
+(defconst hy--spy-delim-uuid "#cbb4fcbe-b6ba-4812-afa3-4a5ac7b20501"
+  "UUID denoting end of python block in `--spy --control-categories' output")
+
+(setq hy-shell-font-lock-enable t)
+
+Shell buffer utilities
+
+(defun hy-shell-format-process-name (proc-name &optional internal)
+  "Format a PROC-NAME with closing astericks."
+  (->> proc-name (s-prepend "*") (s-append "*")))
+
+(defun hy-shell-get-process ()
+  "Get the Hy process corresponding to `hy-shell-buffer-name'."
+  (-> hy-shell-buffer-name
+     hy-shell-format-process-name
+     get-buffer-process))
+
+(defun hy-shell-get-internal-process ()
+  "Get the Hy internal process corresponding to `hy-shell-internal-buffer-name'."
+  (-> hy-shell-internal-buffer-name
+     (hy-shell-format-process-name t)
+     get-buffer-process))
+
+(defun hy-shell-get-or-create-buffer ()
+  "Get or create a `hy-shell-buffer' for current inferior process."
+  (if hy-shell-buffer
+      hy-shell-buffer
+    (hy-shell-with-shell-buffer
+     (-let [process-name
+            (-> (current-buffer) get-buffer-process process-name)]
+       (generate-new-buffer process-name)))))
+
+(defun hy-shell-buffer? ()
+  "Is `hy-shell-buffer' set and does it exist?"
+  (and hy-shell-buffer
+       (buffer-live-p hy-shell-buffer)))
+
+(defun hy-shell-kill-buffer ()
+  "Kill a `hy-shell-buffer'."
+  (when (hy-shell-buffer?)
+    (kill-buffer hy-shell-buffer)
+    (when (derived-mode-p 'inferior-hy-mode)
+      (setq hy-shell-buffer nil))))
+
+Shell macros
+
+(defmacro hy-shell-with-shell-buffer (&rest forms)
+  "Execute FORMS in the shell buffer."
+  (-let [shell-process
+         (gensym)]
+    `(-let [,shell-process
+            (hy-shell-get-process)]
+       (with-current-buffer (process-buffer ,shell-process)
+         ,@forms))))
+
+(defmacro hy-shell-with-font-locked-shell-buffer (&rest forms)
+  "Execute FORMS in the shell buffer with font-lock on."
+  `(hy-shell-with-shell-buffer
+    (save-current-buffer
+      (unless (hy-shell-buffer?)
+        (setq hy-shell-buffer (hy-shell-get-or-create-buffer)))
+
+      (set-buffer hy-shell-buffer)
+
+      (unless (font-lock-mode)
+        (font-lock-mode 1))
+      (unless (derived-mode-p 'hy-mode)
+        (hy-mode))
+
+      ,@forms)))
+
+Font locking
+
+(defun hy-shell-post-command-hook ()
+  "Fontify the current line in `hy-shell-buffer' for `post-command-hook'."
+  (-let [(_ . prompt-end)
+         comint-last-prompt]
+    (when (and prompt-end
+               (> (point) prompt-end)
+               (-> (current-buffer) get-buffer-process process-live-p))
+      (let* ((input (buffer-substring-no-properties
+                     prompt-end (point-max)))
+             (deactivate-mark nil)
+             (start-pos prompt-end)
+             (buffer-undo-list t)
+             (font-lock-buffer-pos nil)
+             (replacement
+              (hy-shell-with-font-locked-shell-buffer
+               (delete-region (line-beginning-position) (point-max))
+               (setq font-lock-buffer-pos (point))
+               (insert input)
+               (funcall 'font-lock-ensure)
+               (buffer-substring font-lock-buffer-pos
+                                 (point-max))))
+             (replacement-length (length replacement))
+             (i 0))
+        ;; Inject text properties to get input fontified.
+        (while (/= i replacement-length)
+          (let* ((plist (text-properties-at i replacement))
+                 (plist (-let [face
+                               (plist-get plist 'face)]
+                          (if (not face)
+                              plist
+                            (plist-put plist 'face nil)
+                            (plist-put plist 'font-lock-face face))))
+                 (next-change (or (next-property-change i replacement)
+                                  replacement-length))
+                 (text-begin (+ start-pos i))
+                 (text-end (+ start-pos next-change)))
+
+            (set-text-properties text-begin text-end plist)
+            (setq i next-change)))))))
+
+(defun hy-shell-font-lock-turn-on ()
+  "Turn on fontification of current line for hy shell."
+  (hy-shell-with-shell-buffer
+   (hy-shell-kill-buffer)
+   (setq-local hy-shell-buffer nil)
+   (add-hook 'post-command-hook
+             'hy-shell-post-command-hook nil 'local)
+   (add-hook 'kill-buffer-hook
+             'hy-shell-kill-buffer nil 'local)))
+
+(defun hy-shell-faces-to-font-lock-faces (text)
+  "Goes through text setting 'face properties to 'font-lock-face."
+  (-let [pos 0]
+    (while (setq next (next-single-property-change pos 'face text))
+      (put-text-property pos next 'font-lock-face
+                         (get-text-property pos 'face text) text)
+      (setq pos next))
+    (add-text-properties 0 (length text) '(fontified t) text)
+    text))
+
+(defun hy-shell-font-lock-spy-output (string)
+  "Applies font-locking to hy outputted python blocks when `--spy' is enabled."
+  (with-temp-buffer
+    (if (s-contains? hy--spy-delim-uuid string)
+        (-let ((python-indent-guess-indent-offset
+                nil)
+               ((python-block hy-output)
+                (s-split hy--spy-delim-uuid string)))
+          (python-mode)
+          (insert python-block)
+          (font-lock-default-fontify-buffer)
+          (-> (buffer-string)
+             hy-shell-faces-to-font-lock-faces
+             s-chomp
+             (s-concat hy-shell-spy-delim hy-output)))
+      string)))
+
+Send strings
+
+(defvar hy-shell--output-filter-in-progress nil
+  "Whether we are waiting for output in `hy-shell-send-string-no-output'.")
+
+(defun hy-shell-comint-end-of-output-p (string)
+  "Return non-nil if STRING ends with the input prompt."
+  (string-match (rx "=> " string-end) string))
+
+(defun hy-shell-output-filter (string)
+  "If STRING ends with input prompt then set filter in progress done."
+  (when (hy-shell-comint-end-of-output-p string)
+    (setq hy-shell--output-filter-in-progress nil))
+  "\n=> ")
+
+(defun hy--shell-send-string (string &optional process)
+  "Internal shell send string functionality."
+  (let ((process
+         (or process (hy-shell-get-process)))
+        (hy-shell--output-filter-in-progress
+         t))
+    (comint-send-string process string)
+    (while hy-shell--output-filter-in-progress
+      (accept-process-output process))))
+
+(defun hy-shell-send-string-no-output (string &optional process)
+  "Send STRING to hy PROCESS. Return the output."
+  (-let [comint-preoutput-filter-functions
+         '(hy-shell-output-filter)]
+    (hy--shell-send-string string process)))
+
+(defun hy-shell-send-string (string &optional process)
+  "Send STRING to hy PROCESS and inhibit output. Return the output."
+  (-let [comint-output-filter-functions
+         '(hy-shell-output-filter)]
+    (hy--shell-send-string string process)))
+
+Shell creation
+
+(defun hy-shell-make-comint (cmd proc-name &optional show internal)
+  (save-excursion
+    (-let [proc-buffer-name
+           (hy-shell-format-process-name proc-name internal)]
+      (unless (comint-check-proc proc-buffer-name)
+        (-let* ((cmdlist (split-string-and-unquote cmd))
+                ((interpreter . args) cmdlist)
+                (buffer (apply 'make-comint-in-buffer
+                               proc-name proc-buffer-name interpreter nil
+                               args))
+                (process (get-buffer-process buffer)))
+          (with-current-buffer buffer
+            (inferior-hy-mode))
+          (when show
+            (display-buffer buffer))
+          (if internal
+              (set-process-query-on-exit-flag process nil)
+            (setq hy-shell-buffer buffer))))
+      proc-buffer-name)))
+
+(defun hy-shell-calculate-interpreter-args ()
+  "Calculate `hy-shell-interpreter-args' based on `--spy' flag."
+  (if (and hy-shell-use-control-codes?
+           (s-contains? "--spy" hy-shell-interpreter-args))
+      (s-concat hy-shell-interpreter-args " --control-codes")
+    hy-shell-interpreter-args))
+
+(defun hy-shell-calculate-command (&optional internal)
+  "Calculate the string used to execute the inferior Hy process."
+  (format "%s %s"
+          (shell-quote-argument hy-shell-interpreter)
+          (if internal
+              ""
+            (hy-shell-calculate-interpreter-args))))
+
+(defun hy--shell-send-internal-setup-code ()
+  (-let [process
+         (hy-shell-get-internal-process)]
+    (comint-send-string process
+                        (concat hy-eldoc-setup-code
+                                hy-company-setup-code))
+    (while (accept-process-output process nil 100 t))))
+
+(defun run-hy (&optional cmd)
+  "Run an inferior Hy process.
+
+CMD defaults to the result of `hy-shell-calculate-command'."
+  (interactive)
+  (-> (or cmd
+         (hy-shell-calculate-command))
+     (hy-shell-make-comint hy-shell-buffer-name t)
+     get-buffer-process))
+
+(defun run-hy-internal ()
+  "Start an inferior hy process in the background for autocompletion."
+  (interactive)
+  (when (and (not (hy-shell-get-internal-process))
+             (executable-find "hy"))
+    (-let [hy-shell-font-lock-enable
+           nil]
+      (prog1
+          (-> (hy-shell-calculate-command t)
+             (hy-shell-make-comint hy-shell-internal-buffer-name nil t)
+             get-buffer-process)
+        (hy--shell-send-internal-setup-code)))))
+
+Eldoc
+
+(defconst hy-eldoc-setup-code
+  "(import builtins)
+(import inspect)
+(import [hy.macros [-hy-macros]])
+
+
+(defn --HYDOC-format-argspec [argspec]
+  \"Lispy version of format argspec covering all defun kwords.\"
+  (setv docs \"\")
+
+  (defmacro add-docs [&rest forms]
+    `(do (when docs (setv docs (+ docs \" \")))
+         (setv docs (+ docs ~@forms))))
+
+  (defn format-args [&rest args]
+    (->> args
+       (map (fn [x] (-> x str (.replace \"_\" \"-\"))))
+       (.join \" \")))
+
+  (setv args argspec.args)
+  (setv defaults argspec.defaults)
+  (setv varargs argspec.varargs)
+  (setv varkw argspec.varkw)
+  (setv kwonlyargs argspec.kwonlyargs)
+  (setv kwonlydefaults argspec.kwonlydefaults)
+
+  (when (and args defaults)
+    (setv args (-> argspec.defaults
+                  len
+                  (drop-last argspec.args)
+                  list))
+    (setv defaults (-> args
+                      len
+                      (drop argspec.args)
+                      list)))
+
+  (when (and kwonlyargs kwonlydefaults)
+    (setv kwonlyargs (->> kwonlyargs
+                        (remove (fn [x] (in x (.keys kwonlydefaults))))
+                        list))
+    (setv kwonlydefaults (->> kwonlydefaults
+                            (.items)
+                            (*map (fn [k v] (.format \"[{} {}]\" k v)))
+                            list)))
+
+  (when args
+    (add-docs (format-args #* args)))
+  (when defaults
+    (add-docs \"&optional \"
+              (format-args #* defaults)))
+  (when varargs
+    (add-docs \"&rest \"
+              (format-args varargs)))
+  (when varkw
+    (add-docs \"&kwargs \"
+              (format-args varkw)))
+  (when kwonlyargs
+    (add-docs \"&kwonly \"
+              (format-args #* kwonlyargs)))
+  (when kwonlydefaults
+    (add-docs (if-not kwonlyargs \"&kwonly \" \"\")
+              (format-args #* kwonlydefaults)))
+
+  docs)
+
+(defn --HYDOC-format-eldoc-string [obj-name f]
+  \"Format an obj name for callable f.\"
+  (if f.--doc--
+      (.format \"{obj}: ({args}) - {docs}\"
+               :obj (.replace obj-name \"_\" \"-\")
+               :args (--HYDOC-format-argspec (inspect.getfullargspec f))
+               :docs (-> f.--doc-- (.splitlines) first))
+      (.format \"{obj}: ({args})\"
+               :obj (.replace obj-name \"_\" \"-\")
+               :args (--HYDOC-format-argspec (inspect.getfullargspec f)))))
+
+(defn --HYDOC-python-eldoc [obj]
+  \"Build eldoc string for python obj or string.
+
+Not all defuns can be argspeced - eg. C defuns.\"
+  (try
+    (do (when (isinstance obj str)
+          (setv obj (.eval builtins obj (globals))))
+        (setv doc (.getdoc inspect obj))
+        (try
+          (setv doc (--HYDOC-format-eldoc-string obj.--name-- obj))
+          (except [e TypeError]
+            (setv doc (->> doc
+                         (.splitlines)
+                         first
+                         (+ \"builtin: \"))))))
+    (except [e Exception]
+      (setv doc \"\")))
+  doc)
+
+(defn --HYDOC-macro-eldoc [obj]
+  \"Get eldoc string for a macro.\"
+  (try
+    (do (setv obj (.replace obj \"-\" \"_\"))
+        (setv macros (get -hy-macros None))
+
+        (when (in obj macros)
+          (--HYDOC-format-eldoc-string obj (get macros obj))))
+    (except [e Exception] \"\")))
+
+(defn --HYDOC [obj]
+  \"Get eldoc string for any obj.\"
+  (setv doc (--HYDOC-python-eldoc obj))
+  (unless doc (setv doc (--HYDOC-macro-eldoc obj)))
+  doc)"
+  "Symbol introspection code to send to the internal process for eldoc.")
+
+(defun hy--eldoc-chomp-output (text)
+  "Chomp prefixes and suffixes from eldoc process output."
+  (->> text
+     (s-chop-prefixes '("\"" "'"))
+     (s-chop-suffixes '("\"" "'"))))
+
+(defun hy--send-eldoc (command)
+  "Send command for eldoc to internal process."
+  (let ((output-buffer " *Comint Redirect Work Buffer*")
+        (process (hy-shell-get-internal-process))
+        results)
+    (with-current-buffer (get-buffer-create output-buffer)
+      (erase-buffer)
+
+      (comint-redirect-send-command-to-process
+       command output-buffer process nil t)
+
+      (set-buffer (process-buffer process))
+      (while (and (null comint-redirect-completed)
+                  (accept-process-output process nil 100 t)))
+      (set-buffer output-buffer)
+
+      (if (>= (- (point-max) (point-min)) 4)
+          (hy--eldoc-chomp-output
+           (buffer-substring-no-properties (point-min) (- (point-max) 4)))
+        ""))))
+
+(defun hy--eldoc-format-command (symbol)
+  (format "(try (--HYDOC \"%s\") (except [e Exception] (str)))" symbol))
+
+(defun hy--eldoc-format-command-raw-obj (symbol)
+  (format "(try (--HYDOC %s) (except [e Exception] (str)))" symbol))
+
+(defun hy--eldoc-get-inner-symbol ()
+  (save-excursion
+    (-when-let* ((_ (hy-shell-get-internal-process))
+                 (state (syntax-ppss))
+                 (start-pos (hy--sexp-inermost-char state))
+                 (_ (progn (goto-char start-pos)
+                           (not (hy--not-function-form-p))))
+                 (function (progn (forward-char)
+                                  (thing-at-point 'symbol))))
+
+      ;; Attribute method call (eg. ".format str") needs following sexp
+      (if (s-starts-with? "." function)
+          (when (ignore-errors (forward-sexp) (forward-char) t)
+            (pcase (char-after)
+              ;; Can't send just .method to eldoc
+              (?\) (setq function nil))
+              (?\s (setq function nil))
+              (?\C-j (setq function nil))  ; newline
+
+              ;; Dot dsl doesn't work on literals
+              (?\[ (concat "list" function))
+              (?\{ (concat "dict" function))
+              (?\" (concat "str" function))
+
+              ;; Otherwise complete the dot dsl
+              (_ (progn
+                   (forward-char)
+                   (concat (thing-at-point 'symbol) function)))))
+        function))))
+
+(defun hy-eldoc-fontify-text (text)
+  "Fontify eldoc strings."
+  (unless (s-blank? text)
+    (-let [((_ . end))
+           (s-matched-positions-all (rx string-start
+                                        (1+ (not (any space ":")))
+                                        ":")
+                                    text)]
+      (add-face-text-property 0 end 'font-lock-keyword-face nil text)))
+
+  (-each
+      (s-matched-positions-all (rx symbol-start "&" (1+ word)) text)
+    (-lambda ((beg . end))
+      (add-face-text-property beg end 'font-lock-type-face nil text)))
+
+  (-each
+      (s-matched-positions-all (rx "`" (1+ (not space)) "`") text)
+    (-lambda ((beg . end))
+      (add-face-text-property beg end 'font-lock-constant-face nil text)
+      (add-face-text-property beg end 'bold-italic nil text)))
+
+  text)
+
+(defun hy-eldoc-documentation-function ()
+  (when-let (function (hy--eldoc-get-inner-symbol))
+    (-let [result
+           (-> function hy--eldoc-format-command hy--send-eldoc)]
+      (when (s-equals? "" result)
+        (setq result
+              (-> function hy--eldoc-format-command-raw-obj hy--send-eldoc)))
+      (hy-eldoc-fontify-text result))))
+
+Autocompletion
+
+(defconst hy-company-setup-code
+  "(import [hy.completer [Completer]])
+(setv completer (Completer))"
+  "Autocompletion setup code to send to the internal process.")
+
+(defun hy--company-redirect-results-list-from-process (process command regexp regexp-group)
+  "Execute `comint-redirect-results-list-from-process' with timeout for company."
+  (let ((output-buffer " *Comint Redirect Work Buffer*")
+        results)
+    (with-current-buffer (get-buffer-create output-buffer)
+      (erase-buffer)
+      (comint-redirect-send-command-to-process command
+                                               output-buffer process nil t)
+      ;; Wait for the process to complete
+      (set-buffer (process-buffer process))
+      (while (and (null comint-redirect-completed)
+                  (accept-process-output process nil 100 t)))
+      ;; Collect the output
+      (set-buffer output-buffer)
+
+      (goto-char (point-min))
+      ;; Skip past the command, if it was echoed
+      (and (looking-at command)
+           (forward-line))
+      (while (and (not (eobp))
+                  (re-search-forward regexp nil t))
+        (push (buffer-substring-no-properties
+               (match-beginning regexp-group)
+               (match-end regexp-group))
+              results))
+      (nreverse results))))
+
+(defun hy--company-get-matches (&optional str)
+  "Return matches for STR."
+  (when (hy-shell-get-internal-process)
+    (hy--company-redirect-results-list-from-process
+     (hy-shell-get-internal-process)
+     (concat
+      "(completer."
+      (cond ((s-starts-with? "#" str)  ; Hy not recording tag macros atm
+             "tag-matches")
+
+            ((s-contains? "." str)
+             "attr-matches")
+
+            (t
+             "global-matches"))
+      " \"" str "\")"
+      )
+     (rx "'"
+         (group (1+ (or word (any "!@#$%^&*-_+=?~`'<>,.\|"))))
+         "'"
+         (any "," "]"))
+     1)))
+
+(defun hy-company (command &optional arg &rest ignored)
+  (interactive (list 'interactive))
+  (cl-case command
+    (interactive (company-begin-backend 'hy-company))
+    (prefix (company-grab-symbol))
+    (candidates (cons :async
+                      (lexical-let ((prfx arg))
+                        (lambda (cb)
+                          (let ((res (hy--company-get-matches prfx)))
+                            (funcall cb res))))))
+    ;; (meta (format "This value is named %s" arg))
+    ))
+
+hy-mode and inferior-hy-mode
+Hy-mode setup
+
+(defun hy--mode-setup-font-lock ()
+  (setq-local font-lock-multiline t)
   (setq font-lock-defaults
         '(hy-font-lock-kwds
           nil nil
-          (("+-*/.<>=!?$%_&~^:@" . "w")) ; syntax alist
+          (("+-*/.<>=!?$%_&~^:@" . "w"))  ; syntax alist
           nil
           (font-lock-mark-block-function . mark-defun)
-          (font-lock-syntactic-face-function
-           . hy-font-lock-syntactic-face-function)))
+          (font-lock-syntactic-face-function  ; Differentiates (doc)strings
+           . hy-font-lock-syntactic-face-function))))
 
-  (setq-local ahs-include "^[0-9A-Za-z/_.,:;*+=&%|$#@!^?-~]+$")
+(defun hy--mode-setup-syntax ()
+  ;; Bracket string literals require context sensitive highlighting
+  (setq-local syntax-propertize-function 'hy-syntax-propertize-function)
 
-  ;; Smartparens
-  (when (fboundp 'sp-local-pair)
-    (sp-local-pair '(hy-mode) "`" "`" :actions nil)
-    (sp-local-pair '(hy-mode) "'" "'" :actions nil))
+  ;; AutoHighlightSymbol needs adjustment for symbol recognition
+  (setq-local ahs-include "^[0-9A-Za-z/_.,:;*+=&%|$#@!^?-~\-]+$")
 
-  ;; Fixes #43: inferior lisp history getting corrupted
-  ;; Ideally change so original comint-stored-incomplete-input functionality
-  ;; is preserved for terminal case, but not big deal.
-  (advice-add 'comint-previous-input :before
-              (lambda (&rest args) (setq-local comint-stored-incomplete-input "")))
-
-  ;; Comments
+  ;; Lispy comment syntax
   (setq-local comment-start ";")
   (setq-local comment-start-skip
               "\\(\\(^\\|[^\\\\\n]\\)\\(\\\\\\\\\\)*\\)\\(;+\\|#|\\) *")
   (setq-local comment-add 1)
 
-  ;; Indentation
+  ;; Lispy indent with hy-specialized indentation
   (setq-local indent-tabs-mode nil)
   (setq-local indent-line-function 'lisp-indent-line)
-  (setq-local lisp-indent-function 'hy-indent-function)
+  (setq-local lisp-indent-function 'hy-indent-function))
 
-  ;; Inferior Lisp Program
+(defun hy--mode-setup-smartparens ()
+  "Setup smartparens, if active, pairs for Hy."
+  (when (fboundp 'sp-local-pair)
+    (sp-local-pair '(hy-mode) "`" "`" :actions nil)
+    (sp-local-pair '(hy-mode) "'" "'" :actions nil)
+    (sp-local-pair '(inferior-hy-mode) "`" "" :actions nil)
+    (sp-local-pair '(inferior-hy-mode) "'" "" :actions nil)))
+
+(defun hy--mode-setup-inferior ()
+  (setenv "PYTHONIOENCODING" "UTF-8")
+
   (setq-local inferior-lisp-program hy-mode-inferior-lisp-command)
   (setq-local inferior-lisp-load-command
               (concat "(import [hy.importer [import-file-to-module]])\n"
                       "(import-file-to-module \"__main__\" \"%s\")\n"))
 
-  (setenv "PYTHONIOENCODING" "UTF-8"))
+  (run-hy-internal)
+  (add-hook 'pyvenv-post-activate-hooks 'run-hy-internal nil t))
 
+(defun hy--mode-setup-eldoc ()
+  (make-local-variable 'eldoc-documentation-function)
+  (setq-local eldoc-documentation-function 'hy-eldoc-documentation-function)
+  (eldoc-mode +1))
+
+Inferior-hy-mode setup
+
+(defun hy--inferior-mode-setup ()
+  (setq mode-line-process '(":%s"))
+  (setq-local indent-tabs-mode nil)
+  (setq-local comint-prompt-read-only nil)
+
+  ;; (setq-local comint-prompt-regexp (rx bol "=>" space))
+
+  ;; So errors are highlighted according to colorama python package
+  (ansi-color-for-comint-mode-on)
+  (setq-local comint-output-filter-functions
+              '(ansi-color-process-output))
+
+  ;; Don't startup font lock for internal processes
+  (when hy-shell-font-lock-enable
+    (setq-local comint-preoutput-filter-functions
+                `(xterm-color-filter hy-shell-font-lock-spy-output))
+    (hy-shell-font-lock-turn-on))
+
+  ;; Fixes issue with "=>", no side effects from this advice
+  (advice-add 'comint-previous-input :before
+              (lambda (&rest args) (setq-local comint-stored-incomplete-input ""))))
+
+Core
+
+(add-to-list 'auto-mode-alist '("\\.hy\\'" . hy-mode))
+(add-to-list 'interpreter-mode-alist '("hy" . hy-mode))
+
+###autoload
+(define-derived-mode inferior-hy-mode comint-mode "Inferior Hy"
+  "Major mode for Hy inferior process."
+  (hy--inferior-mode-setup))
+
+###autoload
+(define-derived-mode hy-mode prog-mode "Hy"
+  "Major mode for editing Hy files."
+  (hy--mode-setup-eldoc)
+  (hy--mode-setup-font-lock)
+  (hy--mode-setup-smartparens)
+  (hy--mode-setup-syntax)
+  (hy--mode-setup-inferior))
+
+Keybindings
 Utilities
 
 ###autoload
@@ -613,13 +1222,69 @@ Utilities
   (interactive)
   (insert "((fn [x] (import pdb) (pdb.set-trace) x))"))
 
+###autoload
+(defun hy-shell-start-or-switch-to-shell ()
+  (interactive)
+  (if (hy-shell-buffer?)
+      (switch-to-buffer-other-window
+       (hy-shell-get-or-create-buffer))
+    (run-hy)))
+
+###autoload
+(defun hy-shell-eval-buffer ()
+  "Send the buffer to the shell, inhibiting output."
+  (interactive)
+  (-let [text
+         (buffer-string)]
+    (unless (hy-shell-buffer?)
+      (hy-shell-start-or-switch-to-shell))
+    (hy-shell-with-shell-buffer
+     (hy-shell-send-string-no-output text))))
+
+###autoload
+(defun hy-shell-eval-region ()
+  "Send highlighted region to shell, inhibiting output."
+  (interactive)
+  (when (and (region-active-p)
+             (not (region-noncontiguous-p)))
+    (-let [text
+           (buffer-substring (region-beginning) (region-end))]
+      (unless (hy-shell-buffer?)
+        (hy-shell-start-or-switch-to-shell))
+      (hy-shell-with-shell-buffer
+       (hy-shell-send-string-no-output text)))))
+
+(defun hy--current-form-string ()
+  "Get form containing current point as string."
+  (save-excursion
+    (-when-let* ((state (syntax-ppss))
+                 (start-pos (hy--sexp-inermost-char state)))
+      (goto-char start-pos)
+      (while (ignore-errors (forward-sexp)))
+
+      (concat (buffer-substring-no-properties start-pos (point)) "\n"))))
+
+###autoload
+(defun hy-shell-eval-current-form ()
+  "Send form containing current point to shell."
+  (interactive)
+  (-when-let (text (hy--current-form-string))
+    (unless (hy-shell-buffer?)
+      (hy-shell-start-or-switch-to-shell))
+    (hy-shell-with-shell-buffer
+     (hy-shell-send-string text))))
+
 Keybindings
 
+Spacemacs users please see spacemacs-hy, all bindings defined there
 (set-keymap-parent hy-mode-map lisp-mode-shared-map)
 (define-key hy-mode-map (kbd "C-M-x")   'lisp-eval-defun)
 (define-key hy-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
 (define-key hy-mode-map (kbd "C-c C-z") 'switch-to-lisp)
 (define-key hy-mode-map (kbd "C-c C-l") 'lisp-load-file)
+
+(define-key hy-mode-map (kbd "C-c C-e") 'hy-shell-start-or-switch-to-shell)
+(define-key hy-mode-map (kbd "C-c C-b") 'hy-shell-eval-buffer)
 
 (define-key hy-mode-map (kbd "C-c C-t") 'hy-insert-pdb)
 (define-key hy-mode-map (kbd "C-c C-S-t") 'hy-insert-pdb-threaded)
