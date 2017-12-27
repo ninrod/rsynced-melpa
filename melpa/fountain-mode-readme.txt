@@ -20,7 +20,6 @@ Features
 - Navigation by section, scene, character name, or page
 - 3 levels of element syntax highlighting
 - Automatic loading for `*.fountain` files
-- Support for both official and legacy commenting (boneyard) syntax
 - Include or omit a title page
 - Emphasis (bold, italic, underlined text)
 - Toggle visibility of emphasis delimiters and syntax characters
@@ -42,7 +41,7 @@ For more, see the [Wiki](https://github.com/rnkn/fountain-mode/wiki).
 Requirements
 ------------
 
-- Emacs 24.4
+- Emacs 24.5
 - LaTeX packages for PDF export: geometry fontspec titling fancyhdr
   marginnote ulem xstring oberdiek
 
@@ -80,7 +79,7 @@ Bugs and Feature Requests
 
 Please raise an issue on [Issues](https://github.com/rnkn/fountain-mode/issues).
 
-- Emacs versions prior to 26.1 have a bug with `visual-line-mode` that produces erratic
+- Emacs versions prior to 26 have a bug with `visual-line-mode` that produces erratic
   navigation behavior when displaying very long lines. More information here:
   <https://debbugs.gnu.org/23879>
 
@@ -93,5 +92,10 @@ History
 -------
 
 See [Releases](https://github.com/rnkn/fountain-mode/releases).
+
+Tips
+----
+
+Bitcoin Cash address 19gUvL8YUzDKr5GyiHpYeF31BfQm87xM9L
 
 
