@@ -5,12 +5,13 @@ inspired by Sierra.vim with adding some extra colors.
 
 =======  This package includes the following themes  =======
 
- * kaolin-dark - a dark jade variant inspired by Sierra.vim
- * kaolin-light - light variant of the original kaolin-dark
- * kaolin-eclipse - a dark purple variant
- * kaolin-ocean - dark blue variant
- * kaolin-tribal - theme based on Tribal color scheme by Dayle Rees.
+ * kaolin-dark - a dark jade variant inspired by Sierra.vim.
+ * kaolin-light - light variant of the original kaolin-dark.
+ * kaolin-eclipse - a dark purple variant.
+ * kaolin-ocean - dark blue variant.
  * kaolin-galaxy - bright theme based on one of the Sebastian Andaur arts.
+ * kaolin-aurora - Kaolin meets polar lights.
+ * kaolin-mono-dark - almost monochrome dark green Kaolin theme.
 
 
 =======  Configuration example  =======
@@ -33,6 +34,3 @@ inspired by Sierra.vim with adding some extra colors.
 
  ;; When t, will display colored hl-line style
  (setq kaolin-hl-line-colored t)
-
-
-                          The end of the path is the beginning.

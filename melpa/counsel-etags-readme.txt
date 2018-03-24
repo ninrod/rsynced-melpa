@@ -2,22 +2,23 @@ Usage:
   "Exuberant Ctags" and "GNU Find" should exist at first.
 
   "M-x counsel-etags-find-tag-at-point" to navigate.  This command will also
-  run `counsel-etags-scan-code' automatically if tags file is not built yet.
+  run `counsel-etags-scan-code' AUTOMATICALLY if tags file is not built yet.
 
   "M-x counsel-etags-scan-code" to create tags file
   "M-x counsel-etags-grep" to grep
   "M-x counsel-etags-grep-symbol-at-point" to grep the symbol at point
   "M-x counsel-etags-recent-tag" to open recent tag
-  "M-x counsel-etags-find-tag" to fuzzy searching tag
+  "M-x counsel-etags-find-tag" to two step tag matching use regular expression and filter
+  "M-x counsel-etags-list-tag" to list all tags
 
 That's all!
 
 Tips:
-- Add below code into "~/.emacs" to auto-update scan code:
+- Add below code into "~/.emacs" to AUTOMATICALLY update tags file:
 
-  ;; Don't ask before rereading the TAGS files if they have changed
+  ;; Don't ask before re-reading changed TAGS files
   (setq tags-revert-without-query t)
-  ;; Don't warn when TAGS files are large
+  ;; NO warning when loading large TAGS files
   (setq large-file-warning-threshold nil)
   (add-hook 'prog-mode-hook
     (lambda ()
