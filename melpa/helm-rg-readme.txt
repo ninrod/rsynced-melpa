@@ -3,6 +3,8 @@ https://github.com/cosmicexplorer/helm-rg.
 
 MELPA: https://melpa.org/#/helm-rg
 
+!`helm-rg' example usage (./emacs-helm-rg.png)
+
 Search massive codebases extremely fast, using `ripgrep'
 (https://github.com/BurntSushi/ripgrep) and `helm'
 (https://github.com/emacs-helm/helm). Inspired by `helm-ag'
@@ -65,14 +67,60 @@ a result from a different file than it started on.
         - When moving by file, `helm-rg' will cycle around the results list,
 but it will print a harmless error message instead of looping infinitely if
 all results are from the same file.
+- Use the interactive autoloaded function `helm-rg-display-help' to see the
+ripgrep command's usage info.
 
 
 TODO:
 
-- make a keybinding to drop into an edit mode and edit file content inline
-in results like `helm-ag' (https://github.com/syohex/emacs-helm-ag)
-- allow (elisp)? regex searching of search results, including file names
-    - use `helm-swoop' (https://github.com/ShingoFukuyama/helm-swoop)?
+*items checked completed here are ready to be added to the docs above*
+
+- [x] make a keybinding to drop into an "edit mode" and edit file content
+inline in results like `helm-ag' (https://github.com/syohex/emacs-helm-ag)
+    - *currently called "bounce mode"* in the alpha stage
+    - [x] needs to dedup results from the same line
+        - [x] should also merge the colorations
+        - [x] this might be easier without using the `--vimgrep' flag (!!!)
+    - [x] can insert markers on either side of each line to find the text
+added or removed
+    - [x] can change the filename by editing the file line
+        - [x] needs to reset all the file data for each entry if the file
+name is being changed!!!
+    - [x] can expand the windows of text beyond single lines at a time
+        - using `helm-rg--expand-match-context' and/or
+`helm-rg--spread-match-context'
+        - [x] and pop into another buffer for a quick view if you want
+          - can use `helm-rg--visit-current-file-for-bounce'
+        - [ ] can expand up and down from file header lines to add lines
+from the top or bottom of the file!
+        - [ ] can use newlines in inserted text
+            - not for file names -- newlines are still removed there
+            - would need to use text properties to move by match results
+then, for everything that uses `helm-rg--apply-matches-with-file-for-bounce'
+basically
+    - [x] visiting the file should go to the appropriate line of the file!
+- [x] color all results in the file in the async action!
+    - [x] don't recolor when switching to a different result in the same
+file!
+    - [x] don't color matches whenever file path matches
+`helm-rg-shallow-highlight-files-regexp'
+- [ ] use `ripgrep' file types instead of flattening globbing out into
+`helm-rg-default-glob-string'
+    - user defines file types in a `defcustom', and can interactively toggle
+the accepted file types
+    - user can also set the default set of file types
+        - as a dir-local variable!!
+- [ ] add testing
+  - [ ] should be testing all of our interactive functions
+      - in all configurations (for all permutations of `defcustom' values)
+  - [ ] also everything that's called by helm
+      - does helm have any frameworks to make integration testing easier?
+- [ ] publish `update-commentary.el' and the associated machinery
+    - as an npm package, MELPA package, pandoc writer, *???*
+- [ ] make a keybinding for running `helm-rg' on dired marked files
+    - then you could do an `f3' search, bounce to dired, then immediately
+`helm-rg' on just the file paths from the `f3' search, *which would be
+sick*
 
 
 License:
@@ -80,5 +128,3 @@ License:
 GPL 3.0+ (./LICENSE)
 
 End Commentary
-
-
