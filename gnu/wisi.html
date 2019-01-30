@@ -23,29 +23,26 @@
 
             <div class="container">
 <h2 class="package">wisi</h2><dl><dt>Description</dt><dd>Utilities for implementing an indentation/navigation engine using a generalized LALR parser</dd>
-<dt>Latest</dt> <dd><a href="wisi-1.1.4.tar">wisi-1.1.4.tar</a>, 2016-Oct-31,  100kB</dd>
-<dt>Maintainer</dt> <dd>Stephen Leake &lt;stephen_leake@member.fsf.org></dd>
+<dt>Latest</dt> <dd><a href="wisi-2.0.1.tar">wisi-2.0.1.tar</a>, 2018-Dec-08, 1.55MB</dd>
+<dt>Maintainer</dt> <dd>Stephen Leake &lt;stephen_leake@stephe-leake.org></dd>
 <dt>Home page</dt> <dd><a href="http://www.nongnu.org/ada-mode/wisi/wisi.html">http://www.nongnu.org/ada-mode/wisi/wisi.html</a></dd>
 <dt>Browse ELPA's repository</dt> <dd><a href="http://git.savannah.gnu.org/cgit/emacs/elpa.git/tree/packages/wisi">CGit</a> or <a href="http://git.savannah.gnu.org/gitweb/?p=emacs/elpa.git;a=tree;f=packages/wisi">Gitweb</a></dd>
 </dl><p>To install this package, run in Emacs:</p>
                        <pre>M-x <span class="kw">package-install</span> RET <span class="kw">wisi</span> RET</pre><h2>Full description</h2><pre>
-Emacs wisi package 1.1.4
+Emacs wisi package 2.0.0
 
 The wisi package provides utilities for using generalized LALR parsers
-to do indentation and navigation. See ada-mode for an example of its
-use.
+(in elisp or external processes) to do indentation, fontification, and
+navigation. See ada-mode for an example of its use.
 
-It is provided as a Gnu ELPA package; to install the package, add to
-~./emacs:
 
-(package-initialize)
-
-then invoke M-x list-packages, install wisi.
-
-(end of file)
 
 </pre>
 <h2>Old versions</h2><table>
+<tr><td><a href="wisi-2.0.0.tar">wisi-2.0.0.tar</a></td><td>2018-Dec-03</td><td>1.58MB</td>
+<tr><td><a href="wisi-1.1.6.tar">wisi-1.1.6.tar</a></td><td>2017-Oct-03</td><td> 110kB</td>
+<tr><td><a href="wisi-1.1.5.tar">wisi-1.1.5.tar</a></td><td>2017-Jul-09</td><td> 100kB</td>
+<tr><td><a href="wisi-1.1.4.tar">wisi-1.1.4.tar</a></td><td>2016-Oct-31</td><td> 100kB</td>
 <tr><td><a href="wisi-1.1.3.tar">wisi-1.1.3.tar</a></td><td>2016-Jul-27</td><td> 100kB</td>
 <tr><td><a href="wisi-1.1.2.tar">wisi-1.1.2.tar</a></td><td>2016-Jan-22</td><td> 100kB</td>
 <tr><td><a href="wisi-1.1.1.tar">wisi-1.1.1.tar</a></td><td>2015-Apr-13</td><td> 100kB</td>
@@ -60,13 +57,64 @@ then invoke M-x list-packages, install wisi.
 <h2>News</h2><pre>
 GNU Emacs wisi NEWS -- history of user-visible changes.
 
-Copyright (C) 2014 Free Software Foundation, Inc.
+Copyright (C) 2018 Free Software Foundation, Inc.
 See the end of the file for license conditions.
 
 Please send wisi bug reports to bug-gnu-emacs@gnu.org, with
 'wisi' in the subject. If possible, use M-x report-emacs-bug.
 
 
+* wisi 2.0.1
+8 Dec 2018
+
+** Assign copyright in Ada files to FSF
+
+** Update user guide, include it in elpa package
+
+* wisi 2.0.0
+17 Nov 2018
+
+** Change indentation engine to compute indent directly in parser actions.
+
+** Add error correcting external process parser.
+
+** Factor out wisi-elisp-lexer.el from wisi.el, and
+   ada-wisi-elisp-parse.el from ada-wisi.el. Move elisp grammar
+   actions from wisi.el to wisi-elisp-parse.el; they are not used with
+   the process parser.
+
+** Add support for error corrections in parser; 'wisi-repair-error'
+   can apply the corrections to the buffer text.
+
+** Display marks in fringe at location of errors detected by
+   background parser.
+
+** include sources for wisitoken parser runtime, parser generator.
+
+* wisi 1.1.6
+3 Oct 2017
+
+** wisi-forward-find-cache-token - new function.
+
+** New minor-mode parse_table-mode helps navigating parse table
+   listings output by 'wisi-generate -v 1'; useful when debugging
+   grammars.
+
+* wisi 1.1.5
+9 Jul 2017
+
+** wisi-indent-fallback allows setting the indent engine to use when
+   the wisi engine fails.
+
+** wisi-comment-indent now uses comment-column for comments following
+   code on the same line.
+
+** wisi-forward-statement-keyword tolerates end of buffer, and uses
+   either cache-next or cache-end.
+
+** forward-sexp-function is set to wisi-forward-sexp, which handles
+   parens, strings, and statements.
+
 * wisi 1.1.4
 31 Oct 2016
 

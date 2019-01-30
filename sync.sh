@@ -12,6 +12,6 @@ function clone {
 }
 
 # gnu elpa rsync link: https://github.com/emacs-china/elpa/issues/30
-clone "rsync://elpa.gnu.org::elpa/" "gnu"
+clone "elpa.gnu.org::elpa/" "gnu"
 clone "rsync://melpa.org/packages/" "melpa"
 clone "http://orgmode.org/elpa/" "org"

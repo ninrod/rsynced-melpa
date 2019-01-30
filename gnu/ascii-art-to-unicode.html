@@ -23,15 +23,15 @@
 
             <div class="container">
 <h2 class="package">ascii-art-to-unicode</h2><dl><dt>Description</dt><dd>a small artist adjunct</dd>
-<dt>Latest</dt> <dd><a href="ascii-art-to-unicode-1.9.el">ascii-art-to-unicode-1.9.el</a>, 2014-May-30, 17.3kB</dd>
+<dt>Latest</dt> <dd><a href="ascii-art-to-unicode-1.12.el">ascii-art-to-unicode-1.12.el</a>, 2018-Apr-29, 20.3kB</dd>
 <dt>Maintainer</dt> <dd>Thien-Thi Nguyen &lt;ttn@gnu.org></dd>
 <dt>Home page</dt> <dd><a href="http://www.gnuvola.org/software/aa2u/">http://www.gnuvola.org/software/aa2u/</a></dd>
 <dt>Browse ELPA's repository</dt> <dd><a href="http://git.savannah.gnu.org/cgit/emacs/elpa.git/tree/packages/ascii-art-to-unicode">CGit</a> or <a href="http://git.savannah.gnu.org/gitweb/?p=emacs/elpa.git;a=tree;f=packages/ascii-art-to-unicode">Gitweb</a></dd>
 </dl><p>To install this package, run in Emacs:</p>
                        <pre>M-x <span class="kw">package-install</span> RET <span class="kw">ascii-art-to-unicode</span> RET</pre><h2>Full description</h2><pre>
-The command `aa2u' converts simple ASCII art line drawings in
+The command ‘aa2u’ converts simple ASCII art line drawings in
 the {active,accessible} region of the current buffer to Unicode.
-Command `aa2u-rectangle' is like `aa2u', but works on rectangles.
+Command ‘aa2u-rectangle’ is like ‘aa2u’, but works on rectangles.
 
 Example use case:
 - M-x artist-mode RET
@@ -68,8 +68,8 @@ Example use case:
 
 Much easier on the eyes now!
 
-Normally, lines are drawn with the `LIGHT' weight.  If you set var
-`aa2u-uniform-weight' to symbol `HEAVY', you will see, instead:
+Normally, lines are drawn with the ‘LIGHT’ weight.  If you set var
+‘aa2u-uniform-weight’ to symbol ‘HEAVY’, you will see, instead:
 
   ┏━━━━━━━━━━━━━━━┓
   ┃               ┃
@@ -84,36 +84,49 @@ Normally, lines are drawn with the `LIGHT' weight.  If you set var
           ┗━━━━━━━━━━┛
 
 To protect particular ‘|’, ‘-’ or ‘+’ characters from conversion,
-you can set the property `aa2u-text' on that text with command
-`aa2u-mark-as-text'.  A prefix arg clears the property, instead.
-(You can use `describe-text-properties' to check.)  For example:
+you can set the property ‘aa2u-text’ on that text with command
+‘aa2u-mark-as-text’.  A prefix arg clears the property, instead.
+(You can use ‘describe-text-properties’ to check.)  For example:
 
      ┌───────────────────┐
      │                   │
      │ |\/|              │
-     │ `Oo'   --Oop Ack! │
+     │ ‘Oo’   --Oop Ack! │
      │  ^&amp;-MM.           │
      │                   │
      └─────────┬─────────┘
                │
            """""""""
 
-Command `aa2u-mark-rectangle-as-text' is similar, for rectangles.
+Command ‘aa2u-mark-rectangle-as-text’ is similar, for rectangles.
 
 Tip: For best results, you should make sure all the tab characaters
-are converted to spaces.  See: `untabify', `indent-tabs-mode'.
+are converted to spaces.  See: ‘untabify’, ‘indent-tabs-mode’.
 </pre>
 <h2>Old versions</h2><table>
+<tr><td><a href="ascii-art-to-unicode-1.9.el">ascii-art-to-unicode-1.9.el</a></td><td>2014-May-30</td><td>17.3kB</td>
 <tr><td><a href="ascii-art-to-unicode-1.8.el">ascii-art-to-unicode-1.8.el</a></td><td>2014-May-21</td><td>15.8kB</td>
 <tr><td><a href="ascii-art-to-unicode-1.7.el">ascii-art-to-unicode-1.7.el</a></td><td>2014-May-12</td><td>13.5kB</td>
 <tr><td><a href="ascii-art-to-unicode-1.6.el">ascii-art-to-unicode-1.6.el</a></td><td>2014-May-09</td><td>11.1kB</td>
 <tr><td><a href="ascii-art-to-unicode-1.5.el">ascii-art-to-unicode-1.5.el</a></td><td>2014-Apr-04</td><td>10.1kB</td>
 <tr><td><a href="ascii-art-to-unicode-1.4.el">ascii-art-to-unicode-1.4.el</a></td><td>2014-Jan-16</td><td>9.79kB</td>
+<tr><td><a href="ascii-art-to-unicode-1.11.el">ascii-art-to-unicode-1.11.el</a></td><td>2017-Oct-03</td><td>18.9kB</td>
 </table>
 <h2>News</h2><pre>
 NEWS for ascii-art-to-unicode.el
 See the end for copying conditions.
 
+
+- 1.12 | 2018-04-29
+  - Commentary, docstrings now use U+2018, U+2019
+  - mention ‘DOUBLE’ as possible value for ‘aa2u-uniform-weight’
+  - small docfixes
+
+- 1.11 | 2017-10-03
+  - fix uncool attempt to be cool :-/
+
+- 1.10 | 2017-10-03
+  - be cool w/ Emacs where (ucs-names) => hash table
 
 - 1.9 | 2014-05-29
   - new command: ‘aa2u-mark-rectangle-as-text’
@@ -166,7 +179,7 @@ See the end for copying conditions.
   End:
 
 _____________________________________________________________________
-Copyright (C) 2014-2017 Free Software Foundation, Inc.
+Copyright (C) 2014-2018 Free Software Foundation, Inc.
 
 Copying and distribution of this file, with or without modification,
 are permitted provided the copyright notice and this notice are preserved.
