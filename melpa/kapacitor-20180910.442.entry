@@ -1,0 +1,2 @@
+
+(kapacitor . [(20180910 442) ((emacs (25 1)) (magit (2 13 0)) (magit-popup (2 12 4))) "Main file for kapacitor-mode" single ((:commit . "b0e95f98b965f215be6ead14779949d5cf358ea5") (:keywords "kapacitor" "emacs" "magit" "tools") (:authors ("Manoj Kumar Manikchand" . "manojm.321@gmail.com")) (:maintainer "Manoj Kumar Manikchand" . "manojm.321@gmail.com") (:url . "http://github.com/Manoj321/kapacitor-el"))])

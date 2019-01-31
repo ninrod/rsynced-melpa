@@ -1,0 +1,2 @@
+
+(psc-ide . [(20190122 1014) ((dash (2 13 0)) (dash-functional (1 2 0)) (company (0 8 7)) (s (1 10 0)) (emacs (25)) (flycheck (0 24)) (let-alist (1 0 4)) (seq (1 11))) "Minor mode for PureScript's psc-ide tool." tar ((:commit . "230101a3d56c9e062c3ce2bf9a4dc077e5607cc0") (:keywords "languages") (:authors ("Erik Post" . "erik@shinsetsu.nl") ("Dmitry Bushenko" . "d.bushenko@gmail.com") ("Christoph Hegemann") ("Brian Sermons")) (:maintainer "Erik Post" . "erik@shinsetsu.nl") (:url . "https://github.com/epost/psc-ide-emacs"))])

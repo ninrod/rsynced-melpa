@@ -72,9 +72,11 @@ Yankpad example:
 
 * Category 2
 
-  Descriptive lists at the top-level of a category will be treated as
-  snippets.  You can set them to be treated as `abbrev-mode' abbrevs instead,
-  by setting `yankpad-descriptive-list-treatment' to abbrev.
+  Descriptive lists will be treated as snippets.  You can set them to be
+  treated as `abbrev-mode' abbrevs instead, by setting
+  `yankpad-descriptive-list-treatment' to abbrev.  If a heading could be considered
+  to be a snippet, add the `snippetlist' tag to ignore the snippet and scan
+  it for descriptive lists instead.
 
   - name :: Erik Sjöstrand
   - key :: Typing "key" followed by `yankpad-expand' will insert this snippet.
@@ -108,3 +110,11 @@ Yankpad example:
 * Global category       :global:
 ** Always available
    Snippets in a category with the :global: tag are always available for expansion.
+* Default                                           :global:
+** Fallback for major-mode categories
+
+If you open a file, but have no category named after its major-mode, a
+category named "Default" will be used instead (if you have it defined in your
+                                                  Yankpad). It is probably a good idea to make this category global. You can
+change the name of the default category by setting the variable
+yankpad-default-category.

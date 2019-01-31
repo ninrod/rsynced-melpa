@@ -1,1 +1,1 @@
-Provides font-lock and indentation for editing Fennel code.
+Provides font-lock, indentation, navigation, and repl for Fennel code.

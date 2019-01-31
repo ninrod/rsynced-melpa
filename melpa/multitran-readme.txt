@@ -11,7 +11,8 @@ Variables to customize:
 ~~~~~~~~~~~~~~~~~~~~~~
 
 * `multitran-languages' - Pair of languages for translation, for
-  example ("ru" . "en") for russian <-> english translation
+  example ("Russian" . "English") for russian <-> english
+  translation
 
 * `multitran-header-formatters' - Header line formatters
   You might want to add your custom formatters, like:

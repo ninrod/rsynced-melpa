@@ -1,0 +1,2 @@
+
+(fold-this . [(20180828 1336) nil "Just fold this region please" single ((:commit . "59ec711ee5f4decf197b8168e333b691b852c827") (:keywords "convenience") (:authors ("Magnar Sveen" . "magnars@gmail.com")) (:maintainer "Magnar Sveen" . "magnars@gmail.com"))])

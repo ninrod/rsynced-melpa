@@ -1,7 +1,7 @@
 This package provide commands for looking up the web of word under cursor.
 
 • xah-lookup-word-on-internet
-• xah-lookup-google
+• xah-lookup-web
 • xah-lookup-wikipedia
 • xah-lookup-word-definition
 • xah-lookup-word-dict-org

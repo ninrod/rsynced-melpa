@@ -1,0 +1,2 @@
+
+(ssh-tunnels . [(20181129 1536) ((cl-lib (0 5)) (emacs (24))) "Manage SSH tunnels" tar ((:commit . "903bfd0d2d225c7e37fcc8c7596bd0a387384f05") (:keywords "tools" "convenience") (:authors ("death <github.com/death>")) (:maintainer "death <github.com/death>") (:url . "http://github.com/death/ssh-tunnels"))])

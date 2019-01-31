@@ -4,9 +4,11 @@ not necessarily for ease of use.  For example, formatting is done
 in two steps: first you need to generate a formatting function for
 given pattern, and only using it obtain formatted strings.
 
-Package's main feature currently is timestamp formatting based on
+Package's main feature is timestamp parsing and formatting based on
 Java pattern.  Arbitrary timezones and locales (i.e. not
-necessarily those used by the system) are supported.  See function
+necessarily those used by the system) are supported.  However,
+specifying timezone in the input string to the parser function is
+not implemented yet.  See functions `datetime-parser-to-float' and
 `datetime-float-formatter' for details.
 
 Library also supports timestamp matching.  It can generate regular
@@ -18,8 +20,5 @@ e.g. in various application logs.  See `datetime-matching-regexp'.
 Finally, library provides functions to select an appropriate
 timestamp format for given locale.  For example, function
 `datetime-locale-date-pattern' returns a Java pattern suitable for
-formatting date only, without time part.  However, it is not
-required that formats are generated this way.
-
-Timestamp parsing is currently not implemented, but planned for a
-future version.
+formatting (or parsing) date only, without time part.  However, it
+is not required that patterns are generated this way.

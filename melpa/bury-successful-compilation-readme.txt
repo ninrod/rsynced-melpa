@@ -5,6 +5,13 @@ after a successful recompile:
 issued the last recompile, ignoring successive compilations to
 squash bugs.
 
-Usage:
+Commentary:
 
-(bury-successful-compilation 1)
+`bury-successful-compilation' works by saving the current window
+configuration to a register before each compilation.  If a
+compilation fails, the saved state is not restored until the build
+succeeds again.  This means after an attempted compilation, you can
+thrash your window configuration to chase down the compile-time
+issue, because when the build succeeds you will be popped up the
+stack back to the saved window configuration, right before your
+unsuccessful compilation attempt.

@@ -1,0 +1,2 @@
+
+(pylint . [(20170402 1255) nil "minor mode for running `pylint'" single ((:commit . "72fd895f636f7d0c62569c39dd74227ed28c8c8b") (:keywords "languages" "python") (:authors ("Ian Eure" . "ian.eure@gmail.com")) (:maintainer "Jonathan Kotta" . "jpkotta@gmail.com"))])

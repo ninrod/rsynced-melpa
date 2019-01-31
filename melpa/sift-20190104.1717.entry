@@ -1,0 +1,2 @@
+
+(sift . [(20190104 1717) nil "Front-end for sift, a fast and powerful grep alternative" single ((:commit . "16bdffd2edf9300db50a81dc0b456da7ad6da86c") (:keywords "sift" "ack" "pt" "ag" "grep" "search") (:authors ("Nicolas Lamirault" . "nicolas.lamirault@gmail.com")) (:maintainer "Nicolas Lamirault" . "nicolas.lamirault@gmail.com") (:url . "https://github.com/nlamirault/sift.el"))])

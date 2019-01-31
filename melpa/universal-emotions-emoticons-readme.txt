@@ -22,14 +22,16 @@ their description(s).
 Hit n to go forward, p to go backward, RETURN to select a field,
 and q to quit.
 
+<img src="./screenshot.png" alt="Screenshot" width="62%" height="100%">
+
 Installation:
 
 Whatever your preference.
 
 Add it to your load path and
 
-`(require 'universal-emotions-emoticons)`
+    (require 'universal-emotions-emoticons)
 
 or
 
-`(use-package universal-emotions-emoticons :ensure t)`
+    (use-package universal-emotions-emoticons :ensure t)

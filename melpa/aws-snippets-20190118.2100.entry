@@ -1,0 +1,2 @@
+
+(aws-snippets . [(20190118 2100) ((yasnippet (0 8 0))) "Yasnippets for AWS" tar ((:commit . "b5ba6dabdb7eca29ac03f12e94fd9bdb4c22bff0") (:keywords "snippets"))])

@@ -1,0 +1,2 @@
+
+(emidje . [(20190107 1743) ((emacs (25)) (cider (0 17 0)) (seq (2 16)) (magit-popup (2 4 0))) "Test runner and report viewer for Midje" single ((:commit . "a3679b200df91caa6aa769354554ed74e3d2c77e") (:keywords "tools") (:authors ("Alan Ghelardi" . "alan.ghelardi@nubank.com.br")) (:maintainer "Alan Ghelardi" . "alan.ghelardi@nubank.com.br") (:url . "https://github.com/nubank/emidje"))])

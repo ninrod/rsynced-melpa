@@ -11,7 +11,7 @@ Usage:
  and the `js-comint-program-arguments' list to the executable that runs
  the JS interpreter and the arguments to pass to it respectively.
  For example, on windows you might need below setup:
-   (setq inferior-js-program-command "C:/Program Files/nodejs/node.exe")
+   (setq js-comint-program-command "C:/Program Files/nodejs/node.exe")
 
  After setup, do: `M-x js-comint-repl'
  Away you go.

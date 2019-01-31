@@ -1,0 +1,2 @@
+
+(char-menu . [(20190101 705) ((emacs (24 3)) (avy-menu (0 1))) "Create your own menu for fast insertion of arbitrary symbols" single ((:commit . "bf6f64e8347bdf6f8421d0494d30b9af30a49778") (:keywords "convenience" "editing") (:authors ("Mark Karpov" . "markkarpov92@gmail.com")) (:maintainer "Mark Karpov" . "markkarpov92@gmail.com") (:url . "https://github.com/mrkkrp/char-menu"))])

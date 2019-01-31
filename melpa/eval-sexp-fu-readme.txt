@@ -5,5 +5,4 @@ This package provides:
 
 Installation:
 
-Put the highlight.el to your load-path.
-Then require this package.
+Require this package using (require 'eval-sexp-fu)

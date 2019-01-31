@@ -32,8 +32,10 @@ C-c C-f k キーワードタグ(@<kw>)で囲む
 C-c C-f C-k キーワードタグ(@<kw>)で囲む
 C-c C-f i イタリックタグ(@<i>)で囲む
 C-c C-f C-i 同上
-C-c C-f e 同上
-C-c C-f C-e 同上
+C-c C-f e 同上 (review-use-em tの場合は@<em>)
+C-c C-f C-e 同上 (review-use-em tの場合は@<em>)
+C-c C-f s 強調タグ(@<strong>)で囲む
+C-c C-f C-s 同上
 C-c C-f t 等幅タグ(@<tt>)で囲む
 C-c C-f C-t 同上
 C-c C-f u 同上

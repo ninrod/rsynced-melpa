@@ -1,2 +1,2 @@
-To enable, call (lsp-ccls-enable) in your c++-mode hook.
+To enable, call (lsp) in c-mode-hook c++-mode-hook objc-mode-hook.
 See more at https://github.com/MaskRay/ccls/wiki/Emacs

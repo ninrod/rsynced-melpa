@@ -1,14 +1,23 @@
 This package provides functionality for correcting words via custom
-interfaces. There are two functions for this: `flyspell-correct-at-point'
-to correct word at point and `flyspell-correct-previous-word-generic' to
-correct any visible word before point. In most cases second function is more
-convenient, so don't forget to bind it.
+interfaces. There are several functions for this:
 
-  (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-previous-word-generic)
+- `flyspell-correct-at-point' - to correct word at point.
+- `flyspell-correct-previous' to correct any visible word before the point.
+- `flyspell-correct-next' to correct any visible word after the point.
+- `flyspell-correct-wrapper' - a beefed wrapper for
+  `flyspell-correct-previous' and `flyspell-correct-next' allowing one to
+  correct many words at once (rapid flow) and change correction direction.
+
+In most cases the last function is the most convenient, so don't forget to
+bind it.
+
+  (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-wrapper)
 
 When invoked, it will show the list of corrections suggested by Flyspell.
-Most interfaces also allow you to save new word to your dictionary, accept
-this spelling in current buffer or for a whole session.
+
+Most interfaces also allow you to save the new word to your dictionary,
+accept this spelling in current buffer or for a whole session, or even skip
+this word (useful in a rapid flow).
 
 Default interface is implemented using `completing-read', but it's highly
 advised to use `flyspell-correct-ido' (which comes bundled with this package)

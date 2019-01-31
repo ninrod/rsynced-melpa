@@ -26,6 +26,13 @@ If you want to load a different org file from your default one, use `org-dotemac
 For faster loading you may prefer to keep your config code in a separate elisp file, and just update this file now and again
 by exporting the code from the org file.
 Use the `org-dotemacs-load-file' command for this and specify a target elisp file when prompted.
+Note however that you may get errors when loading the elisp file that you didnt get with the org file.
+This is because in order to process the org-file some other libraries are loaded which are not loaded when the elisp file loads.
+You will have to experiment for yourself.
+
+After loading you can inspect the *Messages* buffer to see which blocks were successfully loaded and which had errors.
+If you call the `org-dotemacs-jump-to-block' command on one of the org-dotemacs lines in this buffer it will take you to
+the block mentioned on that line, or you can prompt for one by using a prefix with this command.
 
 Structure of the org file
 
@@ -56,14 +63,9 @@ defining buffer-wide properties, etc. This way I can get a nice column view of t
 
 You can enforce dependencies between code blocks by defining NAME & DEPENDS properties for the subtrees containing the
 blocks (preferred). The NAME property should contain the name of the block, and the DEPENDS property should contain a space
-separated list of block names that this block depends on.
-These properties will be applied to all code blocks in the subtree (see "Properties and Columns" in the org manual for
-more details).
-
-The NAME property can be overridden on a per block basis by adding a :name header arg to a block, and dependencies can be
-augmented by adding a :depends header arg (see "Header arguments" in the org manual).
-However it is recommended to keep a separate subtree for each code block and use properties for defining headers and names
-since then you can get a column view of the dependencies (see below).
+separated list of block names that this block depends on. If a block doesn't have it's own NAME property it will be given
+a default name of "@N" where N is the buffer position of the start of the block.
+If `org-dotemacs-dependency-inheritance' is non-nil then block dependencies will be inherited from parent headers.
 
 A block will not be loaded until all of its dependencies have been loaded.
 

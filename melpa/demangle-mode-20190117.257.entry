@@ -1,0 +1,2 @@
+
+(demangle-mode . [(20190117 257) ((cl-lib (0 1)) (emacs (24))) "Automatically demangle C++ symbols" single ((:commit . "b4659ca85c4f02e9043e91d71affb4a8ede87339") (:keywords "c" "tools") (:authors ("Ben Liblit" . "liblit@acm.org")) (:maintainer "Ben Liblit" . "liblit@acm.org") (:url . "https://github.com/liblit/demangle-mode"))])

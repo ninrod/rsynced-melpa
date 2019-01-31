@@ -1,0 +1,2 @@
+
+(ob-restclient . [(20180904 709) ((restclient (0))) "org-babel functions for restclient-mode" single ((:commit . "00b2c5a6637ab6e504708612357ffb29b5416e4b") (:keywords "literate programming" "reproducible research") (:authors ("Alf Lervåg")) (:maintainer "Alf Lervåg") (:url . "http://orgmode.org"))])

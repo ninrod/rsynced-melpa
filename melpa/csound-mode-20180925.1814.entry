@@ -1,0 +1,2 @@
+
+(csound-mode . [(20180925 1814) ((emacs (25)) (shut-up (0 3 2)) (multi (2 0 1))) "A major mode for interacting and coding Csound" tar ((:commit . "9bc2d0badf8316cca2d167348bb81a82e34297c8") (:authors ("Hlöðver Sigurðsson" . "hlolli@gmail.com")) (:maintainer "Hlöðver Sigurðsson" . "hlolli@gmail.com") (:url . "https://github.com/hlolli/csound-mode"))])

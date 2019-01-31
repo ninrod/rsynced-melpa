@@ -16,10 +16,10 @@ cursor to K/2 - K/4.
 Below is an illustration of how you can use binary line navigation to reach
 character `e' at column 10 from character `b' at column 34 in four steps:
 
-                  ________________|     `bln-backward-half'
-         ________|                      `bln-backward-half'
-        |___                            `bln-forward-half'
-           _|                           `bln-backward-half'
+                  ________________|    bln-backward-half (\\[bln-backward-half])
+         ________|                     bln-backward-half (\\[bln-backward-half])
+        |___                           bln-forward-half  (\\[bln-forward-half])
+           _|                          bln-backward-half (\\[bln-backward-half])
 ..........e.......................b.....
 
 This approach requires at most log(N) invocations to move from any position
@@ -30,12 +30,25 @@ navigation sequence by moving the cursor away from its current position (for
 example, by `forward-char'). You can then start the binary navigation again
 from that cursor position.
 
-By default the commands `bln-backward-half' and `bln-forward-half' are bound to M-[
-and M-], respectively.  Depending on your keyboard layout, these keys may not
-be very convenient.  For more convenient binary line navigation, you could
-bind to more convenient keys, like M-j and M-k (at the expense of losing the
-default bindings for `indent-new-comment-line', and `kill-sentence',
-respectively):
+In an analogous manner, `bln-mode` allows for vertical binary
+navigation across the visible lines in the window, using the
+`bln-backward-half-v` and `bln-forward-half-v` commands.
 
-(global-set-key (kbd "M-j") 'bln-backward-half)
-(global-set-key (kbd "M-k") 'bln-forward-half)
+The default keybindings are as follows:
+
+* `bln-backward-half`   (\\[bln-backward-half])
+* `bln-forward-half`    (\\[bln-forward-half])
+* `bln-backward-half-v` (\\[bln-backward-half-v])
+* `bln-forward-half-v`  (\\[bln-forward-half-v])
+
+Navigation using thse keybindings is rather cumbersome
+however. Using the `hydra` package, the following bindings
+provide a much more convenient interface:
+
+    (defhydra hydra-bln ()
+      \"Binary line navigation mode\"
+      (\"j\" bln-backward-half \"Backward in line\")
+      (\"k\" bln-forward-half \"Forward in line\")
+      (\"u\" bln-backward-half-v \"Backward in window\")
+      (\"i\" bln-forward-half-v \"Forward in window\"))
+    (define-key bln-mode-map (kbd \"M-j\") 'hydra-bln/body)

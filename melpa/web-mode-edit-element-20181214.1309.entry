@@ -1,0 +1,2 @@
+
+(web-mode-edit-element . [(20181214 1309) ((emacs (24 4)) (web-mode (14))) "Helper-functions for attribute- and element-handling" tar ((:commit . "30f0f697212a85a9b881549fc272fa7c96d3e703") (:keywords "languages" "convenience") (:authors ("Julian T. Knabenschuh" . "jtkdevelopments@gmail.com")) (:maintainer "Julian T. Knabenschuh" . "jtkdevelopments@gmail.com") (:url . "https://github.com/jtkDvlp/web-mode-edit-element"))])

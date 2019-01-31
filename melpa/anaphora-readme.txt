@@ -9,6 +9,10 @@ Quickstart
     ;; anonymous function to compute factorial using `self'
     (alambda (x) (if (= x 0) 1 (* x (self (1- x)))))
 
+    ;; to fontify `it' and `self'
+    (with-eval-after-load "lisp-mode"
+      (anaphora-install-font-lock-keywords))
+
 Explanation
 
 Anaphoric expressions implicitly create one or more temporary
@@ -42,11 +46,6 @@ The following macros are made available
     `a*'
     `a/'
 
-The following macros are experimental
-
-    `anaphoric-set'
-    `anaphoric-setq'
-
 See Also
 
     M-x customize-group RET anaphora RET
@@ -58,16 +57,13 @@ Notes
 Partially based on examples from the book "On Lisp", by Paul
 Graham.
 
-When this library is loaded, the provided anaphoric forms are
-registered as keywords in font-lock.  This may be disabled via
-customize.
-
 Compatibility and Requirements
 
-    GNU Emacs version 24.4-devel     : yes, except macros marked experimental
-    GNU Emacs version 24.3           : yes, except macros marked experimental
-    GNU Emacs version 23.3           : yes, except macros marked experimental
-    GNU Emacs version 22.2           : yes, except macros marked experimental
+    GNU Emacs version 26.1           : yes
+    GNU Emacs version 25.x           : yes
+    GNU Emacs version 24.x           : yes
+    GNU Emacs version 23.x           : yes
+    GNU Emacs version 22.x           : yes
     GNU Emacs version 21.x and lower : unknown
 
 Bugs
@@ -80,9 +76,7 @@ License
 
 All code contributed by the author to this library is placed in the
 public domain.  It is the author's belief that the portions adapted
-from examples in "On Lisp" are in the public domain.  At least 10
-lines of code have been adapted from the Emacs 'cl package (in the
-function `anaphoric-setq').
+from examples in "On Lisp" are in the public domain.
 
 Regardless of the copyright status of individual functions, all
 code herein is free software, and is provided without any express

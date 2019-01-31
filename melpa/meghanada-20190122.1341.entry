@@ -1,0 +1,2 @@
+
+(meghanada . [(20190122 1341) ((emacs (24 3)) (yasnippet (0 6 1)) (company (0 9 0)) (flycheck (0 23))) "A better java development mode" tar ((:commit . "8905ed8e397c7719f868ae83fe20c888a1355c38") (:keywords "languages" "java") (:authors ("Yutaka Matsubara" . "yutaka.matsubara@gmail.com")) (:maintainer "Yutaka Matsubara" . "yutaka.matsubara@gmail.com") (:url . "https://github.com/mopemope/meghanada-emacs"))])

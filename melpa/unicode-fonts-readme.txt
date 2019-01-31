@@ -5,11 +5,11 @@ Quickstart:
 
     Install these fonts
 
-        http://users.teilar.gr/~g1951d/Symbola.zip      ; NOTE: site is down as of July 2015
+        http://users.teilar.gr/~g1951d/Symbola.zip
         http://www.quivira-font.com/files/Quivira.ttf   ; or Quivira.otf
-        http://sourceforge.net/projects/dejavu/files/dejavu/2.35/dejavu-fonts-ttf-2.35.tar.bz2
-        https://github.com/googlei18n/noto-fonts/blob/master/hinted/NotoSans-Regular.ttc?raw=true
-        https://github.com/googlei18n/noto-fonts/blob/master/unhinted/NotoSansSymbols-Regular.ttf?raw=true
+        http://sourceforge.net/projects/dejavu/files/dejavu/2.37/dejavu-fonts-ttf-2.37.tar.bz2
+        https://github.com/googlei18n/noto-fonts/raw/master/hinted/NotoSans-Regular.ttf
+        https://github.com/googlei18n/noto-fonts/raw/master/unhinted/NotoSansSymbols-Regular.ttf
 
     Remove Unifont from your system.
 
@@ -64,7 +64,7 @@ recent version of OS X or Microsoft Windows, you already own some
 good multi-lingual fonts, though you would do very well to download
 and install the four items below:
 
-From http://dejavu-fonts.org/wiki/Download
+From https://dejavu-fonts.github.io/
 
     DejaVu Sans, DejaVu Sans Mono
 
@@ -72,7 +72,7 @@ From http://www.quivira-font.com/downloads.php
 
     Quivira
 
-From http://users.teilar.gr/~g1951d/Symbola.zip  ; NOTE: site is down as of July 2015
+From http://users.teilar.gr/~g1951d/Symbola.zip
 
     Symbola
 
@@ -152,7 +152,7 @@ that Noto Sans provides coverage:
 
         Gentium Plus                  ; Greek
 
-    From http://users.teilar.gr/~g1951d/    ; NOTE: site is down as of July 2015
+    From http://users.teilar.gr/~g1951d/
 
         Aegean, Aegyptus, Akkadian    ; Ancient languages
         Analecta                      ; Ancient languages, Deseret
@@ -405,14 +405,14 @@ that Noto Sans provides coverage:
 
         Cham OI_Tangin                ; Cham
 
+    From https://ctan.org/tex-archive/fonts/Asana-Math?lang=en
+
+        Asana Math                    ; Mathematical Symbols
+
 Compatibility and Requirements
 
-    GNU Emacs version 25.1-devel     : not tested
-    GNU Emacs version 24.5           : not tested
-    GNU Emacs version 24.4           : yes
-    GNU Emacs version 24.3           : yes
-    GNU Emacs version 23.3           : yes
-    GNU Emacs version 22.3 and lower : no
+    GNU Emacs version 23.3 and higher : yes
+    GNU Emacs version 22.3 and lower  : no
 
     Requires font-utils.el, ucs-utils.el
 

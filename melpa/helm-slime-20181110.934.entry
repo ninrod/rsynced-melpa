@@ -1,0 +1,2 @@
+
+(helm-slime . [(20181110 934) ((emacs (24)) (helm-core (1 9 8)) (slime (2 18)) (cl-lib (0 5))) "helm-sources and some utilities for SLIME." single ((:commit . "070d024147e1632b7358711b7f8fb77a28dcf265") (:keywords "convenience" "helm" "slime") (:authors ("Takeshi Banse" . "takebi@laafc.net")) (:maintainer "Takeshi Banse" . "takebi@laafc.net") (:url . "https://github.com/emacs-helm/helm-slime"))])

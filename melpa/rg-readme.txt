@@ -1,14 +1,14 @@
 This package is a frontend to ripgrep (rg) and works in a similar
 way to Emacs built in `rgrep' command or external `ag' if you like.
 It depends on and reuse parts of built in grep with adjustments to
-ripgrep and is compatible with `wgrep'.
+ripgrep is using `wgrep' for inline editing of search result.
 
 Install the package and and use the default key bindings:
 (rg-enable-default-bindings)
 
 The default key binding prefix is C-c s but can be changed by
 supplying a prefix of choice to the above function call:
-(rg-enable-default-bindings "\M-s")
+(rg-enable-default-bindings)
 
 `rg' is the main entry point but there are functions for easy
 searching:
@@ -54,7 +54,9 @@ result buffers with or without custom naming.
 `rg-list-searches' will display a list of all search buffers with
 search info and allow jumping to results.
 
-The default configuration of this package is compatible with `wgrep'.
-If grouped mode and/or show columns is enabled you need to install
-the wgrep-ag package from MELPA and configure it like this:
-(add-hook 'rg-mode-hook 'wgrep-ag-setup)
+Search history is stored per result buffer.  It's possible to
+navigate back and forward in earlier searches with
+`rg-back-history` and `rg-forward-history`.  Whenever a search is
+modified or a new is created future searches are cleared.
+
+This package use `wgrep' for inline editing of search results.

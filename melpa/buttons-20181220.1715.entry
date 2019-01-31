@@ -1,0 +1,2 @@
+
+(buttons . [(20181220 1715) ((cl-lib (0 3))) "Define and visualize hierarchies of keymaps" single ((:commit . "6bfeca7216ce8fa301e6e99bd40883cc3f1d3787") (:keywords "keymap" "template" "snippet") (:authors ("Ernesto Alfonso")) (:maintainer nil . "(concat \"erjoalgo\" \"@\" \"gmail\" \".com\")") (:url . "http://github.com/erjoalgo/emacs-buttons"))])

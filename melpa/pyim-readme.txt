@@ -59,15 +59,10 @@ pyim 的目标是： *尽最大的努力成为一个好用的 Emacs 中文输入
   :ensure nil
   :demand t
   :config
-  ;; 激活 basedict 拼音词库
+  ;; 激活 basedict 拼音词库，五笔用户请继续阅读 README
   (use-package pyim-basedict
     :ensure nil
     :config (pyim-basedict-enable))
-
-  ;; 五笔用户使用 wbdict 词库
-  ;; (use-package pyim-wbdict
-  ;;   :ensure nil
-  ;;   :config (pyim-wbdict-gbk-enable))
 
   (setq default-input-method "pyim")
 
@@ -100,9 +95,6 @@ pyim 的目标是： *尽最大的努力成为一个好用的 Emacs 中文输入
   ;; 选词框显示5个候选词
   (setq pyim-page-length 5)
 
-  ;; 让 Emacs 启动时自动加载 pyim 词库
-  (add-hook 'emacs-startup-hook
-            #'(lambda () (pyim-restart-1 t)))
   :bind
   (("M-j" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
    ("C-;" . pyim-delete-word-from-personal-buffer)))
@@ -129,8 +121,8 @@ pyim 当前的默认的拼音词库是 pyim-basedict, 这个词库的词条量
 *** 常用快捷键
 | 输入法快捷键          | 功能                       |
 |-----------------------+----------------------------|
-| C-n 或 M-n 或 +       | 向下翻页                   |
-| C-p 或 M-p 或 -       | 向上翻页                   |
+| C-n 或 M-n 或 + 或 .  | 向下翻页                   |
+| C-p 或 M-p 或 - 或 ,  | 向上翻页                   |
 | C-f                   | 选择下一个备选词           |
 | C-b                   | 选择上一个备选词           |
 | SPC                   | 确定输入                   |
@@ -153,6 +145,27 @@ pyim 支持双拼输入模式，用户可以通过变量 `pyim-default-scheme' �
 1. pyim 支持微软双拼（microsoft-shuangpin）和小鹤双拼（xiaohe-shuangpin）。
 2. 用户可以使用变量 `pyim-schemes' 添加自定义双拼方案。
 3. 用户可能需要重新设置 `pyim-translate-trigger-char'。
+
+*** 通过 pyim 来支持 rime 所有输入法
+
+pyim 使用 emacs 动态模块：[[https://gitlab.com/liberime/liberime][liberime]]
+来支持 rime, 设置方式：
+
+1. 安裝 liberime, 见：[[https://gitlab.com/liberime/liberime/blob/master/README.org]] 。
+2. 參考设置：
+   #+BEGIN_EXAMPLE
+   (use-package liberime
+     :load-path "/path/to/liberime.[so|dll]"
+     :config
+     (liberime-start "/usr/share/rime-data" "~/.emacs.d/rime/")
+     (liberime-select-schema "luna_pinyin_simp")
+     (setq pyim-default-scheme 'rime))
+   #+END_EXAMPLE
+3. 使用 rime 全拼输入法的用户，也可以使用 rime-quanpin scheme,
+   这个 scheme 是专门针对 rime 全拼输入法定制的，支持全拼v快捷键。
+   #+BEGIN_EXAMPLE
+   (setq pyim-default-scheme 'rime-quanpin)
+   #+END_EXAMPLE
 
 *** 使用五笔输入
 pyim 支持五笔输入模式，用户可以通过变量 `pyim-default-scheme' 来设定：
@@ -227,7 +240,7 @@ pyim 的 tooltip 选词框默认使用 *双行显示* 的样式，在一些特
 (setq pyim-page-style 'one-line)
 #+END_EXAMPLE
 
-注：用户可以添加函数 pyim-page-style-STYLENAME-style 来定义自己的选词框格式。
+注：用户可以添加函数 pyim-page-style:STYLENAME 来定义自己的选词框格式。
 
 *** 设置模糊音
 可以通过设置 `pyim-fuzzy-pinyin-alist' 变量来自定义模糊音。
@@ -332,9 +345,10 @@ pyim 的 tooltip 选词框默认使用 *双行显示* 的样式，在一些特
 
 ** Tips
 
-*** 如何将个人词条导出到一个文件
+*** 如何将个人词条相关信息导入和导出？
 
-使用命令：pyim-dcache-export-personal-dcache
+1. 导入使用命令： pyim-import
+2. 导出使用命令： pyim-export
 
 *** pyim 出现错误时，如何开启 debug 模式
 

@@ -1,4 +1,4 @@
-The default Emacs theme with an ivory3 background, with tweaks applied.  Used
+The default Emacs theme with an cornsilk3 background, with tweaks applied.  Used
 mostly for coding and magit, with some customizations for org, powerline,
 hl-line
 

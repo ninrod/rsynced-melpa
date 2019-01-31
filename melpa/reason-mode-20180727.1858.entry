@@ -1,0 +1,2 @@
+
+(reason-mode . [(20180727 1858) ((emacs (24 3))) "A major mode for editing ReasonML" tar ((:commit . "0ab99a03b2e47523e86d1e94ccc085e176b987df") (:keywords "languages" "ocaml") (:authors ("Mozilla")) (:maintainer "Mozilla") (:url . "https://github.com/reasonml-editor/reason-mode"))])

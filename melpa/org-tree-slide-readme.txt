@@ -1,7 +1,7 @@
 Requirement:
    org-mode 6.33x or higher version
    The latest version of the org-mode is recommended.
-                     (see http://orgmode.org/)
+                     (see https://orgmode.org/)
 
 Usage:
    1. Put this elisp into your load-path

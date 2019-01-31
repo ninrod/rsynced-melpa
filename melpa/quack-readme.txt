@@ -79,12 +79,10 @@ KEY BINDINGS:
     of Quack may integrate this functionality into a more generalized
     documentation navigation interface.)
 
-RELEASE ANNOUNCEMENTS EMAIL:
-
-    To receive email notification when a new Quack version is released, ask
-    neil@neilvandyke.org to add you to the moderated `scheme-announce' list.
-
 HISTORY:
+
+    Version 0.49 (2018-10-28):
+        * Removed reference to `scheme-announce' email list.
 
     Version 0.48 (2016-04-03):
         * Made fontify `#true` and `#false`.

@@ -10,5 +10,3 @@ To install, put this file somewhere in your load-path and add the following
 to your .emacs file:
 
 (require 'recursive-narrow)
-(global-set-key (kbd "C-x n n") 'recursive-narrow-or-widen-dwim)
-(global-set-key (kbd "C-x n w") 'recursive-widen-dwim)

@@ -6,17 +6,8 @@ You can override the project root by setting `eacl-project-root',
 
 List of commands,
 
-`eacl-complete-line' complete line.  You could assign key binding
-"C-x C-l" to this command.
-
-`eacl-complete-statement' completes statement which ends with ";".
-For example, input "import" and run this command.
-
-`eacl-complete-snippet' completes snippets which ends with "}".
-For example, input "if" and run this command.
-
-`eacl-complete-tag' completes HTML tag which ends with ">".
-For example, input "<div" and run this command.
+`eacl-complete-line' complete single line.
+`eacl-complete-multiline' completes multiline code or html tag.
 
 Modify `grep-find-ignored-directories' and `grep-find-ignored-files'
 to setup directories and files grep should ignore:
@@ -51,11 +42,4 @@ The content of ".dir-locals.el":
                                   "*.log"))
                        (add-to-list 'grep-find-ignored-files v)))))))
 
-Emacs v24.3 and Ivy (https://github.com/abo-abo/swiper) are required.
-GNU Grep v3.1+ is optionally required for multi-line completion.
 "git grep" is automatically detected for single line completion.
-
-On macOS:
-  - Use HomeBrew (https://brew.sh/) to install latest GNU Grep on macOS
-  - Insert `(setq eacl-grep-program "ggrep")' into "~/.emacs".
-  - Bundled "BSD Grep" is too outdated to use

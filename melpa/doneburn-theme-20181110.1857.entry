@@ -1,0 +1,2 @@
+
+(doneburn-theme . [(20181110 1857) nil "A light theme based on Bozhidar Batsov's Zenburn" single ((:commit . "9c31dd6d664436df73c776560c7a660041b3a5bf") (:keywords "faces" "themes") (:authors ("Manuel Uberti" . "manuel.uberti@inventati.org")) (:maintainer "Manuel Uberti" . "manuel.uberti@inventati.org") (:url . "http://github.com/manuel-uberti/doneburn-emacs"))])

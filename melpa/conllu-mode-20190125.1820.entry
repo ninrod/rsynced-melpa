@@ -1,0 +1,2 @@
+
+(conllu-mode . [(20190125 1820) ((emacs (25)) (cl-lib (0 5)) (flycheck (30)) (hydra (0 13 0)) (s (1 0))) "editing mode for CoNLL-U files" tar ((:commit . "1d9cda85c9456b652eeeedcee6848963c2ad022b") (:keywords "extensions") (:authors ("bruno cuconato" . "bcclaro+emacs@gmail.com")) (:maintainer "bruno cuconato" . "bcclaro+emacs@gmail.com") (:url . "https://github.com/odanoburu/conllu-mode"))])

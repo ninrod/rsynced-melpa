@@ -2,12 +2,7 @@ About:
 
 The best dark theme for Emacs.
 
-This theme was originally a fork of Ample theme, but has seen
-enough tweaks and changes that it's essentially a new (and better)
-theme.
-
-Nimbus theme is constantly being worked on, and I am actively
-adding faces and support for more third-party packages.
+See README.md for more info.
 
 Installing:
 

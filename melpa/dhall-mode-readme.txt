@@ -5,8 +5,8 @@ Some of its major features include:
 
  - syntax highlighting (font lock),
 
- - Basic indendation, multi line string support
+ - Basic indentation, multi line string support
 
- - Automatic formatting on save (configuratle via variable)
+ - Automatic formatting on save (configurable)
 
  - Error highlighting

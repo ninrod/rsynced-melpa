@@ -1,3 +1,6 @@
+Includes a minor mode for handling a Python/IPython shell, and can
+take advantage of Pymacs when installed.
+
 See documentation in README.org, README.DEVEL.org
 
 Please report bugs at

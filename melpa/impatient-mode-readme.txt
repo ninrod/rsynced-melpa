@@ -1,5 +1,5 @@
 impatient-mode is a minor mode that publishes the live buffer
-through the local simple-httpd server under /imp/<buffer-name>. To
+through the local simple-httpd server under /imp/live/<buffer-name>/. To
 unpublish a buffer, toggle impatient-mode off.
 
 Start the simple-httpd server (`httpd-start') and visit /imp/ on

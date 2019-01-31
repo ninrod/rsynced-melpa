@@ -3,5 +3,7 @@ below their location in the buffer.
 
 # Setup
 
+Enable the local minor mode for all flycheck-mode buffers:
+
 (with-eval-after-load 'flycheck
-  (flycheck-inline-mode))
+  (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))

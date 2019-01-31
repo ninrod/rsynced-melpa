@@ -19,3 +19,6 @@ Current supported Cargo Key Combinations:
  * C-c C-c C-m - cargo-process-fmt
  * C-c C-c C-k - cargo-process-check
  * C-c C-c C-K - cargo-process-clippy
+ * C-c C-c C-a - cargo-process-add
+ * C-c C-c C-D - cargo-process-rm
+ * C-c C-c C-U - cargo-process-upgrade

@@ -1,0 +1,2 @@
+
+(recursive-narrow . [(20180917 449) nil "narrow-to-region that operates recursively" single ((:commit . "94f5c16a81ecf85c7442ebc8cd04ba7553ab5244") (:authors ("Nathaniel Flath" . "flat0103@gmail.com")) (:maintainer "Nathaniel Flath" . "flat0103@gmail.com") (:url . "http://github.com/nflath/recursive-narrow"))])

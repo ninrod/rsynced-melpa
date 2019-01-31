@@ -3,7 +3,7 @@ to your init.el:
 
 (require 'flycheck-joker)
 
-Make sure Joker binary is on your path.
+Make sure Joker binary is on your path. Joker version v0.9.7 or greater is required.
 Joker installation instructions are here: https://github.com/candid82/joker#installation
 
 Please read about Joker's linter mode to understand its capabilities and limitations:

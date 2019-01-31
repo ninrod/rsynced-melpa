@@ -116,7 +116,7 @@ Documentation:
  their respective header/user-agent arguments.  Set a
  `WGET_OPTIONS' property to a key of this alist (say,
  `Mac-OS-10.8') and org-board will replace the key with its
- corresponding value before calling wget. This is useful for some
+ corresponding value before calling wget.  This is useful for some
  sites that refuse to serve pages to `wget'.
 
  `org-board-wget-show-buffer' controls whether the archival process

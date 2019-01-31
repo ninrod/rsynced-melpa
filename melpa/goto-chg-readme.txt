@@ -19,6 +19,8 @@ Works with XEmacs-20.4 and 21.4 (but see todo about `last-command' below)
 --------------------------------------------------------------------
 History
 
+Ver 1.7.3 2019-01-07 Vasilij Schneidermann
+   Fix errors when used with persistent undo
 Ver 1.7.2 2018-01-05 Vasilij Schneidermann
    Fix byte-compiler warnings again
 Ver 1.7.1 2017-12-31 Vasilij Schneidermann

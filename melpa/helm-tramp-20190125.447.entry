@@ -1,0 +1,2 @@
+
+(helm-tramp . [(20190125 447) ((emacs (24 3)) (helm (2 0))) "Tramp helm interface for ssh, docker, vagrant" single ((:commit . "a7456cee86a83d68c966475fab90ab94006fd23c") (:authors ("Masashı Mıyaura")) (:maintainer "Masashı Mıyaura") (:url . "https://github.com/masasam/emacs-helm-tramp"))])

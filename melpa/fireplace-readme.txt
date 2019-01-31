@@ -1,1 +1,2 @@
-Puts your Emacs on fire
+Oh, the weather outside is frightful!
+But the fire is so delightful...

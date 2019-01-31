@@ -6,6 +6,7 @@
  - C-u M-x composer  - Run composer (global) sub command (with completing read)
  - M-x composer-install  - Run composer install command
  - M-x composer-require  - Run composer require command
+ - M-x composer-update  - Run composer update command
  - C-u M-x composer-require  - Run composer require --dev command
  - M-x composer-dump-autoload - Run composer dump-autoload command
  - M-x composer-find-json-file  - Open composer.json of the project

@@ -1,0 +1,2 @@
+
+(exwm-firefox-evil . [(20181203 1211) ((emacs (24 4)) (exwm (0 16)) (evil (1 0 0))) "Firefox hotkeys to functions" single ((:commit . "e23ebbb9bf1c75536bde9d563ec8668db11533d6") (:keywords "extensions") (:authors ("Sebastian Wålinder" . "s.walinder@gmail.com")) (:maintainer "Sebastian Wålinder" . "s.walinder@gmail.com") (:url . "https://github.com/walseb/exwm-firefox-evil"))])

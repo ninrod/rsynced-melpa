@@ -9,11 +9,16 @@ Flagship themes
 Additional themes
   [X] `doom-city-lights' (added by fuxialexnder)
   [X] `doom-darcula' (added by fuxialexnder)
+  [X] `doom-Iosvkem' (added by neutaaaaan)
   [X] `doom-molokai'
   [X] `doom-nord' (added by fuxialexnder)
+  [X] `doom-nord-light' (added by fuxialexnder)
+  [X] `doom-opera' (added by jwintz)
+  [X] `doom-opera-light' (added by jwintz)
   [X] `doom-nova' (added by bigardone)
   [X] `doom-peacock' (added by teesloane)
   [X] `doom-solarized-light' (added by fuxialexnder)
+  [X] `doom-sourcerer' (added by defphil)
   [X] `doom-spacegrey' (added by teesloane)
   [X] `doom-tomorrow-night'
   [X] `doom-tomorrow-day'

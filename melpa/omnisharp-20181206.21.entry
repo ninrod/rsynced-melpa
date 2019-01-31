@@ -1,0 +1,2 @@
+
+(omnisharp . [(20181206 21) ((emacs (24 4)) (flycheck (30)) (dash (2 12 0)) (auto-complete (1 4)) (popup (0 5 1)) (csharp-mode (0 8 7)) (cl-lib (0 5)) (s (1 10 0)) (f (0 19 0))) "Omnicompletion (intellisense) and more for C#" tar ((:commit . "1658ddc6e418d1046467761c5e38e3577821c7d8") (:keywords "languages" "csharp" "c#" "ide" "auto-complete" "intellisense") (:authors ("Mika Vilpas and others")) (:maintainer "Mika Vilpas and others") (:url . "https://github.com/Omnisharp/omnisharp-emacs"))])

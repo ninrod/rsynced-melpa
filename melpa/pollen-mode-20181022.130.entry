@@ -1,0 +1,2 @@
+
+(pollen-mode . [(20181022 130) ((emacs (24 3)) (cl-lib (0 5))) "major mode for editing pollen files" single ((:commit . "3b57f40f78eb4458e7be41dc4051f9cf0ff6982e") (:keywords "languages" "pollen" "pollenpub") (:authors ("Junsong Li <ljs.darkfish AT GMAIL>")) (:maintainer "Junsong Li") (:url . "https://github.com/lijunsong/pollen-mode"))])

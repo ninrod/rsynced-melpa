@@ -1,0 +1,2 @@
+
+(racket-mode . [(20190116 1853) ((emacs (24 3)) (faceup (0 0 2)) (s (1 9 0))) "Major mode for Racket language." tar ((:commit . "b02f6150ce4e0c682cd3daae4861ce7b8d3d29c1") (:authors ("Greg Hendershott")) (:maintainer "Greg Hendershott") (:url . "https://github.com/greghendershott/racket-mode"))])

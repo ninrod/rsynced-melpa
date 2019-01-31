@@ -1,0 +1,2 @@
+
+(wand . [(20180815 1031) ((dash (20161121 55)) (s (20160928 636))) "Magic wand for Emacs - Select and execute" tar ((:commit . "5c0d4833a3afc57e4b2398250139729cc9131d16") (:keywords "extensions" "tools") (:authors ("Ha-Duong Nguyen <cmpitgATgmail>")) (:maintainer "Ha-Duong Nguyen <cmpitgATgmail>") (:url . "https://github.com/cmpitg/wand"))])

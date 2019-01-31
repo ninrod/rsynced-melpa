@@ -1,12 +1,15 @@
 Attrap! provides a command to attempt to fix the flycheck error at point.
 
 Users: Invoke the command `attrap-attrap' when point is on a
-flycheck error, and check the results.  (If several fixes apply you
-will be asked which one to apply.) Attrap! currently comes with
-builtin fixers for `haskell-dante' and `emacs-lisp'.
+flycheck or flymake error, and check the results.  (If several
+fixes apply you will be asked which one to apply.) Attrap!
+currently comes with builtin fixers for haskell (GHC messages) and
+elisp.
 
-Configuration: attrap-fixers is an alist from flycheck checker
-symbol to attrap fixer.  All the See below for the definition of a fixer.
+Configuration: `attrap-flymake-backends-alist' is an alist from
+flymake backend to attrap fixer.  `attrap-flycheck-checkers-alist'
+is an alist from flycheck checker symbol to attrap fixer.  All the
+See below for the definition of a fixer.
 
 A fixer is a element is a side-effect-free function mapping an
 error message MSG to a list of options.  An option is a cons of a

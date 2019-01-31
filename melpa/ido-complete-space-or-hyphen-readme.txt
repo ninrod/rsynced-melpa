@@ -1,8 +1,8 @@
 The default behavior of ido SPACE key will try to insert SPACE if it makes
-sence (a.k.a, the comman part of all matches contains SPACE). Howerver,
+sense (a.k.a, the common part of all matches contains SPACE). However,
 when ido is used to complete lisp functions or variables, like what smex
 does, HYPHEN is used as separator. This extension for ido inserts SPACE or
-HYPHEN whenever which one makes sence, just like what built-in M-x does.
+HYPHEN whenever either one makes sense, just like what built-in M-x does.
 
 Example:
 

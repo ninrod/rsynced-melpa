@@ -20,8 +20,8 @@ Recommended customizations for using this theme
 
 - Some other modes I like to enable/disable
     (olivetti-mode 1)        ;; Centers text in the buffer
-    (flyspell-mode 1))       ;; Catch Spelling mistakes
-    (typo-mode 1))           ;; Good for symbols like em-dash
+    (flyspell-mode 1)        ;; Catch Spelling mistakes
+    (typo-mode 1)            ;; Good for symbols like em-dash
     (blink-cursor-mode 0)    ;; Reduce visual noise
     (linum-mode 0)           ;; No line numbers for prose
 

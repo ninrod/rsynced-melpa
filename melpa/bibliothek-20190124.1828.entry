@@ -1,0 +1,2 @@
+
+(bibliothek . [(20190124 1828) ((emacs (24 4)) (pdf-tools (0 70)) (a (0 1 0 -3 4))) "Managing a digital library of PDFs" single ((:commit . "26df51b6d72125fe11c0c76e735ce5dbfd1fe3f1") (:keywords "tools") (:authors ("Göktuğ Kayaalp" . "self@gkayaalp.com")) (:maintainer "Göktuğ Kayaalp" . "self@gkayaalp.com") (:url . "https://dev.gkayaalp.com/elisp/index.html#bibliothek-el"))])

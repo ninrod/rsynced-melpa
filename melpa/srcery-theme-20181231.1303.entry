@@ -1,0 +1,2 @@
+
+(srcery-theme . [(20181231 1303) ((emacs (24))) "Dark color theme." single ((:commit . "561d83d5bbd4c1c939ad9f52863e75b969af320d") (:keywords "faces") (:authors ("Daniel Berg")) (:maintainer "Daniel Berg") (:url . "https://github.com/srcery-colors/srcery-emacs"))])

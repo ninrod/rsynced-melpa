@@ -1,6 +1,6 @@
 shx ("shell-extras") extends comint-mode: it parses markup in the output
 stream, enabling plots and graphics to be embedded, and adds command-line
-functions which plug into Emacs (e.g., use :e <filename> to edit a file).
+functions which plug into Emacs (e.g. use :e <filename> to edit a file).
 
 See <https://github.com/riscy/shx-for-emacs/blob/master/README.org> for more.
 
