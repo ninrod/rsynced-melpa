@@ -1,2 +1,0 @@
-
-(flycheck-gradle . [(20180924 200) ((emacs (25 1)) (flycheck (0 25))) "Flycheck extension for Gradle." single ((:commit . "23ecf654b9cfcf8e71b7220b02c34ed5282df075") (:keywords "languages" "gradle") (:maintainer "James Nguyen" . "james@jojojames.com") (:url . "https://github.com/jojojames/flycheck-gradle"))])

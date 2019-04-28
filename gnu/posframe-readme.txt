@@ -23,10 +23,10 @@ NOTE: For MacOS users, posframe need Emacs (version >= 26.0.91)
 
 **** Simple way
 #+BEGIN_EXAMPLE
-;; NOTE: buffers prefixed with space will be not showed in buffer-list.
-(posframe-show " *my-posframe-buffer*"
-               :string "This is a test"
-               :position (point))
+(when (posframe-workable-p)
+  (posframe-show " *my-posframe-buffer*"
+                 :string "This is a test"
+                 :position (point)))
 #+END_EXAMPLE
 
 **** Advanced way
@@ -37,8 +37,9 @@ NOTE: For MacOS users, posframe need Emacs (version >= 26.0.91)
   (erase-buffer)
   (insert "Hello world"))
 
-(posframe-show my-posframe-buffer
-               :position (point))
+(when (posframe-workable-p)
+  (posframe-show my-posframe-buffer
+                 :position (point)))
 #+END_EXAMPLE
 
 **** Arguments

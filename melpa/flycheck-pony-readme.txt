@@ -1,4 +1,4 @@
-Pony syntax checking support for Flycheck.  Runs "ponyc -rexpr" in the
+Pony syntax checking support for Flycheck.  Runs "ponyc -rfinal" in the
 current working directory.
 
 You may need to customize the location of your Pony compiler if

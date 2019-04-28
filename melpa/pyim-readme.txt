@@ -96,7 +96,7 @@ pyim 的目标是： *尽最大的努力成为一个好用的 Emacs 中文输入
   (setq pyim-page-length 5)
 
   :bind
-  (("M-j" . pyim-convert-code-at-point) ;与 pyim-probe-dynamic-english 配合
+  (("M-j" . pyim-convert-string-at-point) ;与 pyim-probe-dynamic-english 配合
    ("C-;" . pyim-delete-word-from-personal-buffer)))
 #+END_EXAMPLE
 
@@ -152,16 +152,42 @@ pyim 使用 emacs 动态模块：[[https://gitlab.com/liberime/liberime][liberim
 来支持 rime, 设置方式：
 
 1. 安裝 liberime, 见：[[https://gitlab.com/liberime/liberime/blob/master/README.org]] 。
-2. 參考设置：
+2. 创建文件： "~/.emacs.d/pyim/rime/default.custom.yaml", 内容为：
+
+   #+BEGIN_EXAMPLE
+   patch:
+        "menu/page_size": 100
+        "speller/auto_select": false
+        "speller/auto_select_unique_candidate": false
+   #+END_EXAMPLE
+
+   `liberime-get-context' 函数在默认情况下一次只能获取5个候选词，如
+   果想获取更多的候选词，就需要给 liberime 发送翻页命令字符，模拟翻
+   页操作，会让 pyim 代码的维护难度增加许多，所以 pyim 使用了一种简
+   单粗暴的方式来处理这个问题： 将 rime 的 page_size 设置为 50, 这
+   样，pyim 在不处理 rime 分页的情况下, 一次就可以获取 50 个候选词，
+   然后用自己方式来分页。用户可以按 TAB 键切换到辅助输入法来输入 50
+   以后的词条。
+
+   更改配置这种方式有点 hack, 如果 liberime 能设置 menu/page_size
+   就好了。
+
+3. 參考设置：
    #+BEGIN_EXAMPLE
    (use-package liberime
      :load-path "/path/to/liberime.[so|dll]"
      :config
-     (liberime-start "/usr/share/rime-data" "~/.emacs.d/rime/")
+     ;; 注意事项:
+     ;; 1. 文件路径需要用 `expand-file-name' 函数处理。
+     ;; 2. `librime-start' 的第一个参数说明 "rime 共享数据文件夹"
+     ;;     的位置，不同的平台其位置也各不相同，可以参考：
+     ;;     https://github.com/rime/home/wiki/RimeWithSchemata
+     (liberime-start (expand-file-name "/path/to/rime-data")
+                     (expand-file-name "~/.emacs.d/pyim/rime/"))
      (liberime-select-schema "luna_pinyin_simp")
      (setq pyim-default-scheme 'rime))
    #+END_EXAMPLE
-3. 使用 rime 全拼输入法的用户，也可以使用 rime-quanpin scheme,
+4. 使用 rime 全拼输入法的用户，也可以使用 rime-quanpin scheme,
    这个 scheme 是专门针对 rime 全拼输入法定制的，支持全拼v快捷键。
    #+BEGIN_EXAMPLE
    (setq pyim-default-scheme 'rime-quanpin)
@@ -191,6 +217,15 @@ pyim 支持五笔输入模式，用户可以通过变量 `pyim-default-scheme' �
 
 最简单的方式是从 melpa 中安装 pyim-wbdict 包，然后根据它的
 [[https://github.com/tumashu/pyim-wbdict][README]] 来配置。
+
+另外 Ye FeiYu 同学维护着 pyim-wbdict 的一个 fork, 里面包含着极点
+五笔和清歌五笔的词库，不做发布，有兴趣的同学可以了解一下：
+
+    https://github.com/yefeiyu/pyim-wbdict
+
+如果用户在使用五笔输入法的过程中，忘记了某个字的五笔码，可以按 TAB
+键临时切换到辅助输入法来输入，选词完成之后自动退出。辅助输入法可以
+通过 `pyim-assistant-scheme' 来设置。
 
 *** 使用仓颉输入法
 pyim 支持仓颉输入法，用户可以通过变量 `pyim-default-scheme' 来设定：
@@ -304,7 +339,7 @@ pyim 的 tooltip 选词框默认使用 *双行显示* 的样式，在一些特
 |-----------------------------------+-----------------------------------------------------------------------------------|
 |                                   | 1. 当前字符为中文字符时，输入下一个字符时默认开启中文输入                         |
 | pyim-probe-dynamic-english        | 2. 当前字符为其他字符时，输入下一个字符时默认开启英文输入                         |
-|                                   | 3. 使用命令 pyim-convert-code-at-point 可以将光标前的拼音字符串强制转换为中文。   |
+|                                   | 3. 使用命令 pyim-convert-string-at-point 可以将光标前的拼音字符串强制转换为中文。   |
 |-----------------------------------+-----------------------------------------------------------------------------------|
 
 激活方式：
@@ -364,7 +399,7 @@ pyim 的文档隐藏在 comment 中，如果用户喜欢阅读 html 格式的文
 
 *** 将光标处的拼音或者五笔字符串转换为中文 (与 vimim 的 “点石成金” 功能类似)
 #+BEGIN_EXAMPLE
-(global-set-key (kbd "M-i") 'pyim-convert-code-at-point)
+(global-set-key (kbd "M-i") 'pyim-convert-string-at-point)
 #+END_EXAMPLE
 
 *** 如何添加自定义拼音词库

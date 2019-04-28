@@ -1,2 +1,0 @@
-
-(shx . [(20181119 251) ((emacs (24 4))) "\"Extras\" for the (comint-mode) shell" single ((:commit . "a7d9dda0196423bbb673f9a4d30ac948449758f6") (:keywords "processes" "tools") (:url . "https://github.com/riscy/shx-for-emacs"))])

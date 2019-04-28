@@ -1,0 +1,2 @@
+
+(vertica-snippets . [(20190403 956) ((yasnippet (0 6 1))) "Yasnippets for Vertica" tar ((:commit . "b7a2e9660762a213fa001355e67ca671d9496339") (:keywords "convenience" "snippets") (:authors ("Andreas Gerler" . "baron@bundesbrandschatzamt.de")) (:maintainer "Andreas Gerler" . "baron@bundesbrandschatzamt.de") (:url . "https://github.com/baron42bba/vertica-snippets"))])

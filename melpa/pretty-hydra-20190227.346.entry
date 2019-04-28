@@ -1,0 +1,2 @@
+
+(pretty-hydra . [(20190227 346) ((hydra (0 13 4)) (s (1 12 0)) (dash (2 15 0)) (dash-functional (1 2 0)) (emacs (24))) "A macro for creating nice-looking hydras" single ((:commit . "2142be970874c679300e539a1d9d0f048eb72a7f") (:authors ("Jerry Peng" . "pr2jerry@gmail.com")) (:maintainer "Jerry Peng" . "pr2jerry@gmail.com") (:url . "https://github.com/jerrypnz/major-mode-hydra.el"))])

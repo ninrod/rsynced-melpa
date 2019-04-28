@@ -1,1 +1,1 @@
-Remind current line status by current buffer.
+Line annotation similar to Visual Studio.

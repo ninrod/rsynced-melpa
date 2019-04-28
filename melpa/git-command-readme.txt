@@ -1,4 +1,4 @@
-This package provides a way to invoke Git shell command using minibuffer.
+This package provides a way to invoke Git shell command from minibuffer.
 There is no major-mode nor minor-mode, you just have to remember usual Git
 subcommands and options.
 

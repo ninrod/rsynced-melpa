@@ -1,2 +1,0 @@
-
-(purescript-mode . [(20181028 838) ((cl-lib (0 6))) "A PureScript editing mode" tar ((:commit . "a6c7e4cc5ea29cf96478490a57d495e745d6e054"))])

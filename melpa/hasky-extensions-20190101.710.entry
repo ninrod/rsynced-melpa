@@ -1,2 +1,0 @@
-
-(hasky-extensions . [(20190101 710) ((emacs (24 4)) (avy-menu (0 2))) "Toggle Haskell language extensions" single ((:commit . "fc36f6ebfa296764076858c858ce508b24895255") (:keywords "programming") (:authors ("Mark Karpov" . "markkarpov92@gmail.com")) (:maintainer "Mark Karpov" . "markkarpov92@gmail.com") (:url . "https://github.com/hasky-mode/hasky-extensions"))])

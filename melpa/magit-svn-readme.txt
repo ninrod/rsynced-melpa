@@ -10,9 +10,9 @@ look at `psvn.el' and info node `(emacs)Version Control'.
 
 When `magit-svn-mode' is turned on then the unpushed and unpulled
 commit relative to the Subversion repository are displayed in the
-status buffer, and `N' is bound to a popup with commands that wrap
-the `git svn' subcommands fetch, rebase, dcommit, branch and tag,
-as well as a few extras.
+status buffer, and "N" is bound to a transient command with
+suffixes that wrap the `git-svn' subcommands fetch, rebase,
+dcommit, branch and tag, as well as a few extras.
 
 To enable the mode in a particular repository use:
 
@@ -26,3 +26,5 @@ To enable the mode for all repositories use:
 To enable the mode globally without dropping to a shell:
 
   (add-hook 'magit-mode-hook 'magit-svn-mode)
+
+This package is unmaintained see the README for more information.

@@ -1,17 +1,16 @@
 This program will create a local package repository by from all
 installed packages.
 
-Please note compile Emacs lisp file (*.elc) from one version of Emacs
-might not work with another version of Emacs. So you need this program
+Please note compile Emacs Lisp file (*.elc) from one version of Emacs
+might not work with another version of Emacs.  So you need this program
 to compile package from local repository.
 
-This is the ONLY way to 100% portable emacs setup.
+This is the ONLY way to 100% portable Emacs setup.
 
 Usage in Emacs,
-`M-x elpamr-create-mirror-for-installed`
-It should works out of box on latest Window 10, Linux, macOS.
-If you use old Windows and native Windows Emacs, please install Cygwin
-or MSYS2.
+Run `elpamr-create-mirror-for-installed'.
+CLI program tar is required.  It's already installed on Windows10/Linux/macOS.
+On old window, the easiest way to get tar is installing Cygwin/MSYS2.
 
 Usage in Shell,
   Emacs --batch -l ~/.emacs.d/init.el

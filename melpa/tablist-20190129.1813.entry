@@ -1,2 +1,0 @@
-
-(tablist . [(20190129 1813) ((emacs (24 3))) "Extended tabulated-list-mode" tar ((:commit . "389730ef0a01e73358d24a37f40fd9db01917f6c") (:keywords "extensions" "lisp") (:authors ("Andreas Politz" . "politza@fh-trier.de")) (:maintainer "Andreas Politz" . "politza@fh-trier.de"))])

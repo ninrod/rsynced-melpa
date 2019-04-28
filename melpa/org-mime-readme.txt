@@ -12,13 +12,10 @@ package the results into an email handling with appropriate MIME
 encoding.
 
 `org-mime-org-subtree-htmlize' is similar to `org-mime-org-buffer-htmlize'
-but works on a subtree. It can also read the following subtree properties:
-MAIL_SUBJECT, MAIL_TO, MAIL_CC, and MAIL_BCC. Note the behavior of this is
-controlled by `org-mime-up-subtree-heading'. The default is to go up to the
-heading containing the current subtree.
+but works on current subtree. It can read following subtree properties:
+MAIL_SUBJECT, MAIL_TO, MAIL_CC, and MAIL_BCC.
 
 Here is the sample of a subtree:
-
 * mail one
   :PROPERTIES:
   :MAIL_SUBJECT: mail title

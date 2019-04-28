@@ -17,13 +17,13 @@
 
             <div class="header small">
                 <div class="container">
-                    <h1>GNU ELPA - ssh-deploy</h1>
+                    <h1><a href="index.html">GNU ELPA</a> - ssh-deploy</h1>
                 </div>
             </div>
 
             <div class="container">
-<h2 class="package">ssh-deploy</h2><dl><dt>Description</dt><dd>Deployment via TRAMP, global or per directory.</dd>
-<dt>Latest</dt> <dd><a href="ssh-deploy-3.0.tar">ssh-deploy-3.0.tar</a>, 2018-Nov-29,  150kB</dd>
+<h2 class="package">ssh-deploy</h2><dl><dt>Description</dt><dd>Deployment via Tramp, global or per directory.</dd>
+<dt>Latest</dt> <dd><a href="ssh-deploy-3.1.tar">ssh-deploy-3.1.tar</a>, 2019-Apr-22,  170kB</dd>
 <dt>Maintainer</dt> <dd>Christian Johansson &lt;christian@cvj.se></dd>
 <dt>Home page</dt> <dd><a href="https://github.com/cjohansson/emacs-ssh-deploy">https://github.com/cjohansson/emacs-ssh-deploy</a></dd>
 <dt>Browse ELPA's repository</dt> <dd><a href="http://git.savannah.gnu.org/cgit/emacs/elpa.git/?h=externals/ssh-deploy">CGit</a> or <a href="http://git.savannah.gnu.org/gitweb/?p=emacs/elpa.git;a=shortlog;h=refs/heads/externals/ssh-deploy">Gitweb</a></dd>
@@ -32,13 +32,13 @@
 ssh-deploy enables automatic deploys on explicit-save actions, manual uploads, renaming,
 deleting, downloads, file and directory differences, launching remote terminals (eshell, shell),
 detection of remote changes, remote directory browsing, remote SQL database sessions and
-running custom deployment scripts via TRAMP.
+running custom deployment scripts via Tramp.
 
 For asynchronous operations it uses package '`make-thread' or if not available '`async.el'.
 
 By setting the variables (globally, per directory or per file):
 ssh-deploy-root-local,ssh-deploy-root-remote, ssh-deploy-on-explicit-save
-you can setup a directory for TRAMP deployment.
+you can setup a directory for Tramp deployment.
 
 For asynchronous transfers you need to setup ~/.authinfo.gpg or key-based authorization or equivalent for automatic authentication.
 
@@ -68,18 +68,19 @@ Add to init-script: (ssh-deploy-add-find-file-hook)
     (global-set-key (kbd "C-c C-z") 'ssh-deploy-prefix-map)
 
 - To set global key-bindings for the pre-defined hydra do something like this:
-    (global-set-key (kbd "C-c C-z") 'ssh-deploy-hydra/body)
+    (ssh-deploy-hydra "C-c C-z")
 
 - To install and set-up using use-package and hydra do this:
   (use-package ssh-deploy
     :ensure t
+    :after hydra
     :demand
-    :bind (("C-c C-z" . ssh-deploy-hydra/body))
     :hook ((after-save . ssh-deploy-after-save)
            (find-file . ssh-deploy-find-file))
     :config
     (ssh-deploy-line-mode) ;; If you want mode-line feature
     (ssh-deploy-add-menu) ;; If you want menu-bar feature
+    (ssh-deploy-hydra "C-c C-z") ;; If you the hydra feature
    )
 
 
@@ -110,7 +111,7 @@ Here is an example for FTP deployment, /Users/Chris/Web/Site3/.dir-locals.el:
 Here is a list of other variables you can set globally or per directory:
 
 * `ssh-deploy-root-local' - The local root that should be under deployment *(string)*
-* `ssh-deploy-root-remote' - The remote TRAMP root that is used for deployment *(string)*
+* `ssh-deploy-root-remote' - The remote Tramp root that is used for deployment *(string)*
 * `ssh-deploy-debug' - Enables debugging messages *(integer)*
 * `ssh-deploy-revision-folder' - The folder used for storing local revisions *(string)*
 * `ssh-deploy-automatically-detect-remote-changes' - Enables automatic detection of remote changes *(integer)*
@@ -132,6 +133,7 @@ When integers are used as booleans, above zero means true, zero means false and 
 Please see README.md from the same repository for more extended documentation.
 </pre>
 <h2>Old versions</h2><table>
+<tr><td><a href="ssh-deploy-3.0.tar">ssh-deploy-3.0.tar</a></td><td>2018-Nov-29</td><td> 150kB</td>
 <tr><td><a href="ssh-deploy-2.0.tar">ssh-deploy-2.0.tar</a></td><td>2018-Oct-21</td><td> 150kB</td>
 </table>
 </body>

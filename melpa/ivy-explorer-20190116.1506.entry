@@ -1,2 +1,0 @@
-
-(ivy-explorer . [(20190116 1506) ((emacs (25)) (ivy (0 10 0))) "Dynamic file browsing grid using ivy" single ((:commit . "54751459b795d952cc0e42d7447248c934fde847") (:keywords "convenience" "files" "matching") (:authors ("Clemens Radermacher" . "clemera@posteo.net")) (:maintainer "Clemens Radermacher" . "clemera@posteo.net") (:url . "https://github.com/clemera/ivy-explorer"))])

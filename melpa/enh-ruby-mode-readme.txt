@@ -2,7 +2,7 @@ This is a fork of http://http://github.com/jacott/Enhanced-Ruby-Mode
 to provide further enhancements and bug fixes.
 
 It has been renamed to enh-ruby-mode.el to avoid name conflicts
-with ruby-mode that ships with emacs. All symbols that started with
+with ruby-mode that ships with Emacs. All symbols that started with
 'ruby now start with 'enh-ruby. This also makes it possible to
 switch back and forth for testing purposes.
 

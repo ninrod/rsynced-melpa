@@ -1,2 +1,0 @@
-
-(company-box . [(20190122 1123) ((emacs (26 0 91)) (dash (2 13)) (dash-functional (1 2 0)) (company (0 9 6))) "Company front-end with icons" tar ((:commit . "1006d6f7cc41c8c584a50652e49c0bf039fdbbae") (:keywords "company" "completion" "front-end" "convenience") (:authors ("Sebastien Chapuis" . "sebastien@chapu.is")) (:maintainer "Sebastien Chapuis" . "sebastien@chapu.is") (:url . "https://github.com/sebastiencs/company-box"))])

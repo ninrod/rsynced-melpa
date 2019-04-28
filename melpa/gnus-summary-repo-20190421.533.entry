@@ -1,0 +1,2 @@
+
+(gnus-summary-repo . [(20190421 533) ((emacs (25))) "Import and export files between IMAP and local by using GNUS" single ((:commit . "23dde5c36271e1703288356aedbee2c6e7be91f6") (:keywords "gnus" "repository") (:authors ("Giap Tran" . "txgvnn@gmail.com")) (:maintainer "Giap Tran" . "txgvnn@gmail.com") (:url . "https://github.com/TxGVNN/gnus-summary-repo"))])

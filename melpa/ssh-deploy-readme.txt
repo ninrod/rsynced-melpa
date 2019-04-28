@@ -37,18 +37,19 @@ Add to init-script: (ssh-deploy-add-find-file-hook)
     (global-set-key (kbd "C-c C-z") 'ssh-deploy-prefix-map)
 
 - To set global key-bindings for the pre-defined hydra do something like this:
-    (global-set-key (kbd "C-c C-z") 'ssh-deploy-hydra/body)
+    (ssh-deploy-hydra "C-c C-z")
 
 - To install and set-up using use-package and hydra do this:
   (use-package ssh-deploy
     :ensure t
+    :after hydra
     :demand
-    :bind (("C-c C-z" . ssh-deploy-hydra/body))
     :hook ((after-save . ssh-deploy-after-save)
            (find-file . ssh-deploy-find-file))
     :config
     (ssh-deploy-line-mode) ;; If you want mode-line feature
     (ssh-deploy-add-menu) ;; If you want menu-bar feature
+    (ssh-deploy-hydra "C-c C-z") ;; If you the hydra feature
    )
 
 

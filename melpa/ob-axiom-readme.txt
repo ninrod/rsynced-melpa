@@ -18,8 +18,8 @@ languages.  They correspond to ``axiom-input-mode'' and
 There are two extra header options (non-standard org-babel options)
 for org-babel ``#+BEGIN_SRC axiom'' source code blocks:-
 
-  :block-read <yes/no>      (defaults to no)
-  :show-prompt <yes/no>     (defaults to yes)
+  :block-read <yes/no/auto>  (defaults to auto)
+  :show-prompt <yes/no>      (defaults to yes)
 
 The block-read option forces ob-axiom to send the entire code block
 to the running axiom process via a temporary file.  This allows

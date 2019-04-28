@@ -1,0 +1,2 @@
+
+(el2org . [(20190313 1351) ((emacs (25 1))) "Convert elisp file to org file" single ((:commit . "d9792a9a861d4d43b0d3aefb2ec9268a6fbc83bc") (:keywords "convenience") (:authors ("Feng Shu " . "tumashu@163.com")) (:maintainer "Feng Shu " . "tumashu@163.com") (:url . "https://github.com/tumashu/el2org"))])

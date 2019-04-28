@@ -34,7 +34,13 @@ i.e., '*' or all kind of marks i.e, any character other than ?\s.
 
 Bugs
 ====
-Some progress reporter might show percent > 100.
+* Some progress reporter might show percent > 100.
+
+* Order by size only works with directory recursive sizes if you use
+  `ls-lisp' with `ls-lisp-use-insert-directory-program' set nil; otherwise,
+  the external ls program is responsible to do the sorting ignoring
+  the recursive dir sizes.
+
 
  Internal variables defined here:
 
@@ -71,12 +77,13 @@ Some progress reporter might show percent > 100.
   `dired-du--get-all-files-type',
   `dired-du--get-max-gid-and-size-lengths-for-subdir',
   `dired-du--get-num-extra-blanks', `dired-du--get-position',
-  `dired-du--get-position-1', `dired-du--get-value',
-  `dired-du--global-update-dir-info', `dired-du--initialize',
-  `dired-du--insert-subdir', `dired-du--local-update-dir-info',
-  `dired-du--number-as-string-p', `dired-du--read-size-from-buffer',
-  `dired-du--replace', `dired-du--replace-1',
-  `dired-du--reset', `dired-du--revert',
+  `dired-du--get-position-1', `dired-du--get-recursive-dir-size',
+  `dired-du--get-value', `dired-du--global-update-dir-info',
+  `dired-du--initialize', `dired-du--insert-subdir',
+  `dired-du--local-update-dir-info', `dired-du--number-as-string-p',
+  `dired-du--read-size-from-buffer', `dired-du--replace',
+  `dired-du--replace-1', `dired-du--reset',
+  `dired-du--revert', `dired-du--size-sorter',
   `dired-du--subdir-position', `dired-du--update-subdir-header',
   `dired-du--update-subdir-header-1', `dired-du-alist-get',
   `dired-du-directory-at-current-line-p',
@@ -88,7 +95,8 @@ Some progress reporter might show percent > 100.
   `dired-du-get-all-subdir-non-directories', `dired-du-get-file-info',
   `dired-du-get-file-size-local', `dired-du-get-file-size-remote',
   `dired-du-get-marked-files', `dired-du-get-recursive-dir-size',
-  `dired-du-get-recursive-dir-size-in-parallel', `dired-du-mark-buffer',
+  `dired-du-get-recursive-dir-size-in-parallel',
+  `dired-du-ls-lisp-handle-switches', `dired-du-mark-buffer',
   `dired-du-mark-subdir-files', `dired-du-marker-regexp',
   `dired-du-run-in-parallel', `dired-du-string-to-number',
   `dired-du-unmark-buffer', `dired-du-use-comma-separator'.

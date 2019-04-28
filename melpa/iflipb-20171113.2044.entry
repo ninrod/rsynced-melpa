@@ -1,2 +1,0 @@
-
-(iflipb . [(20171113 2044) nil "interactively flip between recently visited buffers" single ((:commit . "e86427c5c83f095fb94f819d6a39aab8ce01be88") (:authors ("Joel Rosdahl" . "joel@rosdahl.net")) (:maintainer "Joel Rosdahl" . "joel@rosdahl.net") (:url . "https://github.com/jrosdahl/iflipb"))])

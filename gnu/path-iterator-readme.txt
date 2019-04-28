@@ -13,9 +13,6 @@ non-nil if not.
 
 Other functions:
 
-path-iter-done: non-nil if the iterator is done (all directories
-have been returned).
-
 path-iter-next: return the next directory, or nil if done.
 
 path-iter-restart: restart iterator; next call to `path-iter-next'

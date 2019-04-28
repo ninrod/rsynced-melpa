@@ -1,2 +1,2 @@
 
-(line-up-words . [(20180219 1024) nil "Align words in an intelligent way" single ((:commit . "054fd90f6de2b898a98bc3cafeb1fce1e02b91c8") (:url . "https://github.com/janestreet/line-up-words"))])
+(line-up-words . [(20180219 1024) nil "Align words in an intelligent way" single ((:commit . "c660c0214f130288f6239864df5df01598a5598c") (:url . "https://github.com/janestreet/line-up-words"))])

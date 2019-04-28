@@ -1,2 +1,0 @@
-
-(isolate . [(20181216 847) ((emacs (25))) "Surrounding tool with flexible customizations." single ((:commit . "3b73e6e76b1f13eb1cdcf59b41e7e0f5b4ee0447") (:keywords "convenience") (:authors ("Yuan Fu" . "casouri@gmail.com")) (:maintainer "Yuan Fu" . "casouri@gmail.com") (:url . "https://github.com/casouri/isolate"))])

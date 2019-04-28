@@ -10,8 +10,8 @@ command `mines-dig'.
    contain a number: the number of bombs at distance 1 from this cell.
    If you reveal the content of this cell, then this number is shown.
 
-3. Cells without a bomb at distance > 1 from any bomb contain '@'.
-   If you reveal the content of this cell, then '@' is shown and
+3. Cells without a bomb at distance > 1 from any bomb contain ' '.
+   If you reveal the content of this cell, then ' ' is shown and
    all adjacent cells are recursively revealed.
 
 

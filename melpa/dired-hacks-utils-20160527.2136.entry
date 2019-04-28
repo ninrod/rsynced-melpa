@@ -1,2 +1,2 @@
 
-(dired-hacks-utils . [(20160527 2136) ((dash (2 5 0))) "Utilities and helpers for dired-hacks collection" single ((:commit . "c7184dc8f6ed3f2330db8d8f21f01c4b08056dd3") (:keywords "files") (:authors ("Matúš Goljer" . "matus.goljer@gmail.com")) (:maintainer "Matúš Goljer" . "matus.goljer@gmail.com"))])
+(dired-hacks-utils . [(20160527 2136) ((dash (2 5 0))) "Utilities and helpers for dired-hacks collection" single ((:commit . "2c1234592aee91dcd9401bcd67213e6a4a464fd9") (:keywords "files") (:authors ("Matúš Goljer" . "matus.goljer@gmail.com")) (:maintainer "Matúš Goljer" . "matus.goljer@gmail.com"))])

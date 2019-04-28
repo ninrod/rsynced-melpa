@@ -1,2 +1,2 @@
 
-(dired-rainbow . [(20171202 2248) ((dash (2 5 0)) (dired-hacks-utils (0 0 1))) "Extended file highlighting according to its type" single ((:commit . "c7184dc8f6ed3f2330db8d8f21f01c4b08056dd3") (:keywords "files") (:authors ("Matus Goljer" . "matus.goljer@gmail.com")) (:maintainer "Matus Goljer" . "matus.goljer@gmail.com"))])
+(dired-rainbow . [(20171202 2248) ((dash (2 5 0)) (dired-hacks-utils (0 0 1))) "Extended file highlighting according to its type" single ((:commit . "2c1234592aee91dcd9401bcd67213e6a4a464fd9") (:keywords "files") (:authors ("Matus Goljer" . "matus.goljer@gmail.com")) (:maintainer "Matus Goljer" . "matus.goljer@gmail.com"))])

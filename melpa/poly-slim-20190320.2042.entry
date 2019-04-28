@@ -1,0 +1,2 @@
+
+(poly-slim . [(20190320 2042) ((emacs (25)) (polymode (0 1 5)) (slim-mode (1 1))) "Polymodes for slim" single ((:commit . "1b9fe0fc9fb7f65975be22322d17dc49bdac7c4a") (:keywords "emacs") (:authors ("Siavash Sajjadi and Vitalie Spinu")) (:maintainer "Vitalie Spinu") (:url . "https://github.com/polymode/poly-slim"))])

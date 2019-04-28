@@ -1,0 +1,2 @@
+
+(rope-read-mode . [(20190315 1607) nil "Rearrange lines to read text smoothly" single ((:commit . "3542bf0199d242729e198beac3305cc88497dc89") (:keywords "reading" "convenience" "chill") (:authors ("Marco Wahl" . "marcowahlsoft@gmail.com")) (:maintainer "Marco Wahl" . "marcowahlsoft@gmail.com") (:url . "https://github.com/marcowahl/rope-read-mode"))])

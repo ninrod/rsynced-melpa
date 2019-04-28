@@ -1,2 +1,0 @@
-
-(isend-mode . [(20190131 938) nil "Interactively send parts of an Emacs buffer to an interpreter" single ((:commit . "38ad06a36c8657e759ee6b9fd423a4f4f388ae37") (:authors ("François Févotte" . "fevotte@gmail.com")) (:maintainer "François Févotte" . "fevotte@gmail.com") (:url . "https://github.com/ffevotte/isend-mode.el"))])

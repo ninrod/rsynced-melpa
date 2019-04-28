@@ -6,10 +6,4 @@ Usage:
 
 (require 'ac-dcd)
 (add-to-list 'ac-modes 'd-mode)
-(add-hook 'd-mode-hook
-          (lambda () "set up ac-dcd"
-            (auto-complete-mode t)
-            (yas-minor-mode-on)
-            (ac-dcd-maybe-start-server)
-            (ac-dcd-add-imports)
-            (add-to-list 'ac-sources 'ac-source-dcd)))
+(add-hook 'd-mode-hook #'ac-dcd-setup)

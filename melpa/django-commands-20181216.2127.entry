@@ -1,2 +1,0 @@
-
-(django-commands . [(20181216 2127) ((emacs (25 1))) "Run django commands" single ((:commit . "eff302cbac0bd797108aafe05cc57c9e9112e381") (:keywords "tools") (:authors ("Andrii Kolomoiets" . "andreyk.mad@gmail.com")) (:maintainer "Andrii Kolomoiets" . "andreyk.mad@gmail.com") (:url . "https://github.com/muffinmad/emacs-django-commands"))])

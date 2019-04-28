@@ -10,7 +10,7 @@ Usage:
 
   `counsel-etags-scan-code' to create tags file
   `counsel-etags-grep' to grep
-  `counsel-etags-grep-symbol-at-point' to grep the symbol at point
+  `counsel-etags-grep-current-directory' to grep in current directory
   `counsel-etags-recent-tag' to open recent tag
   `counsel-etags-find-tag' to two step tag matching use regular expression and filter
   `counsel-etags-list-tag' to list all tags
@@ -18,9 +18,9 @@ Usage:
 Tips:
 - Add below code into "~/.emacs" to AUTOMATICALLY update tags file:
 
-  ;; Don't ask before re-reading changed TAGS files
+  ;; Don't ask before reloading updated tags files
   (setq tags-revert-without-query t)
-  ;; NO warning when loading large TAGS files
+  ;; NO warning when loading large tag files
   (setq large-file-warning-threshold nil)
   (add-hook 'prog-mode-hook
     (lambda ()
@@ -29,8 +29,11 @@ Tips:
 
 - You can use ivy's negative pattern to filter candidates.
   For example, input "keyword1 !keyword2 keyword3" means:
-  "(keyword1 and (not (keyword2 or keyword3))"
+  "(keyword1 and (not (or keyword2 keyword3)))"
 
+- `counsel-etags-extra-tags-files' contains extra tags files to parse.
+  Set it like '(setq counsel-etags-extra-tags-files '("/usr/include/TAGS" "/usr/local/include/TAGS"))'
+  Tags files in `counsel-etags-extra-tags-files' should contain only tag with absolute path.
 - You can setup `counsel-etags-ignore-directories' and `counsel-etags-ignore-filenames',
   (eval-after-load 'counsel-etags
     '(progn
@@ -40,5 +43,10 @@ Tips:
        ;; counsel-etags-ignore-filenames supports wildcast
        (add-to-list 'counsel-etags-ignore-filenames "TAGS")
        (add-to-list 'counsel-etags-ignore-filenames "*.json")))
+
+ - Rust programming language is supported. The easiest setup is a ".dir-locals.el"
+ in root directory. The content of .dir-locals.el" is as below,
+  ((nil . ((counsel-etags-update-tags-backend . (lambda (src-dir) (shell-command "rusty-tags emacs")))
+           (counsel-etags-tags-file-name . "rusty-tags.emacs"))))
 
 See https://github.com/redguardtoo/counsel-etags/ for more tips.

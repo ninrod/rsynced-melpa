@@ -20,6 +20,7 @@ Clojure(Script) development:
 * Support connecting to socket REPLs
 * Support for Lumo
 * Support for Planck
+* Support for Joker
 
 For a more powerful/full-featured solution see https://github.com/clojure-emacs/cider.
 

@@ -1,0 +1,2 @@
+
+(mentor . [(20190417 1244) ((xml-rpc (1 6 9)) (seq (1 11)) (cl-lib (0 5)) (async (1 9 3))) "Frontend for the rTorrent bittorrent client" tar ((:commit . "57d27bc58268595ce216f78542ebae92cc063ff0") (:keywords "comm" "processes" "bittorrent") (:authors ("Stefan Kangas" . "stefankangas@gmail.com")) (:maintainer "Stefan Kangas" . "stefankangas@gmail.com"))])

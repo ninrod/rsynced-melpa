@@ -1,2 +1,2 @@
 
-(helm-rtags . [(20170813 411) ((helm (2 0)) (rtags (2 10))) "A front-end for rtags" single ((:commit . "f3c59dcb6fd066f2d5ce67ae350d38fe038e4049") (:authors ("Jan Erik Hanssen" . "jhanssen@gmail.com") ("Anders Bakken" . "agbakken@gmail.com")) (:maintainer "Jan Erik Hanssen" . "jhanssen@gmail.com") (:url . "http://rtags.net"))])
+(helm-rtags . [(20170813 411) ((helm (2 0)) (rtags (2 10))) "A front-end for rtags" single ((:commit . "a3a98726addeaee03982b8ee9376709e493e5dee") (:authors ("Jan Erik Hanssen" . "jhanssen@gmail.com") ("Anders Bakken" . "agbakken@gmail.com")) (:maintainer "Jan Erik Hanssen" . "jhanssen@gmail.com") (:url . "http://rtags.net"))])

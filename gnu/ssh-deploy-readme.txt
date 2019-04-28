@@ -1,13 +1,13 @@
 ssh-deploy enables automatic deploys on explicit-save actions, manual uploads, renaming,
 deleting, downloads, file and directory differences, launching remote terminals (eshell, shell),
 detection of remote changes, remote directory browsing, remote SQL database sessions and
-running custom deployment scripts via TRAMP.
+running custom deployment scripts via Tramp.
 
 For asynchronous operations it uses package '`make-thread' or if not available '`async.el'.
 
 By setting the variables (globally, per directory or per file):
 ssh-deploy-root-local,ssh-deploy-root-remote, ssh-deploy-on-explicit-save
-you can setup a directory for TRAMP deployment.
+you can setup a directory for Tramp deployment.
 
 For asynchronous transfers you need to setup ~/.authinfo.gpg or key-based authorization or equivalent for automatic authentication.
 
@@ -37,18 +37,19 @@ Add to init-script: (ssh-deploy-add-find-file-hook)
     (global-set-key (kbd "C-c C-z") 'ssh-deploy-prefix-map)
 
 - To set global key-bindings for the pre-defined hydra do something like this:
-    (global-set-key (kbd "C-c C-z") 'ssh-deploy-hydra/body)
+    (ssh-deploy-hydra "C-c C-z")
 
 - To install and set-up using use-package and hydra do this:
   (use-package ssh-deploy
     :ensure t
+    :after hydra
     :demand
-    :bind (("C-c C-z" . ssh-deploy-hydra/body))
     :hook ((after-save . ssh-deploy-after-save)
            (find-file . ssh-deploy-find-file))
     :config
     (ssh-deploy-line-mode) ;; If you want mode-line feature
     (ssh-deploy-add-menu) ;; If you want menu-bar feature
+    (ssh-deploy-hydra "C-c C-z") ;; If you the hydra feature
    )
 
 
@@ -79,7 +80,7 @@ Here is an example for FTP deployment, /Users/Chris/Web/Site3/.dir-locals.el:
 Here is a list of other variables you can set globally or per directory:
 
 * `ssh-deploy-root-local' - The local root that should be under deployment *(string)*
-* `ssh-deploy-root-remote' - The remote TRAMP root that is used for deployment *(string)*
+* `ssh-deploy-root-remote' - The remote Tramp root that is used for deployment *(string)*
 * `ssh-deploy-debug' - Enables debugging messages *(integer)*
 * `ssh-deploy-revision-folder' - The folder used for storing local revisions *(string)*
 * `ssh-deploy-automatically-detect-remote-changes' - Enables automatic detection of remote changes *(integer)*

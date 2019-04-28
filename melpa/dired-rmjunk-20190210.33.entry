@@ -1,0 +1,2 @@
+
+(dired-rmjunk . [(20190210 33) nil "A home directory cleanup utility for Dired." single ((:commit . "5d94726b4e427bb21dcc6f043bc3fcfc98b27b7a") (:keywords "files" "matching") (:authors ("Jakob L. Kreuze" . "zerodaysfordays@sdf.lonestar.org")) (:maintainer "Jakob L. Kreuze" . "zerodaysfordays@sdf.lonestar.org") (:url . "https://git.sr.ht/~jakob/dired-rmjunk"))])

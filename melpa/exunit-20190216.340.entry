@@ -1,0 +1,2 @@
+
+(exunit . [(20190216 340) ((dash (2 10 0)) (s (1 11 0)) (emacs (24 3)) (f (0 20 0))) "ExUnit test runner" single ((:commit . "17a333d746fdab3edf377491732cdb94e8af9f82") (:keywords "processes" "elixir" "exunit") (:authors ("Anantha kumaran" . "ananthakumaran@gmail.com")) (:maintainer "Anantha kumaran" . "ananthakumaran@gmail.com") (:url . "http://github.com/ananthakumaran/exunit.el"))])

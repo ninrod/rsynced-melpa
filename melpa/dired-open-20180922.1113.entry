@@ -1,2 +1,2 @@
 
-(dired-open . [(20180922 1113) ((dash (2 5 0)) (dired-hacks-utils (0 0 1))) "Open files from dired using using custom actions" single ((:commit . "c7184dc8f6ed3f2330db8d8f21f01c4b08056dd3") (:keywords "files") (:authors ("Matúš Goljer" . "matus.goljer@gmail.com")) (:maintainer "Matúš Goljer" . "matus.goljer@gmail.com"))])
+(dired-open . [(20180922 1113) ((dash (2 5 0)) (dired-hacks-utils (0 0 1))) "Open files from dired using using custom actions" single ((:commit . "2c1234592aee91dcd9401bcd67213e6a4a464fd9") (:keywords "files") (:authors ("Matúš Goljer" . "matus.goljer@gmail.com")) (:maintainer "Matúš Goljer" . "matus.goljer@gmail.com"))])

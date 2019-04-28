@@ -17,13 +17,13 @@
 
             <div class="header small">
                 <div class="container">
-                    <h1>GNU ELPA - posframe</h1>
+                    <h1><a href="index.html">GNU ELPA</a> - posframe</h1>
                 </div>
             </div>
 
             <div class="container">
 <h2 class="package">posframe</h2><dl><dt>Description</dt><dd>Pop a posframe (just a frame) at point</dd>
-<dt>Latest</dt> <dd><a href="posframe-0.4.2.el">posframe-0.4.2.el</a>, 2018-Dec-14, 33.7kB</dd>
+<dt>Latest</dt> <dd><a href="posframe-0.4.3.el">posframe-0.4.3.el</a>, 2019-Mar-13, 42.2kB</dd>
 <dt>Maintainer</dt> <dd>Feng Shu &lt;tumashu@163.com></dd>
 <dt>Home page</dt> <dd><a href="https://github.com/tumashu/posframe">https://github.com/tumashu/posframe</a></dd>
 <dt>Browse ELPA's repository</dt> <dd><a href="http://git.savannah.gnu.org/cgit/emacs/elpa.git/?h=externals/posframe">CGit</a> or <a href="http://git.savannah.gnu.org/gitweb/?p=emacs/elpa.git;a=shortlog;h=refs/heads/externals/posframe">Gitweb</a></dd>
@@ -54,10 +54,10 @@ NOTE: For MacOS users, posframe need Emacs (version >= 26.0.91)
 
 **** Simple way
 #+BEGIN_EXAMPLE
-;; NOTE: buffers prefixed with space will be not showed in buffer-list.
-(posframe-show " *my-posframe-buffer*"
-               :string "This is a test"
-               :position (point))
+(when (posframe-workable-p)
+  (posframe-show " *my-posframe-buffer*"
+                 :string "This is a test"
+                 :position (point)))
 #+END_EXAMPLE
 
 **** Advanced way
@@ -68,8 +68,9 @@ NOTE: For MacOS users, posframe need Emacs (version >= 26.0.91)
   (erase-buffer)
   (insert "Hello world"))
 
-(posframe-show my-posframe-buffer
-               :position (point))
+(when (posframe-workable-p)
+  (posframe-show my-posframe-buffer
+                 :position (point)))
 #+END_EXAMPLE
 
 **** Arguments
@@ -107,6 +108,7 @@ suggest not run this command if you are sharing a buffer
 between posframe and other packages.
 </pre>
 <h2>Old versions</h2><table>
+<tr><td><a href="posframe-0.4.2.el">posframe-0.4.2.el</a></td><td>2018-Dec-14</td><td>33.7kB</td>
 <tr><td><a href="posframe-0.3.0.el">posframe-0.3.0.el</a></td><td>2018-Mar-09</td><td>28.4kB</td>
 <tr><td><a href="posframe-0.2.0.el">posframe-0.2.0.el</a></td><td>2018-Mar-08</td><td>28.2kB</td>
 <tr><td><a href="posframe-0.1.0.el">posframe-0.1.0.el</a></td><td>2018-Feb-27</td><td>26.9kB</td>

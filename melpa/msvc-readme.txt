@@ -7,7 +7,7 @@
   - Visual Studio project file manager
     backend: msvc + ede
   - coexistence of different versions
-    2017/2015/2013/2012/2010
+    2019/2017/2015/2013/2012/2010
   - code completion (auto / manual)
     backend: ac-clang
     ac-sources: ac-clang or semantic
@@ -28,7 +28,7 @@
   - Microsoft Windows 64/32bit
     10/8/7/Vista
   - Microsoft Visual Studio Community/Professional/Enterprise
-    2017/2015/2013/2012/2010
+    2019/2017/2015/2013/2012/2010
   - Shell 64/32bit
     CYGWIN/MSYS/CMD(cmdproxy)
     CYGWIN's bash recommended
@@ -84,7 +84,7 @@ Usage:
                                       :project-file "d:/DirectXSamples/SubD11/SubD11_2010.vcxproj"
                                       :platform "x64"
                                       :configuration "Release"
-                                      :version "2013"
+                                      :product-name "2019"
                                       :toolset 'x86_amd64
                                       :md5-name-p nil
                                       :force-parse-p nil
@@ -99,7 +99,7 @@ Usage:
   The project buffer name is based on the following format.
   *MSVC Project <`db-name`>*
   msvc-mode will be applied automatically when source code belonging to the project has been opened.
-  msvc-mode has been applied buffer in the mode line MSVC`version`[platform|configuration] and will be displayed.
+  msvc-mode has been applied buffer in the mode line MSVC`product-name`[platform|configuration] and will be displayed.
   You can activate a lot of projects.
 
 * REQUIRED PROPERTIES
@@ -120,9 +120,9 @@ Usage:
      Must be a configuration that exists in the project file.
 
 * OPTIONAL PROPERTIES
-  - :version
-    Specifies the version of Visual Studio to be used.
-    If you do not specify or nil used, the value used is `msvc-env-default-use-version'.
+  - :product-name
+    Specifies the product-name of Visual Studio to be used.
+    If you do not specify or nil used, the value used is `msvc-env-default-use-product-name'.
   - :toolset
     Specifies the toolset of Visual Studio to be used.
     If you do not specify or nil used, the value used is `msvc-env-default-use-toolset'.
@@ -168,14 +168,14 @@ Usage:
     For details, refer to CEDET manual.
   - :flymake-back-end
     nil recommended.
-    specifiable : `msbuild' `clang' `nil'
+    specifiable : `msbuild' `clang-server' `nil'
     refer to `msvc--flymake-back-end'
   - :flymake-manually-p
     nil recommended.
     If value is t, manual syntax check only.
   - :flymake-manually-back-end
     nil recommended.
-    specifiable : `msbuild' `clang' `nil'
+    specifiable : `msbuild' `clang-server' `nil'
     refer to `msvc--flymake-manually-back-end'
 
 * DEFAULT KEYBIND(msvc on Source Code Buffer)

@@ -1,2 +1,0 @@
-
-(color-theme-sanityinc-solarized . [(20181021 2055) nil "A version of Ethan Schoonover's Solarized themes" tar ((:commit . "fa2afc66beebdf7936b9f1391878798d6426730c") (:keywords "themes") (:authors ("Steve Purcell" . "steve@sanityinc.com")) (:maintainer "Steve Purcell" . "steve@sanityinc.com") (:url . "http://github.com/purcell/color-theme-sanityinc-solarized"))])

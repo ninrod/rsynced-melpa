@@ -1,0 +1,2 @@
+
+(monky . [(20190425 1317) nil "Control Hg from Emacs." tar ((:commit . "07a71ab130806ec80d978349ebbd63e55287aebd") (:keywords "tools") (:authors ("Anantha kumaran" . "ananthakumaran@gmail.com")) (:maintainer "Anantha kumaran" . "ananthakumaran@gmail.com") (:url . "http://github.com/ananthakumaran/monky"))])

@@ -1,2 +1,0 @@
-
-(com-css-sort . [(20181206 1659) ((emacs (24 4)) (s (1 12 0))) "Common way of sorting the CSS attributes." single ((:commit . "1ed58ada9f61ce5ed9ddfc3045e73a0ca369d5cb") (:authors ("Shen, Jen-Chieh" . "jcs090218@gmail.com")) (:maintainer "Shen, Jen-Chieh" . "jcs090218@gmail.com") (:url . "https://github.com/jcs090218/com-css-sort"))])

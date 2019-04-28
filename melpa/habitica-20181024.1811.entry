@@ -1,2 +1,0 @@
-
-(habitica . [(20181024 1811) ((org (8 3 5)) (emacs (24 3))) "Interface for habitica.com" single ((:commit . "d977984ac342e9177ba98f400b3c160c450c936d") (:keywords "habitica" "todo") (:authors ("Adrien Brochard")) (:maintainer "Adrien Brochard") (:url . "https://github.com/abrochard/emacs-habitica"))])

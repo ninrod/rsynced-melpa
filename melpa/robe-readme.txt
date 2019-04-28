@@ -7,6 +7,10 @@ Usage
 
 (add-hook 'ruby-mode-hook 'robe-mode)
 
+OR
+
+(global-robe-mode)
+
  - M-. to jump to the definition
  - M-, to jump back
  - C-c C-d to see the documentation

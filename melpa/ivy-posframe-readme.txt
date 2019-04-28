@@ -13,13 +13,13 @@ click.
 1. ivy-posframe-display
 2. ivy-posframe-display-at-frame-center
 3. ivy-posframe-display-at-window-center
-   [[./snapshots/ivy-posframe-display-at-window-center.gif]]
+   [[./snapshots/ivy-posframe-display-at-window-center.png]]
 4. ivy-posframe-display-at-frame-bottom-left
 5. ivy-posframe-display-at-window-bottom-left
-   [[./snapshots/ivy-posframe-display-at-window-bottom-left.gif]]
+   [[./snapshots/ivy-posframe-display-at-window-bottom-left.png]]
 6. ivy-posframe-display-at-frame-bottom-window-center
 7. ivy-posframe-display-at-point
-   [[./snapshots/ivy-posframe-display-at-point.gif]]
+   [[./snapshots/ivy-posframe-display-at-point.png]]
 
 ** How to enable ivy-posframe
 *** Global mode
@@ -65,8 +65,8 @@ by ivy to find display function in `ivy-display-functions-alist',
 *** How to show fringe to ivy-posframe
 #+BEGIN_EXAMPLE
 (setq ivy-posframe-parameters
-      '((left-fringe . 10)
-        (right-fringe . 10)))
+      '((left-fringe . 8)
+        (right-fringe . 8)))
 #+END_EXAMPLE
 
 By the way, User can set *any* parameters of ivy-posframe with

@@ -28,6 +28,7 @@ Supported languages:
 - Java (clang-format)
 - JavaScript/JSON/JSX (prettier)
 - Kotlin (ktlint)
+- Ledger (ledger-mode)
 - Lua (lua-fmt)
 - Markdown (prettier)
 - OCaml (ocp-indent)
@@ -39,6 +40,7 @@ Supported languages:
 - Shell script (shfmt)
 - SQL (sqlformat)
 - Swift (swiftformat)
+- Terraform (terraform fmt)
 - TypeScript/TSX (prettier)
 - YAML (yq)
 

@@ -12,19 +12,20 @@ put the following in your emacs init file:
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (require 'xah-fly-keys)
-(xah-fly-keys-set-layout "qwerty") ; required if you use qwerty
+(xah-fly-keys-set-layout "qwerty") ; required
 
 possible layout values:
+
+"azerty"
+"azerty-be"
+"colemak"
+"colemak-mod-dh"
+"dvorak"
+"programer-dvorak"
 "qwerty"
 "qwerty-abnt"
 "qwertz"
-"dvorak"
-"programer-dvorak"
-"colemak"
-"colemak-mod-dh"
 "workman"
-
-dvorak is the default
 
 (xah-fly-keys 1)
 
@@ -43,7 +44,7 @@ When in command mode:
 【f】 (or Dvorak 【u】) activates insertion mode.
 【Space】 is a leader key. For example, 【SPACE r】 (Dvorak 【SPACE p】) calls query-replace. Press 【SPACE C-h】 to see the full list.
 【Space Space】 also activates insertion mode.
-【Space Enter】 calls execute-extended-command or smex or helm (if they are installed).
+【Space Enter】 calls execute-extended-command.
 【a】 calls execute-extended-command or smex or helm (if they are installed).
 
 The leader key sequence basically replace ALL emacs commands that starts with C-x key.
@@ -93,7 +94,7 @@ see
 How to Make the CapsLock Key do Home Key
 http://ergoemacs.org/misc/capslock_do_home_key.html
 
-If you have a bug, post on github. Or post comment xah-fly-keys home page for small questions.
+If you have a bug, post on github.
 
 For detail about design and other info, see home page at
 http://ergoemacs.org/misc/ergoemacs_vi_mode.html

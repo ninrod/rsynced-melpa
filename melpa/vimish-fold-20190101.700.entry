@@ -1,2 +1,2 @@
 
-(vimish-fold . [(20190101 700) ((emacs (24 4)) (cl-lib (0 5)) (f (0 18 0))) "Fold text like in Vim" single ((:commit . "5ae201fc9a7024dd9c8d1713a00dd42cf1290d6e") (:keywords "convenience") (:authors ("Mark Karpov" . "markkarpov92@gmail.com")) (:maintainer "Mark Karpov" . "markkarpov92@gmail.com") (:url . "https://github.com/mrkkrp/vimish-fold"))])
+(vimish-fold . [(20190101 700) ((emacs (24 4)) (cl-lib (0 5)) (f (0 18 0))) "Fold text like in Vim" single ((:commit . "6ddc79fec2833e45f77df2286ba2aee200049572") (:keywords "convenience") (:authors ("Mark Karpov" . "markkarpov92@gmail.com")) (:maintainer "Mark Karpov" . "markkarpov92@gmail.com") (:url . "https://github.com/mrkkrp/vimish-fold"))])
