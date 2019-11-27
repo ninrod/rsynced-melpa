@@ -23,7 +23,7 @@
 
             <div class="container">
 <h2 class="package">djvu</h2><dl><dt>Description</dt><dd>Edit and view Djvu files via djvused</dd>
-<dt>Latest</dt> <dd><a href="djvu-1.0.1.el">djvu-1.0.1.el</a>, 2019-Jan-02,  166kB</dd>
+<dt>Latest</dt> <dd><a href="djvu-1.1.el">djvu-1.1.el</a>, 2019-Jun-18,  172&nbsp;KiB</dd>
 <dt>Home page</dt> <dd><a href="http://elpa.gnu.org/packages/djvu.html">http://elpa.gnu.org/packages/djvu.html</a></dd>
 <dt>Browse repository</dt> <dd><a href="http://git.savannah.gnu.org/cgit/emacs/elpa.git/tree/packages/djvu">CGit</a> or <a href="http://git.savannah.gnu.org/gitweb/?p=emacs/elpa.git;a=tree;f=packages/djvu">Gitweb</a></dd>
 </dl><p>To install this package, run in Emacs:</p>
@@ -50,24 +50,10 @@ complement each other.
 
 A normal work flow is as follows:
 
-To visit a djvu file type M-x djvu-find-file.  This command is the
-only entry point to this package.  You can bind this command to a key,
-for example
-
-  (global-set-key "\C-cd" 'djvu-find-file)
-
-Or you can use something more general like
-
-  (defun djvu-find-file-noselect (f-f-n filename &amp;rest args)
-    "If FILENAME is a Djvu file call `djvu-find-file'."
-    (if (string-match "\\.djvu\\'" (file-name-sans-versions filename))
-        (djvu-find-file filename nil nil t)
-      (apply f-f-n filename args)))
-  (advice-add 'find-file-noselect :around #'djvu-find-file-noselect)
-
-If you use `djvu-find-file' to visit the file foo.djvu, it puts you into
-the (read-only) buffer foo.djvu.  Normally, this buffer (plus possibly
-the outline buffer) is all you need.
+Djvu files are assumed to have the file extension ".djvu".
+When you visit the file foo.djvu, it puts you into the (read-only)
+buffer foo.djvu.  Normally, this buffer (plus possibly the outline buffer)
+is all you need.
 
 The menu bar of this buffer lists most of the commands with their
 respective key bindings.  For example, you can:
@@ -155,10 +141,29 @@ slightly modified djvused script syntax.
   text or annotations layer if the script is messed up.
 </pre>
 <h2>Old versions</h2><table>
-<tr><td><a href="djvu-1.0.el">djvu-1.0.el</a></td><td>2018-Dec-28</td><td> 165kB</td>
-<tr><td><a href="djvu-0.5.el">djvu-0.5.el</a></td><td>2012-Nov-29</td><td>65.4kB</td>
+<tr><td><a href="djvu-1.0.1.el">djvu-1.0.1.el</a></td><td>2019-Jan-02</td><td> 166&nbsp;KiB</td>
+<tr><td><a href="djvu-1.0.el">djvu-1.0.el</a></td><td>2018-Dec-28</td><td> 165&nbsp;KiB</td>
+<tr><td><a href="djvu-0.5.el">djvu-0.5.el</a></td><td>2012-Nov-29</td><td>65.4&nbsp;KiB</td>
 </table>
 <h2>News</h2><pre>
+v1.1:
+- Use `auto-mode-alist' with file extension ".djvu".
+
+- Support bookmarks.
+
+- Display total number of pages in mode line.
+
+- New option `djvu-rect-area-nodups'.
+
+- User options `djvu-save-after-edit' and `djvu-region-history' removed
+  (obsolete).
+
+- More robust code for merging lines in text layer.
+
+- Clean up handling of editing positions in a djvu document.
+
+- Bug fixes.
+
 v1.0.1:
 - Use `create-file-buffer' instead of `generate-new-buffer'
   for compatibility with uniquify.
@@ -180,5 +185,18 @@ v1.0:
 - Shared annotations buffer.
 
 - Font locking.
+
+To do:
+
+- Auto-save script buffers.  How can we recover these buffers
+  in a meaningful way?
+
+- Use `replace-buffer-contents'?
+
+- New command that makes line breaks in text layer better searchable:
+  Scan text layer for lines ending with hyphenated words "xxx-".
+  If the first word of the next line is "yyy" and ispell knows
+  the word "xxxyyy", replace "yyy" with that string.  A search
+  for the word "xxxyyy" will then succeed.
 </pre>
 </body>

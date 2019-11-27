@@ -7,8 +7,8 @@ you can install it by: "pip3 install arbitools"
            It is distributed under a GPL license.
            https://www.tug.org/applications/pdftex/
 
-"bbpPairings.exe" by Bierema Boyz Programming is necessary to do the 
-                  pairings. Copy the file to an executable folder, 
+"bbpPairings.exe" by Bierema Boyz Programming is necessary to do the
+                  pairings. Copy the file to an executable folder,
                   for example /usr/bin.
                   Find bbpPairings in
                   https://github.com/BieremaBoyzProgramming/bbpPairings
@@ -67,25 +67,15 @@ TODO:
 ---------------------------------
 
 - Write the add players from file function in ELISP.
-
 - Insert results from a results file created with a pairing program.
   Add the date in the "132" line and the results in the "001" lines.
-
 - Add empty round. Ask for date create empty space in the players lines.
   Add the date in the "132" line.
-
 - Add the rank number and the position automatically when adding players.
-
 - Add team.
-
 - Add player to team. Prompt for team and player number.
-
 - Generate pgn file for a round or the whole tournament.
-
 - Reorder the players list
-
 - Error handling
-
 - Make the interface more friendly
-
 You will find more information in www.dggandara.eu/arbitools.htm

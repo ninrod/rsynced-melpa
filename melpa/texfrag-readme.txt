@@ -31,7 +31,7 @@ There are three ways to add TeXfrag support for your new major mode.
  1. Derive your major mode from one of the already supported major modes
     (see doc of variable `texfrag-setup-alist').
     You do not need to do anything beyond that if your major mode does not
-    change the marks for LaTeX equations (e.g., "\f$" for LaTeX equations
+    change the marks for LaTeX equations (e.g., "\f$...\f$" for LaTeX equations
     in doxygen comments for `prog-mode').
 
  2. Add a setup function to `texfrag-setup-alist' (see the doc for that variable).
@@ -78,3 +78,9 @@ Here we list changes that may have an impact on the user configuration.
 2018-03-05:
 - `texfrag-header-function' is now called with `texfrag-source-buffer' as current buffer.
 - adopted LaTeX header generation from `org-latex-make-preamble'
+
+2019-05-04:
+- `texfrag-region' for `texfrag-preview-buffer-at-start' has been moved to `post-command-hook'
+  That is an important step to make `texfrag-preview-buffer-at-start' really work.
+  (No repeated LaTeX processing on the same document within one command.)
+- This version of texfrag is tagged 1.0.

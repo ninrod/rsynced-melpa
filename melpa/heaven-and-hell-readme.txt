@@ -16,7 +16,9 @@ Set preferred light and dark themes (it can be a list of themes as well)
 Default light is Emacs default theme, default dark is wombat
 (setq heaven-and-hell-themes
       '((light . tsdh-light)
-	(dark . (tsdh-dark wombat))))
+        (dark . (tsdh-dark wombat))))
+If you want to load themes without manually confirming them, you can do
+(setq heaven-and-hell-load-theme-no-confirm t)
 
 Add init-hook so heaven-and-hell can load your theme
 (add-hook 'after-init-hook 'heaven-and-hell-init-hook)

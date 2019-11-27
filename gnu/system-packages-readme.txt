@@ -10,13 +10,12 @@ packages more convenient through emacs.
 
 * Installation
 
-  System packages is available on [[https://melpa.org/#/][MELPA]]. If you use [[https://github.com/jwiegley/use-package][use-package]] and have
-  MELPA set up correctly, all you'll need is something like the
-  following:
+  System packages is available on [[https://elpa.gnu.org/packages/system-packages.html][GNU ELPA]]. You can get it by doing
+  M-x package-install RET system-packages RET.
 
-  #+BEGIN_SRC emacs-lisp :eval never
-    (use-package system-packages
-      :ensure t)
+  Users of Debian ≥10 and derivatives can install it with the following:
+  #+BEGIN_SRC sh
+  sudo apt install elpa-system-packages
   #+END_SRC
 
 * Configuration

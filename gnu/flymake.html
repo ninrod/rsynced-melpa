@@ -23,7 +23,7 @@
 
             <div class="container">
 <h2 class="package">flymake</h2><dl><dt>Description</dt><dd>A universal on-the-fly syntax checker</dd>
-<dt>Latest</dt> <dd><a href="flymake-1.0.5.el">flymake-1.0.5.el</a>, 2019-Feb-10, 55.5kB</dd>
+<dt>Latest</dt> <dd><a href="flymake-1.0.8.el">flymake-1.0.8.el</a>, 2019-Jul-04, 56.1&nbsp;KiB</dd>
 <dt>Maintainer</dt> <dd>João Távora &lt;joaotavora@gmail.com></dd>
 <dt>Home page</dt> <dd><a href="http://elpa.gnu.org/packages/flymake.html">http://elpa.gnu.org/packages/flymake.html</a></dd>
 <dt>Browse repository</dt> <dd><a href="http://git.savannah.gnu.org/cgit/emacs.git/tree/lisp/progmodes/flymake.el">CGit</a> or <a href="http://git.savannah.gnu.org/gitweb/?p=emacs.git;a=blob;f=lisp/progmodes/flymake.el">Gitweb</a></dd>
@@ -42,10 +42,9 @@ backends to hook on to.
 The main interactive entry point is the `flymake-mode' minor mode,
 which periodically and automatically initiates checks as the user
 is editing the buffer.  The variables `flymake-no-changes-timeout',
-`flymake-start-syntax-check-on-newline' and
 `flymake-start-on-flymake-mode' give finer control over the events
-triggering a check, as does the interactive command
-`flymake-start', which immediately starts a check.
+triggering a check, as does the interactive command  `flymake-start',
+which immediately starts a check.
 
 Shortly after each check, a summary of collected diagnostics should
 appear in the mode-line.  If it doesn't, there might not be a
@@ -112,8 +111,10 @@ To erase customizations and go back to the original look for
   (cl-remf (symbol-plist :note) 'flymake-bitmap)
 </pre>
 <h2>Old versions</h2><table>
-<tr><td><a href="flymake-1.0.3.el">flymake-1.0.3.el</a></td><td>2018-Dec-13</td><td>54.6kB</td>
-<tr><td><a href="flymake-1.0.2.el">flymake-1.0.2.el</a></td><td>2018-Dec-06</td><td>54.2kB</td>
-<tr><td><a href="flymake-1.0.1.el">flymake-1.0.1.el</a></td><td>2018-Dec-05</td><td>54.1kB</td>
+<tr><td><a href="flymake-1.0.6.el">flymake-1.0.6.el</a></td><td>2019-May-05</td><td>55.8&nbsp;KiB</td>
+<tr><td><a href="flymake-1.0.5.el">flymake-1.0.5.el</a></td><td>2019-Feb-10</td><td>55.5&nbsp;KiB</td>
+<tr><td><a href="flymake-1.0.3.el">flymake-1.0.3.el</a></td><td>2018-Dec-13</td><td>54.6&nbsp;KiB</td>
+<tr><td><a href="flymake-1.0.2.el">flymake-1.0.2.el</a></td><td>2018-Dec-06</td><td>54.2&nbsp;KiB</td>
+<tr><td><a href="flymake-1.0.1.el">flymake-1.0.1.el</a></td><td>2018-Dec-05</td><td>54.1&nbsp;KiB</td>
 </table>
 </body>

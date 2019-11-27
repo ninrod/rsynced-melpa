@@ -510,7 +510,7 @@ Preface
  Old documentation
 
      The following text was written by Jamie Lokier for the release
-     of Folding V1.6. It is included here for no particular reason:
+     of Folding 1.6. It is included here for history.
 
      Emacs 18:
      Folding mode has been tested with versions 18.55 and

@@ -1,2 +1,0 @@
-
-(major-mode-hydra . [(20190227 346) ((dash (2 15 0)) (pretty-hydra (0 1 1)) (emacs (25))) "Major mode keybindings managed by Hydra" single ((:commit . "2142be970874c679300e539a1d9d0f048eb72a7f") (:authors ("Jerry Peng" . "pr2jerry@gmail.com")) (:maintainer "Jerry Peng" . "pr2jerry@gmail.com") (:url . "https://github.com/jerrypnz/major-mode-hydra.el"))])

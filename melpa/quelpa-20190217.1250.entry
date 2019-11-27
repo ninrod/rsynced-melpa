@@ -1,2 +1,0 @@
-
-(quelpa . [(20190217 1250) ((emacs (24 3))) "Emacs Lisp packages built directly from source" tar ((:commit . "716048b5ee048797551a59a4bd121026486db214") (:keywords "package" "management" "build" "source" "elpa") (:authors ("steckerhalter")) (:maintainer "steckerhalter") (:url . "https://framagit.org/steckerhalter/quelpa"))])

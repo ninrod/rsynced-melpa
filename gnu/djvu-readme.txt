@@ -20,24 +20,10 @@ complement each other.
 
 A normal work flow is as follows:
 
-To visit a djvu file type M-x djvu-find-file.  This command is the
-only entry point to this package.  You can bind this command to a key,
-for example
-
-  (global-set-key "\C-cd" 'djvu-find-file)
-
-Or you can use something more general like
-
-  (defun djvu-find-file-noselect (f-f-n filename &rest args)
-    "If FILENAME is a Djvu file call `djvu-find-file'."
-    (if (string-match "\\.djvu\\'" (file-name-sans-versions filename))
-        (djvu-find-file filename nil nil t)
-      (apply f-f-n filename args)))
-  (advice-add 'find-file-noselect :around #'djvu-find-file-noselect)
-
-If you use `djvu-find-file' to visit the file foo.djvu, it puts you into
-the (read-only) buffer foo.djvu.  Normally, this buffer (plus possibly
-the outline buffer) is all you need.
+Djvu files are assumed to have the file extension ".djvu".
+When you visit the file foo.djvu, it puts you into the (read-only)
+buffer foo.djvu.  Normally, this buffer (plus possibly the outline buffer)
+is all you need.
 
 The menu bar of this buffer lists most of the commands with their
 respective key bindings.  For example, you can:

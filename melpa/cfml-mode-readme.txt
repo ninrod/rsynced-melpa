@@ -1,24 +1,5 @@
-This file contains definitions of CFML submode classes.
+This file provides syntax highlighting for CFML (also known as ColdFusion) source files.
 
 Usage:
 
-(require 'mmm-mode)
-(require 'cfml-mode)
-
-(add-to-list 'magic-mode-alist
-             '("<cfcomponent" . cftag-mode))
-(add-to-list 'magic-mode-alist
-             '("<!---" . cftag-mode))
-(add-to-list 'auto-mode-alist
-             '("\\.cfm\\'" . cftag-mode))
-(add-to-list 'auto-mode-alist
-             '("\\.cfc\\'" . cfml-cfscript-mode))
-
-(setq mmm-global-mode 'maybe)
-(mmm-add-mode-ext-class nil "\\.cfm\\'" 'cfml-cftag)
-(mmm-add-mode-ext-class nil "\\.cfc\\'" 'cfml-cftag)
-(mmm-add-mode-ext-class nil "\\.cfm\\'" 'cfml-js)
-
-Optional settings:
-
-(setq mmm-submode-decoration-level 0)
+Install the cfml-mode package.  CFML files should now open in cfml-mode

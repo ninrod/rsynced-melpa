@@ -19,7 +19,7 @@ Unfortunately, many Emacs editing features are not available when
 running in term mode.  Also, term mode is not available in
 shell-command prompts.
 
-Bash completion can also be run programatically, outside of a
+Bash completion can also be run programmatically, outside of a
 shell-mode command, by calling
 `bash-completion-dynamic-complete-nocomint'
 
@@ -30,7 +30,7 @@ INSTALLATION
   (autoload 'bash-completion-dynamic-complete \"bash-completion\"
     \"BASH completion hook\")
   (add-hook 'shell-dynamic-complete-functions
-	'bash-completion-dynamic-complete)
+     'bash-completion-dynamic-complete)
 
   or simpler, but forces you to load this file at startup:
 

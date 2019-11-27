@@ -1,8 +1,11 @@
-You only need run "M-x vc-msg-show" and follow the hint.
+This package is an extended and actively maintained version of the
+package emacs-git-messenger.
 
-The current Version Control Software (VCS) is detected automatically.
-If you need force the VCS type (Peforce, for example),
-it's only one liner setup:
+Run "M-x vc-msg-show" and follow the hint.
+
+The Version Control Software (VCS) is detected automatically.
+
+Set up to force the VCS type (Perforce, for example),
   (setq vc-msg-force-vcs "p4")
 
 You can add hook to `vc-msg-hook',
@@ -21,6 +24,12 @@ is displayed. Here is sample code:
     ;; use `ffip-diff-mode' from package find-file-in-project instead of `diff-mode'
     (ffip-diff-mode))
   (add-hook 'vc-msg-show-code-hook 'vc-msg-show-code-setup)
+
+Git users could set `vc-msg-git-show-commit-function' to show the code of commit,
+
+  (setq vc-msg-git-show-commit-function 'magit-show-commit)
+
+If `vc-msg-git-show-commit-function' is executed, `vc-msg-show-code-hook' is ignored.
 
 Perforce is detected automatically.  You don't need any manual setup.
 But if you use Windows version of perforce CLI in Cygwin Emacs, we

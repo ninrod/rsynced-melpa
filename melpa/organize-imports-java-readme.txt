@@ -1,4 +1,4 @@
-Mimic Eclipse's Organize Imports functionality.
+Automatically organize imports in Java code.
 
 (@* "TODO" )
 * Performance is terrible when loading all the jar files to path.

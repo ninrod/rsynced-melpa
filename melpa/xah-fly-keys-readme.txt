@@ -26,6 +26,7 @@ possible layout values:
 "qwerty-abnt"
 "qwertz"
 "workman"
+"norman"
 
 (xah-fly-keys 1)
 
@@ -45,7 +46,7 @@ When in command mode:
 【Space】 is a leader key. For example, 【SPACE r】 (Dvorak 【SPACE p】) calls query-replace. Press 【SPACE C-h】 to see the full list.
 【Space Space】 also activates insertion mode.
 【Space Enter】 calls execute-extended-command.
-【a】 calls execute-extended-command or smex or helm (if they are installed).
+【a】 calls execute-extended-command or smex or helm or counsel (if they are installed).
 
 The leader key sequence basically replace ALL emacs commands that starts with C-x key.
 

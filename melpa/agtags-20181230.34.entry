@@ -1,2 +1,0 @@
-
-(agtags . [(20181230 34) ((emacs (25))) "A frontend to GNU Global" tar ((:commit . "7a59137db7780678cf86d0c1193da5fde38bc759") (:keywords "tools" "convenience") (:authors ("Vietor Liu" . "vietor.liu@gmail.com")) (:maintainer "Vietor Liu" . "vietor.liu@gmail.com") (:url . "https://github.com/vietor/agtags"))])

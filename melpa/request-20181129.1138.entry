@@ -1,2 +1,0 @@
-
-(request . [(20181129 1138) ((emacs (24 4))) "Compatible layer for URL request in Emacs" single ((:commit . "db88fd21d25399ff9940c208173665b12493992b") (:authors ("Takafumi Arakaki <aka.tkf at gmail.com>")) (:maintainer "Takafumi Arakaki <aka.tkf at gmail.com>") (:url . "https://github.com/tkf/emacs-request"))])

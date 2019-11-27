@@ -1,2 +1,0 @@
-
-(aio . [(20190420 2207) ((emacs (26 1))) "async/await for Emacs Lisp" tar ((:commit . "8efe2422d6cd8a4bd6be2f5250d8ae62661e80bc") (:authors ("Christopher Wellons" . "wellons@nullprogram.com")) (:maintainer "Christopher Wellons" . "wellons@nullprogram.com") (:url . "https://github.com/skeeto/emacs-aio"))])

@@ -23,7 +23,7 @@ an Emacs front-end to modern debuggers.
 Oh, and because global variables are largely banned, we can support
 several simultaneous debug sessions.
 
-RealGUD supports many external debuggers. See URL
+RealGUD supports many external debuggers.  See URL
 `https://github.com/realgud/realgud/wiki/Debuggers-Supported' for a
 list.  However, if you don't see your favorite debugger, see URL
 `https://github.com/realgud/realgud/wiki/How-to-add-a-new-debugger/'
@@ -42,6 +42,6 @@ the ways to to install and more details on installation.
 
 [1] Four or more years in, as of 2018 realgud sports a number of
 old debuggers too.  However we *mark* them as such, and move them
-out of the main code base. See for example:
+out of the main code base.  See for example:
 https://github.com/realgud/realgud-old-debuggers.  So that's
 another difference: this code better *maintained*.

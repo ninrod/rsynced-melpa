@@ -21,7 +21,7 @@ inspired by Sierra.vim with adding some extra colors.
 -------  Configuration example  -------
 
  (require 'kaolin-themes)
- (load-theme 'kaolin-dark)
+ (load-theme 'kaolin-dark t)
 
  ;; Apply treemacs customization for Kaolin themes, requires the all-the-icons package.
  (kaolin-treemacs-theme)

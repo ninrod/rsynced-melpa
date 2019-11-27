@@ -1,11 +1,7 @@
-The dart-mode that exists doesn't properly indent, so give this a try.
+A major mode for handling Gherkin files and syntax highlighting.
 
-Much of this mode is derived from the js.el package.
+This mode is not coupled to an underlying Cucumber system such as feature-mode.
 
-General Remarks:
+If you want a full-fledged IDE like experience, see: feature-mode (no affiliation).
 
-XXX: This mode assumes that block comments are not nested inside block
-XXX: comments
-
-Exported names start with "pickle-"; private names start with
-"pickle--".
+If you just want syntax highlighting in a lightweight mode, use this.

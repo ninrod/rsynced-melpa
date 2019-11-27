@@ -1,5 +1,8 @@
-Emacs IPython Notebook (EIN) lets you edit and run Jupyter_ (formerly IPython)
+Emacs IPython Notebook (EIN) lets you run Jupyter (formerly IPython)
 notebooks within Emacs.  It channels all the power of Emacs without the
 idiosyncrasies of in-browser editing.
 
-EIN was originally written by tkf_.  More `complete documentation`_ is available.
+Org_ users please find ob-ein_, a jupyter Babel_ backend.
+
+EIN was originally written by `[tkf]`_.  A jupyter Babel_ backend was first
+introduced by `[gregsexton]`_.

@@ -43,7 +43,7 @@ Command line options:
   colors. This is both used when mapping faces to actual colors and
   to decide the kind of ANSI sequences that is used.
 
-* `--color-class' -- Specify `color' or `grayscale'.
+* `--color-class' -- Specify `color', `grayscale' or `mono'.
 
 * `--theme' -- Specify the color theme to use.
 

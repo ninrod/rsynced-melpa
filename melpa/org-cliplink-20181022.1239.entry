@@ -1,2 +1,0 @@
-
-(org-cliplink . [(20181022 1239) ((emacs (24 4))) "insert org-mode links from the clipboard" tar ((:commit . "7ab98f2b17a627e907b50c27737ec1a8ae8b0f3d") (:authors ("Alexey Kutepov" . "reximkut@gmail.com")) (:maintainer "Alexey Kutepov" . "reximkut@gmail.com") (:url . "http://github.com/rexim/org-cliplink"))])

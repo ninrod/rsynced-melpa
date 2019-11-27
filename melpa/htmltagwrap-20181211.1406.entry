@@ -1,2 +1,0 @@
-
-(htmltagwrap . [(20181211 1406) ((emacs (24 4))) "Wraps a chunk of HTML code in tags." single ((:commit . "f211f7ffd024b21caae27fbac12f5c757753ade4") (:authors ("Shen, Jen-Chieh" . "jcs090218@gmail.com")) (:maintainer "Shen, Jen-Chieh" . "jcs090218@gmail.com") (:url . "https://github.com/jcs090218/htmltagwrap"))])

@@ -1,2 +1,0 @@
-
-(github-stars . [(20190415 1644) ((emacs (25 1)) (ghub (2 0 0))) "Browse your Github Stars" single ((:commit . "c0047adfc403ddb2b983009310fff13de9e61cb2") (:keywords "tools") (:authors ("Xu Chunyang" . "mail@xuchunyang.me")) (:maintainer "Xu Chunyang" . "mail@xuchunyang.me") (:url . "https://github.com/xuchunyang/github-stars.el"))])

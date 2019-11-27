@@ -87,7 +87,7 @@ pyim 的目标是： *尽最大的努力成为一个好用的 Emacs 中文输入
   ;; 开启拼音搜索功能
   (pyim-isearch-mode 1)
 
-  ;; 使用 pupup-el 来绘制选词框, 如果用 emacs26, 建议设置
+  ;; 使用 popup-el 来绘制选词框, 如果用 emacs26, 建议设置
   ;; 为 'posframe, 速度很快并且菜单不会变形，不过需要用户
   ;; 手动安装 posframe 包。
   (setq pyim-page-tooltip 'popup)
@@ -148,10 +148,10 @@ pyim 支持双拼输入模式，用户可以通过变量 `pyim-default-scheme' �
 
 *** 通过 pyim 来支持 rime 所有输入法
 
-pyim 使用 emacs 动态模块：[[https://gitlab.com/liberime/liberime][liberime]]
+pyim 使用 emacs 动态模块：[[https://github.com/merrickluo/liberime][liberime]]
 来支持 rime, 设置方式：
 
-1. 安裝 liberime, 见：[[https://gitlab.com/liberime/liberime/blob/master/README.org]] 。
+1. 安裝 liberime, 见：[[https://github.com/merrickluo/liberime]] 。
 2. 创建文件： "~/.emacs.d/pyim/rime/default.custom.yaml", 内容为：
 
    #+BEGIN_EXAMPLE
@@ -175,7 +175,7 @@ pyim 使用 emacs 动态模块：[[https://gitlab.com/liberime/liberime][liberim
 3. 參考设置：
    #+BEGIN_EXAMPLE
    (use-package liberime
-     :load-path "/path/to/liberime.[so|dll]"
+     :load-path "/path/to/liberime-module/" ;liberime.so 或者 liberime.dll 所在的目录
      :config
      ;; 注意事项:
      ;; 1. 文件路径需要用 `expand-file-name' 函数处理。
@@ -192,7 +192,12 @@ pyim 使用 emacs 动态模块：[[https://gitlab.com/liberime/liberime][liberim
    #+BEGIN_EXAMPLE
    (setq pyim-default-scheme 'rime-quanpin)
    #+END_EXAMPLE
-
+5. 如果通过 rime 使用微软双拼，可以用以下设置：
+   #+BEGIN_EXAMPLE
+   (liberime-select-schema "double_pinyin_mspy")
+   (setq pyim-default-scheme 'rime-microsoft-shuangpin)
+   #+END_EXAMPLE
+   默认是用繁体中文，想要改成简体中文的话，可以参考 [[https://github.com/rime/home/wiki/CustomizationGuide#%E4%B8%80%E4%BE%8B%E5%AE%9A%E8%A3%BD%E7%B0%A1%E5%8C%96%E5%AD%97%E8%BC%B8%E5%87%BA][rime wiki]]，或者[[http://wenshanren.org/?p=1070#orgc7dbd8e][这篇博客]]
 *** 使用五笔输入
 pyim 支持五笔输入模式，用户可以通过变量 `pyim-default-scheme' 来设定：
 
@@ -380,6 +385,12 @@ pyim 的 tooltip 选词框默认使用 *双行显示* 的样式，在一些特
 
 ** Tips
 
+*** 关闭输入联想词功能 (默认开启)
+
+#+BEGIN_EXAMPLE
+(setq pyim-enable-shortcode nil)
+#+END_EXAMPLE
+
 *** 如何将个人词条相关信息导入和导出？
 
 1. 导入使用命令： pyim-import
@@ -400,6 +411,20 @@ pyim 的文档隐藏在 comment 中，如果用户喜欢阅读 html 格式的文
 *** 将光标处的拼音或者五笔字符串转换为中文 (与 vimim 的 “点石成金” 功能类似)
 #+BEGIN_EXAMPLE
 (global-set-key (kbd "M-i") 'pyim-convert-string-at-point)
+#+END_EXAMPLE
+
+*** 如何使用其它字符翻页
+#+BEGIN_EXAMPLE
+(define-key pyim-mode-map "." 'pyim-page-next-page)
+(define-key pyim-mode-map "," 'pyim-page-previous-page)
+#+END_EXAMPLE
+
+*** 如何用 ";" 来选择第二个候选词
+#+BEGIN_EXAMPLE
+(define-key pyim-mode-map ";"
+  (lambda ()
+    (interactive)
+    (pyim-page-select-word-by-number 2)))
 #+END_EXAMPLE
 
 *** 如何添加自定义拼音词库

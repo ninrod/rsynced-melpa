@@ -7,9 +7,13 @@ the command `M-x debbugs-gnu-patches' lists bugs containing a patch.
 In order to show bugs with known numbers, `M-x debbugs-gnu-bugs' could
 be used.
 
+Bugs can be marked by a local tag.  All bugs marked like this will be
+shown via `M-x debbugs-gnu-tagged'.
+
 If you prefer the listing of bugs as TODO items of `org-mode', you
 could use the commands `M-x debbugs-org', `M-x debbugs-org-search',
-`M-x debbugs-org-patches' and `M-x debbugs-org-bugs' instead.
+`M-x debbugs-org-patches', `M-x debbugs-org-bugs' and `M-x
+debbugs-org-tagged' instead.
 
 A minor mode `debbugs-browse-mode' let you browse URLs to the GNU Bug
 Tracker as well as bug identifiers prepared for `bug-reference-mode'.
@@ -18,7 +22,7 @@ All these commands are described in the Debbugs User Guide, accessible via
 (info "(debbugs-ug)")
 
 This package works by implementing basic functions to access a Debbugs
-SOAP server (see <http://wiki.debian.org/DebbugsSoapInterface>).  It
+SOAP server (see <https://wiki.debian.org/DebbugsSoapInterface>).  It
 implements the SOAP functions "get_bugs", "newest_bugs", "get_status",
 "get_usertag", "get_bug_log" and "search_est".  The SOAP function
 "get_versions" is not implemented (yet).

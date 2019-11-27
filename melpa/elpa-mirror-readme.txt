@@ -5,7 +5,7 @@ Please note compile Emacs Lisp file (*.elc) from one version of Emacs
 might not work with another version of Emacs.  So you need this program
 to compile package from local repository.
 
-This is the ONLY way to 100% portable Emacs setup.
+This is the ONLY way to have 100% portable Emacs setup.
 
 Usage in Emacs,
 Run `elpamr-create-mirror-for-installed'.
@@ -23,4 +23,4 @@ Use the repository created by elpa-mirror,
   - Restart Emacs
 
 You can also setup repositories on Dropbox and Github.
-See https://github.com/redguardtoo/elpa-mirror for HOW.
+See https://github.com/redguardtoo/elpa-mirror for details.

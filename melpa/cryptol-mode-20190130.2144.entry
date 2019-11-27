@@ -1,2 +1,0 @@
-
-(cryptol-mode . [(20190130 2144) nil "Cryptol major mode for Emacs" single ((:commit . "1d6bc05380481056b0615670a890a8234d997da9") (:keywords "cryptol" "cryptography") (:authors (nil . "Austin Seipp <aseipp [@at] pobox [dot] com>")) (:maintainer nil . "Austin Seipp <aseipp [@at] pobox [dot] com>") (:url . "http://github.com/thoughtpolice/cryptol-mode"))])

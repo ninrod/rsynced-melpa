@@ -1,2 +1,0 @@
-
-(alect-themes . [(20190203 2112) ((emacs (24 0))) "Configurable light, dark and black themes for Emacs 24 or later" tar ((:commit . "588eb9ef66c319705a4d94003eacd90ad9de29c2") (:keywords "color" "theme") (:authors ("Alex Kost" . "alezost@gmail.com")) (:maintainer "Alex Kost" . "alezost@gmail.com") (:url . "https://github.com/alezost/alect-themes"))])

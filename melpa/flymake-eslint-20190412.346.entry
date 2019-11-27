@@ -1,2 +1,0 @@
-
-(flymake-eslint . [(20190412 346) ((emacs (26 0))) "A Flymake backend for Javascript using eslint" single ((:commit . "b0951ae2be75e19b7df4ef0e3947897869b837d1") (:authors ("Dan Orzechowski")) (:maintainer "Dan Orzechowski") (:url . "https://github.com/orzechowskid/flymake-eslint"))])

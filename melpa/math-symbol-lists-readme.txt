@@ -7,6 +7,8 @@ Defined (a)lists are:
  `math-symbol-list-extended`
  `math-symbol-list-packages`
  `math-symbol-list-latex-commands`
+ `math-symbol-list-subscripts`
+ `math-symbol-list-superscripts`
 
 Sources:
 

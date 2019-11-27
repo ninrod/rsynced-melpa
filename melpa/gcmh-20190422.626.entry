@@ -1,2 +1,0 @@
-
-(gcmh . [(20190422 626) ((emacs (24))) "the Garbage Collector Magic Hack" single ((:commit . "81844fa43b9af8cc0882f8cd25f6bbfd5bb390c7") (:keywords "internal") (:maintainer nil . "andrea_corallo@yahoo.it") (:url . "https://gitlab.com/koral/gcmh"))])

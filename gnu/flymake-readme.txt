@@ -11,10 +11,9 @@ backends to hook on to.
 The main interactive entry point is the `flymake-mode' minor mode,
 which periodically and automatically initiates checks as the user
 is editing the buffer.  The variables `flymake-no-changes-timeout',
-`flymake-start-syntax-check-on-newline' and
 `flymake-start-on-flymake-mode' give finer control over the events
-triggering a check, as does the interactive command
-`flymake-start', which immediately starts a check.
+triggering a check, as does the interactive command  `flymake-start',
+which immediately starts a check.
 
 Shortly after each check, a summary of collected diagnostics should
 appear in the mode-line.  If it doesn't, there might not be a

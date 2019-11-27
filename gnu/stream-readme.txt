@@ -14,7 +14,7 @@ streams could be created from any sequential input data:
 - ...
 
 All functions are prefixed with "stream-".
-All functions are tested in test/automated/stream-tests.el
+All functions are tested in tests/stream-tests.el
 
 Here is an example implementation of the Fibonacci numbers
 implemented as in infinite stream:

@@ -1,2 +1,0 @@
-
-(poly-R . [(20190415 1550) ((emacs (25)) (polymode (0 1 5)) (poly-markdown (0 1 5)) (poly-noweb (0 1 5))) "Various polymodes for R language" single ((:commit . "b86abfeb452041deb5da4a792b02d6ba33105b89") (:keywords "languages" "multi-modes") (:authors ("Vitalie Spinu")) (:maintainer "Vitalie Spinu") (:url . "https://github.com/polymode/poly-R"))])

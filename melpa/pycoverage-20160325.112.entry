@@ -1,2 +1,0 @@
-
-(pycoverage . [(20160325 112) ((emacs (24 3))) "Support for coverage stats on Python 2.X and 3" tar ((:commit . "4f5451f4d6e1e2ddd5878fc7d18f5fc4fc92a83d") (:keywords "project" "convenience") (:authors ("matt harrison")) (:maintainer "matt harrison") (:url . "https://github.com/mattharrison/pycoverage.el"))])

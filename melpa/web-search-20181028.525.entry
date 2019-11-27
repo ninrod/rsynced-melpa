@@ -1,2 +1,0 @@
-
-(web-search . [(20181028 525) ((emacs (24 3))) "Open a web search" tar ((:commit . "24f5b49774f4fb60c903c2b65598590d1c6456d9") (:keywords "web" "search") (:authors ("Chunyang Xu" . "mail@xuchunyang.me")) (:maintainer "Chunyang Xu" . "mail@xuchunyang.me") (:url . "https://github.com/xuchunyang/web-search.el"))])

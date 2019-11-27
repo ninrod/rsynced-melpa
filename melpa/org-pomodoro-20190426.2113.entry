@@ -1,2 +1,0 @@
-
-(org-pomodoro . [(20190426 2113) ((alert (0 5 10)) (cl-lib (0 5))) "Pomodoro implementation for org-mode." tar ((:commit . "4f5328ed25c44ab5b92f7fd5af3c4f4a1cbedce1") (:authors ("Arthur Leonard Andersen" . "leoc.git@gmail.com")) (:maintainer "Arthur Leonard Andersen" . "leoc.git@gmail.com") (:url . "https://github.com/lolownia/org-pomodoro"))])

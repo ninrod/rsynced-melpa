@@ -8,6 +8,8 @@ More specifically, it can use the following tools:
   http://www.vergenet.net/~conrad/software/xsel/ respectively).
 - MacOS: `pbpaste/pbcopy'
 - Cygwin: `getclip/putclip'
+- Under Wayland: `wl-clipboard' (https://github.com/bugaevc/wl-clipboard)
+- Termux: `termux-clipboard-get/set'
 - Emacs: It can also use Emacs's built-in GUI support to talk to the GUI.
   This requires an Emacs built with GUI support.
   It uses `make-frame-on-display' which has been tested to work under X11,

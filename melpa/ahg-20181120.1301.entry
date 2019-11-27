@@ -1,2 +1,0 @@
-
-(ahg . [(20181120 1301) nil "Alberto's Emacs interface for Mercurial (Hg)" single ((:commit . "7213c02fdbd6e76afbb0d8ee3d43200926b59cbb") (:authors ("Alberto Griggio" . "agriggio@users.sourceforge.net")) (:maintainer "Alberto Griggio" . "agriggio@users.sourceforge.net") (:url . "https://bitbucket.org/agriggio/ahg"))])

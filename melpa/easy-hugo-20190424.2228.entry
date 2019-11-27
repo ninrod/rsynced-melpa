@@ -1,2 +1,0 @@
-
-(easy-hugo . [(20190424 2228) ((emacs (24 4)) (popup (0 5 3)) (request (0 3 0))) "Write blogs made with hugo by markdown or org-mode" single ((:commit . "c8ca64713637e6344f49dd3973896b5474b7dfb3") (:authors ("Masashı Mıyaura")) (:maintainer "Masashı Mıyaura") (:url . "https://github.com/masasam/emacs-easy-hugo"))])

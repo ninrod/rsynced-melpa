@@ -10,8 +10,7 @@ It also comes with:
 
 - `nhexl-nibble-edit-mode': a "nibble editor" minor mode.
   where the cursor pretends to advance by nibbles (4-bit) and the
-  self-insertion keys (which only work for hex-digits) will only modify the
-  nibble under point.
+  self-insertion keys let you edit the hex digits directly.
 
 - `nhexl-overwrite-only-mode': a minor mode to try and avoid moving text.
   In this minor mode, not only self-inserting keys overwrite existing

@@ -1,2 +1,0 @@
-
-(exiftool . [(20190203 2006) ((emacs (25))) "Elisp wrapper around ExifTool" single ((:commit . "4131fa38160dabd5d7143aad8aca5db575749292") (:keywords "data") (:authors ("Arun I" . "arunisaac@systemreboot.net")) (:maintainer "Arun I" . "arunisaac@systemreboot.net") (:url . "https://git.systemreboot.net/exiftool.el"))])

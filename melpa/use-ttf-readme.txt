@@ -1,1 +1,1 @@
-Use the same font cross OS.
+Keep font consistency across different OSs.

@@ -25,22 +25,59 @@ click.
 *** Global mode
 #+BEGIN_EXAMPLE
 (require 'ivy-posframe)
-(setq ivy-display-function #'ivy-posframe-display)
-(setq ivy-display-function #'ivy-posframe-display-at-frame-center)
-(setq ivy-display-function #'ivy-posframe-display-at-window-center)
-(setq ivy-display-function #'ivy-posframe-display-at-frame-bottom-left)
-(setq ivy-display-function #'ivy-posframe-display-at-window-bottom-left)
-(setq ivy-display-function #'ivy-posframe-display-at-point)
-(ivy-posframe-enable)
+display at `ivy-posframe-style'
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-bottom-left)))
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-bottom-left)))
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
+(ivy-posframe-mode 1)
 #+END_EXAMPLE
 *** Per-command mode.
 #+BEGIN_EXAMPLE
 (require 'ivy-posframe)
 Different command can use different display function.
-(push '(counsel-M-x . ivy-posframe-display-at-window-bottom-left) ivy-display-functions-alist)
-(push '(complete-symbol . ivy-posframe-display-at-point) ivy-display-functions-alist)
-(push '(swiper . ivy-posframe-display-at-point) ivy-display-functions-alist)
-(ivy-posframe-enable)
+(setq ivy-posframe-display-functions-alist
+      '((swiper          . ivy-posframe-display-at-point)
+        (complete-symbol . ivy-posframe-display-at-point)
+        (counsel-M-x     . ivy-posframe-display-at-window-bottom-left)
+        (t               . ivy-posframe-display)))
+(ivy-posframe-mode 1)
+#+END_EXAMPLE
+
+You can use ivy original display function on specify function.
+You may want to use the original display function because display
+of Swiper at point hides the contents of the buffer.
+#+BEGIN_EXAMPLE
+(require 'ivy-posframe)
+Different command can use different display function.
+(setq ivy-posframe-display-functions-alist
+      '((swiper          . nil)
+        (complete-symbol . ivy-posframe-display-at-point)
+        (counsel-M-x     . ivy-posframe-display-at-window-bottom-left)
+        (t               . ivy-posframe-display)))
+(ivy-posframe-mode 1)
+#+END_EXAMPLE
+
+You may want to change the height of ivy by a function only while
+using posframe. This is possible with the code below.
+
+The following example displays swiper on 20 lines by default for ivy,
+and displays other functions in posframe at the location specified on
+40 lines.
+#+BEGIN_EXAMPLE
+(require 'ivy-posframe)
+Different command can use different display function.
+(setq ivy-posframe-height-alist '((swiper . 20)
+                                  (t      . 40)))
+
+(setq ivy-posframe-display-functions-alist
+      '((swiper          . nil)
+        (complete-symbol . ivy-posframe-display-at-point)
+        (counsel-M-x     . ivy-posframe-display-at-window-bottom-left)
+        (t               . ivy-posframe-display)))
+(ivy-posframe-mode 1)
 #+END_EXAMPLE
 
 NOTE: Using swiper as example: swiper's display function *only*
@@ -52,13 +89,6 @@ swiper's.
 The value of variable `this-command' will be used as the search key
 by ivy to find display function in `ivy-display-functions-alist',
 "C-h v this-command" is a good idea.
-
-*** Fallback mode
-#+BEGIN_EXAMPLE
-(require 'ivy-posframe)
-(push '(t . ivy-posframe-display) ivy-display-functions-alist)
-(ivy-posframe-enable)
-#+END_EXAMPLE
 
 ** Tips
 
@@ -78,5 +108,6 @@ The simplest way is:
 #+BEGIN_EXAMPLE
 (defun ivy-posframe-display-at-XXX (str)
   (ivy-posframe--display str #'your-own-poshandler-function))
-(ivy-posframe-enable) ; This line is needed.
+(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-XXX)))
+(ivy-posframe-mode 1) ; This line is needed.
 #+END_EXAMPLE

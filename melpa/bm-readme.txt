@@ -51,22 +51,21 @@ Description:
      `bm-highlight-style'. It is possible to have fringe-markers on
      left or right side.
 
+   - Display the number of bookmarks in the current buffer in the
+     mode line, see `bm-modeline-info' and
+     `bm-modeline-display-total'.
 
 
 Known limitations:
 
-  This package is developed and tested on GNU Emacs 23.x. It should
-  work on all GNU Emacs 21.x, GNU Emacs 22.x and also on XEmacs
-  21.x with some limitations.
+  This package is developed and tested on GNU Emacs 26.x. It should
+  also work on all GNU Emacs newer than version 21.x.
 
   There are some incompatibilities with lazy-lock when using
   fill-paragraph. All bookmark below the paragraph being filled
   will be lost. This issue can be resolved using the
   `jit-lock-mode' introduced in GNU Emacs 21.1
 
-  Bookmarks will be extended when inserting text (before, inside or
-  after) bookmark in XEmacs. This is due to the missing support for
-  overlay hooks i XEmacs.
 
 
 Installation:
@@ -103,6 +102,20 @@ Configuration:
   left, add the following to line:
 
   (setq bm-marker 'bm-marker-right)
+
+
+  Mode line:
+
+  Since there are number of different packages that helps with
+  configuring the mode line, it is hard to provide integrations.
+  Below is two examples on how to add it to the standard Emacs mode
+  line:
+
+    (add-to-list 'mode-line-position '(:eval (bm-modeline-info)) t)
+
+  or
+
+    (setq global-mode-string '(:eval (bm-modeline-info)))
 
 
 
@@ -185,7 +198,6 @@ Acknowledgements:
 
  - The use of overlays for bookmarks was inspired by highline.el by
    Vinicius Jose Latorre <vinicius(at)cpqd.com.br>.
- - Thanks to Ben Key for XEmacs support.
  - Thanks to Peter Heslin for notifying me on the incompability
    with lazy-lock.
  - Thanks to Christoph Conrad for adding support for goto line

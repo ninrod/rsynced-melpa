@@ -2,6 +2,9 @@ Note: The interface used in this file requires CC Mode 5.30 or
 later.
 
 History:
+  0.9.9 - 2019-05-07
+       added support for YANG multiline string literals; contributed
+         by Tripp Lilley
   0.9.8 - 2018-03-06
        yet another autoload fix; contributed by Christian Hopps
   0.9.7 - 2017-03-23

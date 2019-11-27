@@ -1,2 +1,0 @@
-
-(modalka . [(20190101 700) ((emacs (24 4))) "Easily introduce native modal editing of your own design" single ((:commit . "657d0b15c21558d4758b10bda401c806876a800c") (:keywords "modal" "editing") (:authors ("Mark Karpov" . "markkarpov92@gmail.com")) (:maintainer "Mark Karpov" . "markkarpov92@gmail.com") (:url . "https://github.com/mrkkrp/modalka"))])
