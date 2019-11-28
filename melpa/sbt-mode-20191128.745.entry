@@ -1,0 +1,2 @@
+
+(sbt-mode . [(20191128 745) ((emacs (24 4))) "Interactive support for sbt projects" tar ((:commit . "43cbb61bd5d9e8e8be191d9cecfba7a9e175d90b") (:keywords "languages") (:url . "https://github.com/hvesalai/emacs-sbt-mode"))])

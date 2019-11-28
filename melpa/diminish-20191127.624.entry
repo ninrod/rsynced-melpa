@@ -1,2 +1,0 @@
-
-(diminish . [(20191127 624) nil "Diminished modes are minor modes with no modeline display" single ((:commit . "8bed521dbd10c009ca76f5efbf95966fc186465f") (:keywords "extensions" "diminish" "minor" "codeprose") (:authors ("Will Mengarini" . "seldon@eskimo.com")) (:maintainer "Martin Yrjölä" . "martin.yrjola@gmail.com") (:url . "https://github.com/myrjola/diminish.el"))])

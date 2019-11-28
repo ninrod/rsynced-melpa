@@ -1,0 +1,2 @@
+
+(helm-core . [(20191128 903) ((emacs (24 4)) (async (1 9 3))) "Development files for Helm" tar ((:commit . "26fcedeafb28e7669b9ce5bfdeeabc5477f99dd4") (:url . "https://emacs-helm.github.io/helm/"))])
